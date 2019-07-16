@@ -4,7 +4,10 @@ import com.pgrsoft.controlgastos.model.Producto;
 
 import java.util.List;
 
-public interface GastoServices {
+public interface MovimientoServices {
+
+
+
 
 
 

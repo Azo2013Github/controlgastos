@@ -15,6 +15,7 @@ public class ProductoServicesImpl implements ProductoServices {
 
     static {
         PRODUCTOS = new HashMap<Long, Producto>();
+        //PRODUCTOS.put()
     }
 
     @Override
@@ -23,7 +24,7 @@ public class ProductoServicesImpl implements ProductoServices {
     }
 
     @Override
-    public Producto read(long codigo) {
+    public Producto read(Long codigo) {
         return null;
     }
 

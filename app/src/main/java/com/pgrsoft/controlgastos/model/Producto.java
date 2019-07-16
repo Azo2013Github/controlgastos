@@ -4,42 +4,52 @@ import java.util.Date;
 
 public class Producto {
 
-    private int codigo; //codigo del producto que se autoincrementa PK.
-    private int tipoProducto; // gastos puntuales o gastpos de casa que son alquiler o comida o bebida etc...
-    private String descripcionProducto; // nombre del producto...
+    private Long codigo; //codigo del producto que se autoincrementa PK.
+    private String nombre;
+    private String descripcion; // nombre del producto...
     private double precio;
+    private Categoria categoria; // gastos puntuales o gastpos de casa que son alquiler o comida o bebida etc...
 
     public Producto() {
     }
 
-    public Producto(int tipoProducto, String descripcionProducto, double precio) {
-        this.tipoProducto = tipoProducto;
-        this.descripcionProducto = descripcionProducto;
+    public Producto(Categoria categoria, String nombre, String descripcion, double precio) {
+        this.categoria = categoria;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
         this.precio = precio;
     }
 
-    public int getCodigo() {
+    public Long getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
 
-    public int getTipoProducto() {
-        return tipoProducto;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setTipoProducto(int tipoProducto) {
-        this.tipoProducto = tipoProducto;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
-    public String getDescripcionProducto() {
-        return descripcionProducto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setDescripcionProducto(String descripcionProducto) {
-        this.descripcionProducto = descripcionProducto;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public double getPrecio() {
@@ -54,8 +64,9 @@ public class Producto {
     public String toString() {
         return "Producto{" +
                 "codigo=" + codigo +
-                ", tipoProducto=" + tipoProducto +
-                ", descripcionProducto='" + descripcionProducto + '\'' +
+                ", categoria=" + categoria +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
                 ", precio=" + precio +
                 '}';
     }

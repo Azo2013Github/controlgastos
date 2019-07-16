@@ -2,38 +2,32 @@ package com.pgrsoft.controlgastos.model;
 
 import java.util.Date;
 
-public class Gasto {
+public class Movimiento {
 
-    private int codigo; // PK
-    private double precioGastos; // precio del producto
+    private Long codigo; // PK
+    private double importe; // precio del producto
     private Producto producto; // El nombre del producto en el que nos hemos gastado el dinero
-    private String descripion; //codigo postal de donde hemos gastado
+    private String descripion; // descripcion del movimeinto
     private Date fecha;
+    private double saldo;
 
-    public Gasto() {
+    public Movimiento() {
     }
 
-    public Gasto(double precioGastos, Producto producto, String descripion, Date fecha) {
-        this.precioGastos = precioGastos;
-        this.producto = producto;
-        this.descripion = descripion;
-        this.fecha = fecha;
-    }
-
-    public int getCodigo() {
+    public Long getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
 
-    public double getPrecioGastos() {
-        return precioGastos;
+    public double getImporte() {
+        return importe;
     }
 
-    public void setPrecioGastos(double precioGastos) {
-        this.precioGastos = precioGastos;
+    public void setImporte(double importe) {
+        this.importe = importe;
     }
 
     public Producto getProducto() {
@@ -60,14 +54,23 @@ public class Gasto {
         this.fecha = fecha;
     }
 
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
     @Override
     public String toString() {
-        return "Gasto{" +
+        return "Movimiento{" +
                 "codigo=" + codigo +
-                ", precioGastos=" + precioGastos +
+                ", importe=" + importe +
                 ", producto=" + producto +
                 ", descripion='" + descripion + '\'' +
                 ", fecha=" + fecha +
+                ", saldo=" + saldo +
                 '}';
     }
 }
