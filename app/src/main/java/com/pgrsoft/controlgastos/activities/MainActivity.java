@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Spinner;
 
 import com.pgrsoft.controlgastos.R;
@@ -19,12 +20,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //categoria =
 
         DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
+
+        // Es necesario solicitar una instancia de SQLiteDatabase para entrar en onCreate o onUpgrade
+        sql = dataBaseHelper.getWritableDatabase();
+
         Categoria categoria = dataBaseHelper.createCategoria(new Categoria());
 
+        sql.close();
 
+        Log.d("*","FIN");
 
     }
 }

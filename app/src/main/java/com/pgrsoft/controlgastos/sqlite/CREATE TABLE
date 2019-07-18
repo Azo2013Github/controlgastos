@@ -1,0 +1,16 @@
+  private static final String PRODUCTOS_TABLE = "productos"; // Productos
+
+    public static final String MOVIMIENTOS_TABLE = "movimientos"; // Movimiento
+/*
+    private static final String COL_1_PRODUCTOS = "codigo";
+    private static final String COL_2_PRODUCTOS = "nombre";
+    private static final String COL_3_PRODUCTOS = "descripcion";
+    private static final String COL_4_PRODUCTOS = "precio";
+    private static final String COL_5_PRODUCTOS = "categoria";
+
+    private static final String COL_1_MOVIMIENTOS = "codigo";
+    private static final String COL_2_MOVIMIENTOS = "importe";
+    private static final String COL_3_MOVIMIENTOS = "descripcion";
+    private static final String COL_4_MOVIMIENTOS = "fecha";
+    private static final String COL_5_MOVIMIENTOS = "saldo";
+    private static final String COL_6_MOVIMIENTOS = "producto";*/
