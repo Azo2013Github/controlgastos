@@ -14,3 +14,6 @@
     private static final String COL_4_MOVIMIENTOS = "fecha";
     private static final String COL_5_MOVIMIENTOS = "saldo";
     private static final String COL_6_MOVIMIENTOS = "producto";*/
+
+
+    INSERT INTO CATEGORIAS (CODIGO, NOMBRE) VALUES (1, 'LENTEJAS')

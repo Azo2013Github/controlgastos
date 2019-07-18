@@ -1,14 +1,12 @@
 package com.pgrsoft.controlgastos.model;
 
-import java.util.Date;
-
 public class Producto {
 
     private Long codigo; //codigo del producto que se autoincrementa PK.
-    private String nombre;
-    private String descripcion; // nombre del producto...
+    private Categoria categoria;
+    private String nombre; // nombre del producto...
     private double precio;
-    private Categoria categoria; // gastos puntuales o gastpos de casa que son alquiler o comida o bebida etc...
+    private String descripcion;
 
     public Producto() {
     }

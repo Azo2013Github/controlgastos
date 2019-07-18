@@ -16,6 +16,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String COL1_CODIDO_CAT = "CODIGO";
     private static final String COL2_NOMBRE_CAT = "NOMBRE";
 
+    private static final String PRODUCTOS_TABLE = "PRODUCTOS"; // Productos
+    private static final String COL_1_PRODUCTOS = "CODIGO";
+    private static final String COL_2_PRODUCTOS = "idCATEGORIA";
+    private static final String COL_3_PRODUCTOS = "NOMBRE";
+    private static final String COL_4_PRODUCTOS = "PRECIO";
+    private static final String COL_5_PRODUCTOS = "DESCRIPCION";
+
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
@@ -28,13 +35,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         // Creación de tablas
 
         builder.append("CREATE TABLE " + CATEGORIAS_TABLE + " (")
-               .append(COL1_CODIDO_CAT).append(" INTEGER PRIMARY KEY AUTOINCREMENT, ")
-               .append(COL2_NOMBRE_CAT).append(" TEXT NOT NULL )");
-        Log.d("****",builder.toString());
+                .append(COL1_CODIDO_CAT).append(" INTEGER PRIMARY KEY AUTOINCREMENT, ")
+                .append(COL2_NOMBRE_CAT).append(" TEXT NOT NULL )");
+        Log.d("****", builder.toString());
         String strDDL = builder.toString();
         db.execSQL(strDDL);
 
         // Inserción de datos de ejemplo
+        /*CREATE TABLE track(
+  trackid     INTEGER,
+  trackname   TEXT,
+  trackartist INTEGER,
+  FOREIGN KEY(trackartist) REFERENCES artist(artistid)
+
+);*/
+        builder.append("CREATE TABLE " + PRODUCTOS_TABLE + " (")
+                .append(COL_1_PRODUCTOS).append(" INTEGER PRIMARY KEY AUTOINCREMENT, ")
+                .append(COL_2_PRODUCTOS).append(" FOREIGN KEY (idCATEGORIA)  REFERENCES " + CATEGORIAS_TABLE + " "+ COL1_CODIDO_CAT + " , ")
+                .append(COL_3_PRODUCTOS).append(" TEXT NOT NULL, ")
+                .append(COL_4_PRODUCTOS).append(" REAL NOT NULL, ")
+                .append(COL_5_PRODUCTOS).append(" TEXT NOT NULL )");
+
 
     }
 
@@ -45,8 +66,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-
-    public Categoria createCategoria(Categoria categoria){
+    public Categoria createCategoria(Categoria categoria) {
 
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -59,7 +79,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         return categoria;
     }
-
 
 
 }
