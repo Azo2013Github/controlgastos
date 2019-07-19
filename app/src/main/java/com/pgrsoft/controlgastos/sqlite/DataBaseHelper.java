@@ -18,17 +18,17 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static final String PRODUCTOS_TABLE = "PRODUCTOS"; // Productos
     private static final String COL_1_PRODUCTOS = "CODIGO";
-    private static final String COL_2_PRODUCTOS = "idCATEGORIA";
-    private static final String COL_3_PRODUCTOS = "NOMBRE";
+    private static final String COL_2_PRODUCTOS = "NOMBRE";
+    private static final String COL_3_PRODUCTOS = "DESCRIPCION";
     private static final String COL_4_PRODUCTOS = "PRECIO";
-    private static final String COL_5_PRODUCTOS = "DESCRIPCION";
+    private static final String COL_5_PRODUCTOS = "CODIGO_CATEGORIA";
 
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase sb) {
 
         StringBuilder builder = new StringBuilder();
 
@@ -39,23 +39,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 .append(COL2_NOMBRE_CAT).append(" TEXT NOT NULL )");
         Log.d("****", builder.toString());
         String strDDL = builder.toString();
-        db.execSQL(strDDL);
+        sb.execSQL(strDDL);
 
-        // Inserción de datos de ejemplo
-        /*CREATE TABLE track(
-  trackid     INTEGER,
-  trackname   TEXT,
-  trackartist INTEGER,
-  FOREIGN KEY(trackartist) REFERENCES artist(artistid)
+        // Creacion de la tabla de productos
 
-);*/
+        builder.setLength(0);
         builder.append("CREATE TABLE " + PRODUCTOS_TABLE + " (")
                 .append(COL_1_PRODUCTOS).append(" INTEGER PRIMARY KEY AUTOINCREMENT, ")
-                .append(COL_2_PRODUCTOS).append(" FOREIGN KEY (idCATEGORIA)  REFERENCES " + CATEGORIAS_TABLE + " "+ COL1_CODIDO_CAT + " , ")
+                .append(COL_2_PRODUCTOS).append(" TEXT NOT NULL, ")
                 .append(COL_3_PRODUCTOS).append(" TEXT NOT NULL, ")
                 .append(COL_4_PRODUCTOS).append(" REAL NOT NULL, ")
-                .append(COL_5_PRODUCTOS).append(" TEXT NOT NULL )");
-
+                .append(COL_5_PRODUCTOS).append(" INTEGER NOT NULL, ")
+                .append(" FOREIGN KEY " + "( " + COL_5_PRODUCTOS + " ) REFERENCES " + CATEGORIAS_TABLE + " (" + COL1_CODIDO_CAT + "  ))" );
+        strDDL = builder.toString();
+        sb.execSQL(strDDL);
 
     }
 
@@ -63,8 +60,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         Log.d("***", "ENTRA....");
         db.execSQL("DROP TABLE IF EXISTS " + CATEGORIAS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + PRODUCTOS_TABLE);
         onCreate(db);
     }
+
+
+
 
     public Categoria createCategoria(Categoria categoria) {
 
