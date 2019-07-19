@@ -23,6 +23,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String COL_4_PRODUCTOS = "PRECIO";
     private static final String COL_5_PRODUCTOS = "CODIGO_CATEGORIA";
 
+    public static final String MOVIMIENTOS_TABLE = "MOVIMIENTOS"; // Movimiento
+    private static final String COL_1_MOVIMIENTOS = "CODIGO";
+    private static final String COL_2_MOVIMIENTOS = "IMPORTE";
+    private static final String COL_3_MOVIMIENTOS = "DESCRIPCION";
+    private static final String COL_4_MOVIMIENTOS = "FECHA";
+    private static final String COL_5_MOVIMIENTOS = "SALDO";
+    private static final String COL_6_MOVIMIENTOS = "CODIGO_PRODUCTO";
+    private static final String COL_7_MOVIMIENTOS = "CODIGO_CATEGORIA";
+
     public DataBaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
@@ -33,15 +42,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         StringBuilder builder = new StringBuilder();
 
         // Creación de tablas
-
         builder.append("CREATE TABLE " + CATEGORIAS_TABLE + " (")
                 .append(COL1_CODIDO_CAT).append(" INTEGER PRIMARY KEY AUTOINCREMENT, ")
                 .append(COL2_NOMBRE_CAT).append(" TEXT NOT NULL )");
-        Log.d("****", builder.toString());
+
         String strDDL = builder.toString();
         sb.execSQL(strDDL);
-
-        // Creacion de la tabla de productos
 
         builder.setLength(0);
         builder.append("CREATE TABLE " + PRODUCTOS_TABLE + " (")
@@ -54,32 +60,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         strDDL = builder.toString();
         sb.execSQL(strDDL);
 
+        builder.setLength(0);
+        builder.append("CREATE TABLE " + MOVIMIENTOS_TABLE + " (")
+                .append(COL_1_MOVIMIENTOS).append(" INTEGER PRIMARY KEY AUTOINCREMENT, ")
+                .append(COL_2_MOVIMIENTOS).append(" REAL NOT NULL, ")
+                .append(COL_3_MOVIMIENTOS).append(" TEXT NOT NULL, ")
+                .append(COL_4_MOVIMIENTOS).append(" TEXT NOT NULL, ")
+                .append(COL_5_MOVIMIENTOS).append(" REAL NOT NULL, ")
+                .append(COL_6_MOVIMIENTOS).append(" INTEGER NOT NULL, ")
+                .append(" FOREIGN KEY " + "( " + COL_6_MOVIMIENTOS + ") REFERENCES " + PRODUCTOS_TABLE + " (" + COL_1_PRODUCTOS + " )) ");
+
+
+        strDDL = builder.toString();
+        Log.d("****", strDDL);
+        sb.execSQL(strDDL);
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        Log.d("***", "ENTRA....");
+
         db.execSQL("DROP TABLE IF EXISTS " + CATEGORIAS_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + PRODUCTOS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + MOVIMIENTOS_TABLE);
         onCreate(db);
     }
-
-
-
-
-    public Categoria createCategoria(Categoria categoria) {
-
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL2_NOMBRE_CAT, categoria.getNombre());
-
-        Long resultado = db.insert(CATEGORIAS_TABLE, null, contentValues);
-        categoria.setCodigo(resultado);
-
-        //Log.d("****", "DAR DE ALTA: " +categoria.getNombre());
-
-        return categoria;
-    }
-
 
 }

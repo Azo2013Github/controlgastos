@@ -26,11 +26,9 @@ public class MainActivity extends AppCompatActivity {
         // Es necesario solicitar una instancia de SQLiteDatabase para entrar en onCreate o onUpgrade
         sql = dataBaseHelper.getWritableDatabase();
 
-        Categoria categoria = dataBaseHelper.createCategoria(new Categoria());
 
         sql.close();
 
-        Log.d("*","FIN");
 
     }
 }
