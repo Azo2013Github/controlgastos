@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">controlgastos</string>
+    <string name="titulo">CONTROL DE GASTOS</string>
+    <string name="crear">CREAR</string>
+    <string name="listar">LISTAR</string>
+    <string name="categoria">CATEGORIA:</string>
+    <string name="precio">PRECIO:</string>
+    <string name="descripcion">DESCRIPCION:</string>
+    <string name="nombre">NOMBRE:</string>
+    <string name="fecha">FECHA:</string>
+    <string name="importe">IMPORTE:</string>
+    <string name="descrpcionMovimiento">DESCRIPCION MOVIMIENTO</string>
+    <string name="saldo">SALDO</string>
+    <string name="introducir_gastos">INTRODUCIR GATOS:</string>
+
 </resources>

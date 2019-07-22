@@ -1,4 +1,4 @@
-package com.pgrsoft.controlgastos.impl;
+package com.pgrsoft.controlgastos.services.impl;
 
 import com.pgrsoft.controlgastos.model.Producto;
 import com.pgrsoft.controlgastos.services.ProductoServices;
@@ -9,14 +9,6 @@ import java.util.Map;
 
 public class ProductoServicesImpl implements ProductoServices {
 
-    private  static final ProductoServices INSTANCE = new ProductoServicesImpl();
-    private static final Map<Long, Producto> PRODUCTOS;
-
-
-    static {
-        PRODUCTOS = new HashMap<Long, Producto>();
-        //PRODUCTOS.put()
-    }
 
     @Override
     public Producto create(Producto producto) {

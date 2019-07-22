@@ -2,11 +2,15 @@ package com.pgrsoft.controlgastos.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.pgrsoft.controlgastos.model.Categoria;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
@@ -70,7 +74,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 .append(COL_6_MOVIMIENTOS).append(" INTEGER NOT NULL, ")
                 .append(" FOREIGN KEY " + "( " + COL_6_MOVIMIENTOS + ") REFERENCES " + PRODUCTOS_TABLE + " (" + COL_1_PRODUCTOS + " )) ");
 
-
         strDDL = builder.toString();
         Log.d("****", strDDL);
         sb.execSQL(strDDL);
@@ -85,5 +88,60 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + MOVIMIENTOS_TABLE);
         onCreate(db);
     }
+
+    // INSERCION DE DATOS:
+    public Categoria createCategoria(Categoria categoria) {
+
+        SQLiteDatabase db = getWritableDatabase();
+
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL2_NOMBRE_CAT, categoria.getNombre());
+
+        long resultado = db.insert(CATEGORIAS_TABLE, null, contentValues);
+
+        Log.d("******", "Vamos a dar de alta: " + categoria.toString());
+        categoria.setCodigo(resultado);
+        //db.close();
+        return resultado == -1 ? null : categoria;
+    }
+
+    public List<Categoria> getAll(){
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + CATEGORIAS_TABLE + " ORDER BY " + COL1_CODIDO_CAT + " DESC ", null);
+
+        List<Categoria> categorias = new ArrayList<>();
+
+        if (cursor != null){
+
+            while (cursor.moveToNext()){
+
+                Long codigo = cursor.getLong(0);
+                String nombre = cursor.getString(1);
+
+                Categoria categoria = new Categoria(codigo, nombre);
+                categorias.add(categoria);
+
+            }
+
+            //db.close();
+            Log.d("***", categorias.toString());
+        }
+
+
+
+
+
+
+        return categorias;
+    }
+
+
+
+
+
+
 
 }

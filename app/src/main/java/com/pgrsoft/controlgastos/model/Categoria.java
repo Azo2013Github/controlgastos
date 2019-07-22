@@ -2,17 +2,22 @@ package com.pgrsoft.controlgastos.model;
 
 public class Categoria {
 
-    private long codigo;
+    private Long codigo;
     private String nombre;
 
     public Categoria() {
     }
 
-    public long getCodigo() {
+    public Categoria(Long codigo, String nombre) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+    }
+
+    public Long getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(long codigo) {
+    public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
 
