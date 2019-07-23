@@ -24,16 +24,21 @@ public class CategoriaServicesImpl implements CategoriaServices {
     public Categoria create(Categoria categoria) {
 
         SQLiteDatabase db = myDB.getWritableDatabase();
-
         Categoria createCategoria = myDB.createCategoria(categoria);
-        Log.d("***", createCategoria.toString());
+        //Log.d("***", createCategoria.toString());
         db.close();
         return createCategoria;
     }
 
     @Override
     public List<Categoria> getAll() {
-          return myDB.getAll();
+
+        return myDB.getAll();
+    }
+
+    @Override
+    public Categoria read(Long codigo) {
+        return myDB.getCategoria(codigo);
     }
 
     @Override
@@ -45,13 +50,5 @@ public class CategoriaServicesImpl implements CategoriaServices {
     public boolean delete(Long codigo) {
         return false;
     }
-
-    @Override
-    public Categoria read(Long codigo) {
-        return null;
-    }
-
-
-
 
 }

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.pgrsoft.controlgastos.model.Categoria;
+import com.pgrsoft.controlgastos.model.Producto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,15 +95,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
 
-
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL2_NOMBRE_CAT, categoria.getNombre());
 
         long resultado = db.insert(CATEGORIAS_TABLE, null, contentValues);
 
-        Log.d("******", "Vamos a dar de alta: " + categoria.toString());
         categoria.setCodigo(resultado);
-        //db.close();
         return resultado == -1 ? null : categoria;
     }
 
@@ -110,7 +108,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + CATEGORIAS_TABLE + " ORDER BY " + COL1_CODIDO_CAT + " DESC ", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + CATEGORIAS_TABLE + " ORDER BY " + COL1_CODIDO_CAT + " ASC ", null);
 
         List<Categoria> categorias = new ArrayList<>();
 
@@ -123,22 +121,87 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
                 Categoria categoria = new Categoria(codigo, nombre);
                 categorias.add(categoria);
-
             }
 
-            //db.close();
             Log.d("***", categorias.toString());
         }
-
-
-
-
-
-
+        db.close();
         return categorias;
     }
 
+    public Categoria getCategoria(Long codigo) {
 
+        SQLiteDatabase db = getWritableDatabase();
+
+        String[] args = new String[]{String.valueOf(codigo)};
+        Categoria categoria = null;
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + CATEGORIAS_TABLE +
+                " WHERE " + COL1_CODIDO_CAT + " = ?", args);
+
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToNext();
+            Long code = cursor.getLong(0);
+            String nombre = cursor.getString(1);
+            // RESOLVER ESTO!
+            categoria = new Categoria(code, nombre);
+            categoria.setCodigo(codigo);
+        }
+
+        //Log.d("CODIGO", categoria.toString());
+        db.close();
+        return categoria;
+
+
+    }
+
+    // Insert the new Product.
+    public Producto createProducto(Producto producto) {
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_2_PRODUCTOS, producto.getNombre());
+        contentValues.put(COL_3_PRODUCTOS, producto.getDescripcion());
+        contentValues.put(COL_4_PRODUCTOS, producto.getPrecio());
+        contentValues.put(COL_5_PRODUCTOS, producto.getCategoria().getCodigo());
+
+        long resultado = db.insert(PRODUCTOS_TABLE, null, contentValues);
+        Log.d("******", "DAR ALTA AL PRODUCTO: " + producto.toString());
+        producto.setCodigo(resultado);
+        db.close();
+        return resultado == -1 ? null : producto;
+    }
+
+    public List<Producto> getAllProducto() {
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + PRODUCTOS_TABLE + " ORDER BY " + COL_1_PRODUCTOS + " DESC", null);
+
+        List<Producto> productos = new ArrayList<>();
+
+        if (cursor != null && cursor.getCount() > 0) {
+
+            while (cursor.moveToNext()) {
+
+                Long codigo = cursor.getLong(0);
+                String nombre = cursor.getString(1);
+                String descripcion = cursor.getString(2);
+                double precio = cursor.getDouble(3);
+                Long codigoCategoria = cursor.getLong(4);
+
+                Producto producto = new Producto(codigo, nombre, descripcion, precio, (Categoria) codigoCategoria);
+
+                //producto.setCodigo(codigo);
+
+                //productos.add(producto);
+            }
+        }
+        db.close();
+        return productos;
+
+    }
 
 
 

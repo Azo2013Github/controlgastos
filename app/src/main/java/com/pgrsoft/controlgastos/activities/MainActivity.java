@@ -9,7 +9,10 @@ import android.widget.Spinner;
 
 import com.pgrsoft.controlgastos.R;
 import com.pgrsoft.controlgastos.model.Categoria;
+import com.pgrsoft.controlgastos.model.Producto;
 import com.pgrsoft.controlgastos.services.CategoriaServices;
+import com.pgrsoft.controlgastos.services.ProductoServices;
+import com.pgrsoft.controlgastos.services.impl.ProductoServicesImpl;
 import com.pgrsoft.controlgastos.sqlite.DataBaseHelper;
 import com.pgrsoft.controlgastos.services.impl.CategoriaServicesImpl;
 
@@ -17,8 +20,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    //private SQLiteDatabase sql;
+
     private CategoriaServices categoriaServices;
+    private ProductoServices productoServices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,12 +42,20 @@ public class MainActivity extends AppCompatActivity {
 
         List<Categoria> categorias = categoriaServices.getAll();
 
-        Log.d("***", categorias.toString());
+        categoria = categoriaServices.read(7L);
+
+        // la parte de productos:
+        productoServices = new ProductoServicesImpl(this);
+        Producto producto = productoServices.create(new Producto
+                (null, ("prod_" + numeroAleatorio),"buen_producto_" +numeroAleatorio, 12.3, categoria));
+
+        //List<Producto> productos = productoServices.getAll();
+        //sql.close();
 
 
         //
 
-        //sql.close();
+
 
 
     }
