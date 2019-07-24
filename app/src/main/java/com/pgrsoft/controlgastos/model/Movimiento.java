@@ -7,11 +7,20 @@ public class Movimiento {
     private Long codigo; // PK
     private double importe; // precio del producto
     private Producto producto; // El nombre del producto en el que nos hemos gastado el dinero
-    private String descripion; // descripcion del movimeinto
+    private String descripcion; // descripcion del movimeinto
     private Date fecha;
     private double saldo;
 
     public Movimiento() {
+    }
+
+    public Movimiento(Long codigo, double importe, String descripcion, Date fecha, double saldo, Producto producto) {
+        this.codigo = codigo;
+        this.importe = importe;
+        this.producto = producto;
+        this.descripcion = descripcion;
+        this.fecha = fecha;
+        this.saldo = saldo;
     }
 
     public Long getCodigo() {
@@ -38,12 +47,12 @@ public class Movimiento {
         this.producto = producto;
     }
 
-    public String getDescripion() {
-        return descripion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescripion(String descripion) {
-        this.descripion = descripion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Date getFecha() {
@@ -68,7 +77,7 @@ public class Movimiento {
                 "codigo=" + codigo +
                 ", importe=" + importe +
                 ", producto=" + producto +
-                ", descripion='" + descripion + '\'' +
+                ", descripion='" + descripcion + '\'' +
                 ", fecha=" + fecha +
                 ", saldo=" + saldo +
                 '}';

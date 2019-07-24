@@ -8,10 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.pgrsoft.controlgastos.model.Categoria;
+import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.model.Producto;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
@@ -21,28 +21,29 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String COL1_CODIDO_CAT = "CODIGO";
     private static final String COL2_NOMBRE_CAT = "NOMBRE";
 
-    private static final String PRODUCTOS_TABLE = "PRODUCTOS"; // Productos
+    private static final String PRODUCTOS_TABLE = "PRODUCTOS"; // tabla Productos
     private static final String COL_1_PRODUCTOS = "CODIGO";
     private static final String COL_2_PRODUCTOS = "NOMBRE";
     private static final String COL_3_PRODUCTOS = "DESCRIPCION";
     private static final String COL_4_PRODUCTOS = "PRECIO";
     private static final String COL_5_PRODUCTOS = "CODIGO_CATEGORIA";
 
-    public static final String MOVIMIENTOS_TABLE = "MOVIMIENTOS"; // Movimiento
+    public static final String MOVIMIENTOS_TABLE = "MOVIMIENTOS"; // Tabla Movimiento
     private static final String COL_1_MOVIMIENTOS = "CODIGO";
     private static final String COL_2_MOVIMIENTOS = "IMPORTE";
     private static final String COL_3_MOVIMIENTOS = "DESCRIPCION";
     private static final String COL_4_MOVIMIENTOS = "FECHA";
     private static final String COL_5_MOVIMIENTOS = "SALDO";
     private static final String COL_6_MOVIMIENTOS = "CODIGO_PRODUCTO";
-    private static final String COL_7_MOVIMIENTOS = "CODIGO_CATEGORIA";
 
-    public DataBaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+
+    public DataBaseHelper(Context context){
+
+        super(context, DATABASE_NAME,null,1);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sb) {
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         StringBuilder builder = new StringBuilder();
 
@@ -52,7 +53,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 .append(COL2_NOMBRE_CAT).append(" TEXT NOT NULL )");
 
         String strDDL = builder.toString();
-        sb.execSQL(strDDL);
+        sqLiteDatabase.execSQL(strDDL);
 
         builder.setLength(0);
         builder.append("CREATE TABLE " + PRODUCTOS_TABLE + " (")
@@ -61,9 +62,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 .append(COL_3_PRODUCTOS).append(" TEXT NOT NULL, ")
                 .append(COL_4_PRODUCTOS).append(" REAL NOT NULL, ")
                 .append(COL_5_PRODUCTOS).append(" INTEGER NOT NULL, ")
-                .append(" FOREIGN KEY " + "( " + COL_5_PRODUCTOS + " ) REFERENCES " + CATEGORIAS_TABLE + " (" + COL1_CODIDO_CAT + "  ))" );
+                .append(" FOREIGN KEY " + "( " + COL_5_PRODUCTOS + " ) REFERENCES " + CATEGORIAS_TABLE + " (" + COL1_CODIDO_CAT + "  ))");
         strDDL = builder.toString();
-        sb.execSQL(strDDL);
+        sqLiteDatabase.execSQL(strDDL);
 
         builder.setLength(0);
         builder.append("CREATE TABLE " + MOVIMIENTOS_TABLE + " (")
@@ -77,21 +78,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         strDDL = builder.toString();
         Log.d("****", strDDL);
-        sb.execSQL(strDDL);
+        sqLiteDatabase.execSQL(strDDL);
 
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-
-        db.execSQL("DROP TABLE IF EXISTS " + CATEGORIAS_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + PRODUCTOS_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + MOVIMIENTOS_TABLE);
-        onCreate(db);
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + CATEGORIAS_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PRODUCTOS_TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MOVIMIENTOS_TABLE);
+        onCreate(sqLiteDatabase);
     }
 
-    // INSERCION DE DATOS:
-    public Categoria createCategoria(Categoria categoria) {
+    public Categoria createCategoria(Categoria categoria){
 
         SQLiteDatabase db = getWritableDatabase();
 
@@ -101,61 +100,34 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         long resultado = db.insert(CATEGORIAS_TABLE, null, contentValues);
 
         categoria.setCodigo(resultado);
+
+        Log.d("**: ", categoria.toString());
+
         return resultado == -1 ? null : categoria;
     }
 
-    public List<Categoria> getAll(){
-
-        SQLiteDatabase db = getWritableDatabase();
-
-        Cursor cursor = db.rawQuery("SELECT * FROM " + CATEGORIAS_TABLE + " ORDER BY " + COL1_CODIDO_CAT + " ASC ", null);
-
-        List<Categoria> categorias = new ArrayList<>();
-
-        if (cursor != null){
-
-            while (cursor.moveToNext()){
-
-                Long codigo = cursor.getLong(0);
-                String nombre = cursor.getString(1);
-
-                Categoria categoria = new Categoria(codigo, nombre);
-                categorias.add(categoria);
-            }
-
-            Log.d("***", categorias.toString());
-        }
-        db.close();
-        return categorias;
-    }
-
-    public Categoria getCategoria(Long codigo) {
+    public Cursor getCategoria(Long codigo) {
 
         SQLiteDatabase db = getWritableDatabase();
 
         String[] args = new String[]{String.valueOf(codigo)};
-        Categoria categoria = null;
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + CATEGORIAS_TABLE +
+        /* Cursor cursor = db.rawQuery("SELECT * FROM " + CATEGORIAS_TABLE +
+                " WHERE " + COL1_CODIDO_CAT + " = ?", args);*/
+        return  db.rawQuery("SELECT * FROM " + CATEGORIAS_TABLE +
                 " WHERE " + COL1_CODIDO_CAT + " = ?", args);
+    }
 
-        if (cursor != null && cursor.getCount() > 0) {
-            cursor.moveToNext();
-            Long code = cursor.getLong(0);
-            String nombre = cursor.getString(1);
-            // RESOLVER ESTO!
-            categoria = new Categoria(code, nombre);
-            categoria.setCodigo(codigo);
-        }
+    public Cursor getAllCategoriesCursor(){
 
-        //Log.d("CODIGO", categoria.toString());
-        db.close();
-        return categoria;
+        SQLiteDatabase db = getWritableDatabase();
 
+        return db.rawQuery("SELECT * FROM " + CATEGORIAS_TABLE + " ORDER BY " + COL1_CODIDO_CAT + " ASC ", null);
 
     }
 
-    // Insert the new Product.
+
+    // Las partes de la tabla Productos:
     public Producto createProducto(Producto producto) {
 
         SQLiteDatabase db = getWritableDatabase();
@@ -167,42 +139,71 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_5_PRODUCTOS, producto.getCategoria().getCodigo());
 
         long resultado = db.insert(PRODUCTOS_TABLE, null, contentValues);
-        Log.d("******", "DAR ALTA AL PRODUCTO: " + producto.toString());
         producto.setCodigo(resultado);
+        Log.d("******", "DAR ALTA AL PRODUCTO: " + producto.toString());
+
         db.close();
         return resultado == -1 ? null : producto;
+
     }
 
-    public List<Producto> getAllProducto() {
+    public Cursor getAllProductosCursor(){
 
         SQLiteDatabase db = getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT * FROM " + PRODUCTOS_TABLE + " ORDER BY " + COL_1_PRODUCTOS + " DESC", null);
-
-        List<Producto> productos = new ArrayList<>();
-
-        if (cursor != null && cursor.getCount() > 0) {
-
-            while (cursor.moveToNext()) {
-
-                Long codigo = cursor.getLong(0);
-                String nombre = cursor.getString(1);
-                String descripcion = cursor.getString(2);
-                double precio = cursor.getDouble(3);
-                Long codigoCategoria = cursor.getLong(4);
-
-                Producto producto = new Producto(codigo, nombre, descripcion, precio, (Categoria) codigoCategoria);
-
-                //producto.setCodigo(codigo);
-
-                //productos.add(producto);
-            }
-        }
-        db.close();
-        return productos;
+        return db.rawQuery("SELECT * FROM " + PRODUCTOS_TABLE +
+                " ORDER BY " + COL_1_PRODUCTOS + " ASC", null);
 
     }
 
+    public Cursor getProducto(Long codigo){
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        String[] args = new String[]{String.valueOf(codigo)};
+
+        return db.rawQuery("SELECT * FROM " + PRODUCTOS_TABLE + " WHERE " + COL_1_PRODUCTOS + " = ?", args);
+
+    }
+
+    // La parte de Movimiento: .....
+    public Movimiento createMovimiento(Movimiento movimiento){
+
+        SQLiteDatabase db = getWritableDatabase();
+        // Convertir la fecka en Strng para poder introducir registros en la bb de datos...
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String strFecha = sdf.format(movimiento.getFecha());
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_2_PRODUCTOS, movimiento.getImporte());
+        contentValues.put(COL_3_PRODUCTOS, movimiento.getDescripcion());
+        contentValues.put(COL_4_PRODUCTOS, strFecha);
+        contentValues.put(COL_5_PRODUCTOS, movimiento.getSaldo());
+        contentValues.put(COL_6_MOVIMIENTOS, movimiento.getProducto().getCodigo());
+
+        long resultado = db.insert(PRODUCTOS_TABLE, null, contentValues);
+        movimiento.setCodigo(resultado);
+        Log.d("******", "DAR ALTA AL MOVIMIENTO: " + movimiento.toString());
+
+        db.close();
+
+        return resultado == -1 ? null : movimiento;
+    }
+
+
+    public Cursor getAllMovimientosCursor(){
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        return db.rawQuery("SELECT * FROM " + MOVIMIENTOS_TABLE +
+                " ORDER BY " + COL_1_MOVIMIENTOS + " DESC", null);
+
+    }
+
+    public Movimiento readMovimiento(Movimiento movimiento){
+
+        return movimiento;
+    }
 
 
 
