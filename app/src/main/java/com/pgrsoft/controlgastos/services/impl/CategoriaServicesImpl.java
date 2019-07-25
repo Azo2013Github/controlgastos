@@ -37,12 +37,12 @@ public class CategoriaServicesImpl implements CategoriaServices {
             cursor.moveToNext();
             Long code = cursor.getLong(0);
             String nombre = cursor.getString(1);
-            // RESOLVER ESTO!
+
             categoria = new Categoria(code, nombre);
             categoria.setCodigo(codigo);
         }
 
-        Log.d("**", "LEADO CODIGO: " +categoria.toString());
+        //Log.d("**", "LEADO CODIGO: " +categoria.toString());
         dataBaseHelper.close();
         return categoria;
     }
@@ -63,7 +63,7 @@ public class CategoriaServicesImpl implements CategoriaServices {
                 categorias.add(categoria);
             }
         }
-        Log.d("**", "TODAS CATEGORIA." +categorias.toString());
+        //Log.d("**", "TODAS CATEGORIA." +categorias.toString());
 
         dataBaseHelper.close();
 

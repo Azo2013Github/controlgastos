@@ -101,7 +101,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         categoria.setCodigo(resultado);
 
-        Log.d("**: ", categoria.toString());
+        //Log.d("**: ", categoria.toString());
 
         return resultado == -1 ? null : categoria;
     }
@@ -116,18 +116,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 " WHERE " + COL1_CODIDO_CAT + " = ?", args);*/
         return  db.rawQuery("SELECT * FROM " + CATEGORIAS_TABLE +
                 " WHERE " + COL1_CODIDO_CAT + " = ?", args);
-    }
-
-    public Cursor getAllCategoriesCursor(){
-
-        SQLiteDatabase db = getWritableDatabase();
-
-        return db.rawQuery("SELECT * FROM " + CATEGORIAS_TABLE + " ORDER BY " + COL1_CODIDO_CAT + " ASC ", null);
 
     }
 
 
-    // Las partes de la tabla Productos:
+       // Las partes de la tabla Productos:
     public Producto createProducto(Producto producto) {
 
         SQLiteDatabase db = getWritableDatabase();
@@ -140,10 +133,19 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         long resultado = db.insert(PRODUCTOS_TABLE, null, contentValues);
         producto.setCodigo(resultado);
-        Log.d("******", "DAR ALTA AL PRODUCTO: " + producto.toString());
+        //Log.d("******", "DAR ALTA AL PRODUCTO: " + producto.toString());
 
         db.close();
         return resultado == -1 ? null : producto;
+
+    }
+
+
+    public Cursor getAllCategoriesCursor(){
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        return db.rawQuery("SELECT * FROM " + CATEGORIAS_TABLE + " ORDER BY " + COL1_CODIDO_CAT + " ASC ", null);
 
     }
 
@@ -183,7 +185,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         long resultado = db.insert(PRODUCTOS_TABLE, null, contentValues);
         movimiento.setCodigo(resultado);
-        Log.d("******", "DAR ALTA AL MOVIMIENTO: " + movimiento.toString());
+        //Log.d("******", "DAR ALTA AL MOVIMIENTO: " + movimiento.toString());
 
         db.close();
 
@@ -200,9 +202,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public Movimiento readMovimiento(Movimiento movimiento){
+    public Cursor getMovimiento(Long codigo){
 
-        return movimiento;
+        SQLiteDatabase db = getWritableDatabase();
+        String[] args = new String[]{String.valueOf(codigo)};
+
+        return db.rawQuery("SELECT * FROM " + MOVIMIENTOS_TABLE + " WHERE " + COL_1_MOVIMIENTOS + " = ?", args);
     }
 
 

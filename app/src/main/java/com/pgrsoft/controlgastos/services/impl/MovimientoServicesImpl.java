@@ -2,6 +2,7 @@ package com.pgrsoft.controlgastos.services.impl;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.model.Producto;
@@ -66,18 +67,53 @@ public class MovimientoServicesImpl implements MovimientoServices {
                 Movimiento movimiento = new Movimiento(codigo, importe, descripcion, fecha, saldo, producto);
 
                 movimientos.add(movimiento);
-
             }
 
         }
+        //Log.d("***",  movimientos.toString());
 
+        dataBaseHelper.close();
         return movimientos;
     }
 
     @Override
     public Movimiento read(Long codigo) {
 
-        return null;
+        Movimiento movimiento = null;
+
+        Cursor cursor = this.dataBaseHelper.getMovimiento(codigo);
+
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToNext();
+            Long code = cursor.getLong(0);
+            double importe = cursor.getDouble(1);
+            String descripcion = cursor.getString(2);
+            String strFecha = cursor.getString(3);
+            double saldo = cursor.getDouble(4);
+            Long codigoProducto = cursor.getLong(5);
+
+            // Transformar la fecha en Date()
+            Date fecha = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            // Habrá un try catch....
+            strFecha = "21/08/1994";
+            try {
+                fecha = sdf.parse(strFecha);
+            }catch (ParseException e){
+                e.printStackTrace();
+            }
+
+            ProductoServices productoServices = new ProductoServicesImpl(this.context);
+            Producto producto = productoServices.read(codigoProducto);
+
+            movimiento = new Movimiento (code, importe, descripcion, fecha, saldo, producto);
+            movimiento.setCodigo(codigo);
+
+            Log.d("**", "LEADO CODIGO: " +movimiento.toString());
+        }
+
+        dataBaseHelper.close();
+        return movimiento;
     }
 
 }
