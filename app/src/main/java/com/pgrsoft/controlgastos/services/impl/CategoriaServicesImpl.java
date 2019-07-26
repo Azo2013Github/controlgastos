@@ -42,7 +42,7 @@ public class CategoriaServicesImpl implements CategoriaServices {
             categoria.setCodigo(codigo);
         }
 
-        Log.d("**", "LEADO CODIGO CATEGORIA: " +categoria.toString());
+        //Log.d("**", "LEADO CODIGO CATEGORIA: " +categoria.toString());
         dataBaseHelper.close();
         return categoria;
     }
@@ -63,7 +63,7 @@ public class CategoriaServicesImpl implements CategoriaServices {
                 categorias.add(categoria);
             }
         }
-        Log.d("**", "TODAS CATEGORIA." +categorias.toString());
+        //Log.d("**", "TODAS CATEGORIA." +categorias.toString());
 
         dataBaseHelper.close();
 

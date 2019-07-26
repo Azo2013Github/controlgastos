@@ -77,7 +77,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 .append(" FOREIGN KEY " + "( " + COL_6_MOVIMIENTOS + ") REFERENCES " + PRODUCTOS_TABLE + " (" + COL_1_PRODUCTOS + " )) ");
 
         strDDL = builder.toString();
-        Log.d("****", strDDL);
+        //Log.d("****", strDDL);
         sqLiteDatabase.execSQL(strDDL);
 
     }
@@ -101,7 +101,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         categoria.setCodigo(resultado);
 
-        Log.d("**: ", categoria.toString());
+        //Log.d("**: ", categoria.toString());
 
         return resultado == -1 ? null : categoria;
     }
@@ -135,7 +135,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         long resultado = db.insert(PRODUCTOS_TABLE, null, contentValues);
         producto.setCodigo(resultado);
-        Log.d("******", "DAR ALTA AL PRODUCTO: " + producto.toString());
+        //Log.d("******", "DAR ALTA AL PRODUCTO: " + producto.toString());
 
         db.close();
         return resultado == -1 ? null : producto;
@@ -188,7 +188,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         long resultado = db.insert(MOVIMIENTOS_TABLE, null, contentValues);
         movimiento.setCodigo(resultado);
-        Log.d("******", "DAR ALTA AL MOVIMIENTO: " + movimiento.toString());
+        //Log.d("******", "DAR ALTA AL MOVIMIENTO: " + movimiento.toString());
 
         db.close();
 

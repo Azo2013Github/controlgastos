@@ -42,7 +42,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
 
         if (cursor != null && cursor.getCount() > 0){
 
-            while (cursor.moveToFirst()){
+            while (cursor.moveToNext()){
 
                 Long codigo = cursor.getLong(0);
                 double importe = cursor.getDouble(1);
@@ -55,7 +55,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
                 Date fecha = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                 // Habrá un try catch....
-                strFecha = "21/08/1994";
+                strFecha = "21/08/1994 16:14";
                 try {
                     fecha = sdf.parse(strFecha);
                 }catch (ParseException e){
@@ -67,10 +67,8 @@ public class MovimientoServicesImpl implements MovimientoServices {
                 Movimiento movimiento = new Movimiento(codigo, importe, descripcion, fecha, saldo, producto);
 
                 movimientos.add(movimiento);
-
+                //Log.d("***",  movimientos.toString());
             }
-
-            Log.d("***",  movimientos.toString());
         }
 
         dataBaseHelper.close();
@@ -97,7 +95,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
             Date fecha = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             // Habrá un try catch....
-            strFecha = "21/08/1994";
+            strFecha = "21/08/1994 16:14";
             try {
                 fecha = sdf.parse(strFecha);
             }catch (ParseException e){
