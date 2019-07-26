@@ -63,17 +63,14 @@ public class FormularioActivity extends AppCompatActivity {
         String[] strNombres = new String[5];
         int i = 0;
         for (Categoria categoria: categorias) {
-
             strNombres[i] = categoria.getNombre();
             i++;
 
         }
-
-
         stringArrayAdapter = new ArrayAdapter<String>(FormularioActivity.this, android.R.layout.simple_list_item_1, strNombres);
-
         spinner.setAdapter(stringArrayAdapter);
-        
 
     }
+
+
 }
