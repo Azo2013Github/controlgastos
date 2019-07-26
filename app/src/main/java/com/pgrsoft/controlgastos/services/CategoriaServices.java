@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface CategoriaServices {
 
+    // añadido desde el poratil
+
     public Categoria create(Categoria categoria);       // 1
     public Categoria update(Categoria categoria);       // TODO
     public boolean delete(Long codigo);                 // TODO
