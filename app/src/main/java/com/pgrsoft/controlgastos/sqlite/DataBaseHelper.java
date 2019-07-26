@@ -101,7 +101,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         categoria.setCodigo(resultado);
 
-        //Log.d("**: ", categoria.toString());
+        Log.d("**: ", categoria.toString());
 
         return resultado == -1 ? null : categoria;
     }
@@ -131,9 +131,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_4_PRODUCTOS, producto.getPrecio());
         contentValues.put(COL_5_PRODUCTOS, producto.getCategoria().getCodigo());
 
+        //Categoria categoria = Ca
+
         long resultado = db.insert(PRODUCTOS_TABLE, null, contentValues);
         producto.setCodigo(resultado);
-        //Log.d("******", "DAR ALTA AL PRODUCTO: " + producto.toString());
+        Log.d("******", "DAR ALTA AL PRODUCTO: " + producto.toString());
 
         db.close();
         return resultado == -1 ? null : producto;
@@ -177,15 +179,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String strFecha = sdf.format(movimiento.getFecha());
 
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2_PRODUCTOS, movimiento.getImporte());
-        contentValues.put(COL_3_PRODUCTOS, movimiento.getDescripcion());
-        contentValues.put(COL_4_PRODUCTOS, strFecha);
-        contentValues.put(COL_5_PRODUCTOS, movimiento.getSaldo());
+
+        contentValues.put(COL_2_MOVIMIENTOS, movimiento.getImporte());
+        contentValues.put(COL_3_MOVIMIENTOS, movimiento.getDescripcion());
+        contentValues.put(COL_4_MOVIMIENTOS, strFecha);
+        contentValues.put(COL_5_MOVIMIENTOS, movimiento.getSaldo());
         contentValues.put(COL_6_MOVIMIENTOS, movimiento.getProducto().getCodigo());
 
-        long resultado = db.insert(PRODUCTOS_TABLE, null, contentValues);
+        long resultado = db.insert(MOVIMIENTOS_TABLE, null, contentValues);
         movimiento.setCodigo(resultado);
-        //Log.d("******", "DAR ALTA AL MOVIMIENTO: " + movimiento.toString());
+        Log.d("******", "DAR ALTA AL MOVIMIENTO: " + movimiento.toString());
 
         db.close();
 
@@ -210,7 +213,120 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM " + MOVIMIENTOS_TABLE + " WHERE " + COL_1_MOVIMIENTOS + " = ?", args);
     }
 
+    public Categoria updateCategoria(Categoria categoria){
 
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL2_NOMBRE_CAT, categoria.getNombre());
+
+        String[] args = new String[] {String.valueOf(categoria.getCodigo())};
+
+        db.update(CATEGORIAS_TABLE, contentValues,  COL1_CODIDO_CAT + " = ? ",args);
+
+        db.close();
+        return categoria;
+
+    }
+
+    public boolean deletingCategoria(Long codigo) {
+
+        boolean eliminado = false;
+        SQLiteDatabase db = getWritableDatabase();
+        String[] args = new String[]{String.valueOf(codigo)};
+
+        try{
+            db.delete(CATEGORIAS_TABLE, COL1_CODIDO_CAT + " = ? ", args);
+            eliminado = true;
+
+        }catch (Exception e){
+            eliminado = false;
+            e.printStackTrace();
+        }
+
+        db.close();
+        return true;
+    }
+
+    public Producto updatingProducto (Producto producto){
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        String[] args = new String[]{String.valueOf(producto.getCodigo())};
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_2_PRODUCTOS, producto.getNombre());
+        contentValues.put(COL_3_PRODUCTOS, producto.getDescripcion());
+        contentValues.put(COL_4_PRODUCTOS, producto.getPrecio());
+        contentValues.put(COL_5_PRODUCTOS, producto.getCategoria().getCodigo());
+
+        db.update(PRODUCTOS_TABLE, contentValues, COL_1_PRODUCTOS + " = " , args);
+
+        db.close();
+        return producto;
+
+    }
+
+    public boolean deletingProductoCodigo(Long codigo){
+
+        SQLiteDatabase db = getWritableDatabase();
+        String[] args = new String[]{String.valueOf(codigo)};
+        boolean eliminado = false;
+
+        try{
+            db.delete(PRODUCTOS_TABLE, COL_1_PRODUCTOS + " = ? ", args);
+            eliminado = true;
+
+        }catch (Exception e){
+            eliminado = false;
+            e.printStackTrace();
+        }
+        db.close();
+        return true;
+    }
+
+    public Movimiento updatingMovimiento(Movimiento movimiento){
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        // Convertir la fecka en Strng para poder introducir registros en la bb de datos...
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String strFecha = sdf.format(movimiento.getFecha());
+
+        String[] args = new String[]{String.valueOf(movimiento.getCodigo())};
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(COL_2_MOVIMIENTOS, movimiento.getImporte());
+        contentValues.put(COL_3_MOVIMIENTOS, movimiento.getDescripcion());
+        contentValues.put(COL_4_MOVIMIENTOS, strFecha);
+        contentValues.put(COL_5_MOVIMIENTOS, movimiento.getSaldo());
+        contentValues.put(COL_6_MOVIMIENTOS, movimiento.getProducto().getCodigo());
+
+        db.update(MOVIMIENTOS_TABLE, contentValues, COL_1_MOVIMIENTOS + " = " , args);
+        db.close();
+        return movimiento;
+
+    }
+
+    public boolean deletingMovimientoCodigo(Long codigo){
+
+        SQLiteDatabase db = getWritableDatabase();
+        String[] args = new String[]{String.valueOf(codigo)};
+        boolean eliminado = false;
+
+        try{
+
+            db.delete(MOVIMIENTOS_TABLE, COL_1_MOVIMIENTOS + " = ? ", args);
+            eliminado = true;
+
+        }catch (Exception e){
+            if (eliminado == false){
+                e.printStackTrace();
+            }
+        }
+        db.close();
+        return true;
+    }
 
 
 }

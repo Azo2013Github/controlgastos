@@ -3,6 +3,7 @@ package com.pgrsoft.controlgastos.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.pgrsoft.controlgastos.R;
 import com.pgrsoft.controlgastos.model.Categoria;
@@ -23,6 +24,16 @@ public class MainActivity extends AppCompatActivity {
 
     private CategoriaServices categoriaServices;
     private ProductoServices productoServices;
+    private  MovimientoServices movimientoServices;
+
+    private List<Categoria> categorias;
+    private List<Producto> productos;
+    private List<Movimiento> movimientos;
+
+    private Categoria categoria;
+    private Movimiento movimiento;
+    private Producto producto;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,37 +49,32 @@ public class MainActivity extends AppCompatActivity {
 
         int numeroAleatorio = (int) (Math.random() * 10000);
 
-        Categoria categoria = categoriaServices.create(new Categoria(null, "cat_" + numeroAleatorio));
+        categoria = categoriaServices.create(new Categoria(null, "cat_" + numeroAleatorio));
 
-        //List<Categoria> categorias = categoriaServices.getAll();
+        categorias = categoriaServices.getAll();
 
-       categoria = categoriaServices.read(10L);
+        categoria = categoriaServices.read(5L);
 
         // la parte de productos:
         productoServices = new ProductoServicesImpl(this);
-        Producto producto = productoServices.create(new Producto
-                (null, ("prod_" + numeroAleatorio), "buen_producto_" + numeroAleatorio, 20.3, categoria));
+        producto = productoServices.create(new Producto
+           (null, ("prod_" + numeroAleatorio), "buen_producto_" + numeroAleatorio, 20.3, categoria));
 
-        List<Producto> productos = productoServices.getAll();
+        productos = productoServices.getAll();
 
         producto = productoServices.read(2L);
-        numeroAleatorio = 0;
 
-        MovimientoServices movimientoServices = new MovimientoServicesImpl(this);
+        //numeroAleatorio = 0;
 
-        Movimiento movimiento = movimientoServices.create(new Movimiento(null, 12.3+numeroAleatorio, "descrip_" + numeroAleatorio, new Date(), 210.10, producto));
+        movimientoServices = new MovimientoServicesImpl(this);
 
-        List<Movimiento> movimientos = movimientoServices.getAll();
+        movimiento = movimientoServices.create(new Movimiento(null, 12.4, "descrip_" + numeroAleatorio, new Date(), 710.10, producto));
 
-        movimiento = movimientoServices.read(1L);
+        movimientos = movimientoServices.getAll();
 
+        movimiento = movimientoServices.read(7L);
 
-
-
-
-
-
-    }
+     }
 
 
 }

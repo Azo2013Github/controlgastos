@@ -57,12 +57,10 @@ public class ProductoServicesImpl implements ProductoServices {
 
             }
         }
-        //Log.d("Datos productos", productos.toString());
+        //Log.d("***: Datos productos", productos.toString());
         dataBaseHelper.close();
         return productos;
     }
-
-
 
     @Override
     public Producto read(Long codigo) {
@@ -85,12 +83,25 @@ public class ProductoServicesImpl implements ProductoServices {
             producto = new Producto(codigo, nombre, descripcion, precio, categoria);
             producto.setCodigo(codigo);
 
-            //Log.d("**", "LEYENDO UN PRODUCTO" +producto.toString());
+            //Log.d("**", "LEYENDO UN PRODUCTO: " +producto.toString());
 
         }
 
         dataBaseHelper.close();
         return producto;
     }
+
+    @Override
+    public Producto update(Producto producto) {
+
+        return dataBaseHelper.updatingProducto(producto);
+    }
+
+    @Override
+    public boolean delete(Long codigo) {
+
+        return dataBaseHelper.deletingProductoCodigo(codigo);
+    }
+
 
 }

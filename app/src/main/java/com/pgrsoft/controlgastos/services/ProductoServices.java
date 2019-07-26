@@ -10,4 +10,6 @@ public interface ProductoServices {
     public Producto read(Long codigo);
 
     public List<Producto> getAll();
+    public Producto update(Producto producto);       // TODO
+    public boolean delete(Long codigo);
 }

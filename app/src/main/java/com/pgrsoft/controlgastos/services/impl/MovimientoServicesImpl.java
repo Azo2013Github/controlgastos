@@ -67,10 +67,11 @@ public class MovimientoServicesImpl implements MovimientoServices {
                 Movimiento movimiento = new Movimiento(codigo, importe, descripcion, fecha, saldo, producto);
 
                 movimientos.add(movimiento);
+
             }
 
+            Log.d("***",  movimientos.toString());
         }
-        //Log.d("***",  movimientos.toString());
 
         dataBaseHelper.close();
         return movimientos;
@@ -109,11 +110,29 @@ public class MovimientoServicesImpl implements MovimientoServices {
             movimiento = new Movimiento (code, importe, descripcion, fecha, saldo, producto);
             movimiento.setCodigo(codigo);
 
-            Log.d("**", "LEADO CODIGO: " +movimiento.toString());
+
         }
 
+        //Log.d("**", "LEADO CODIGO: " +movimiento.toString());
         dataBaseHelper.close();
         return movimiento;
     }
+
+    @Override
+    public Movimiento update(Movimiento movimiento) {
+
+
+        return dataBaseHelper.updatingMovimiento(movimiento);
+    }
+
+    @Override
+    public boolean delete(Long codigo) {
+        //Log.d("**", "BORANDO CODIGO: " + codigo);
+        return dataBaseHelper.deletingMovimientoCodigo(codigo);
+    }
+
+
+
+
 
 }

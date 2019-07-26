@@ -10,6 +10,9 @@ public interface MovimientoServices {
     public Movimiento read(Long codigo);
 
     public List<Movimiento> getAll();
+    public Movimiento update(Movimiento movimiento);       // TODO
+    public boolean delete(Long codigo);
+
 
 
 
