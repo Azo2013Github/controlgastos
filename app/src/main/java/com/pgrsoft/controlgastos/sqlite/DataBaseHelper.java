@@ -102,7 +102,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         categoria.setCodigo(resultado);
 
         //Log.d("**: ", categoria.toString());
-
+        db.close();
         return resultado == -1 ? null : categoria;
     }
 
@@ -151,6 +151,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public Categoria updateCategoria(Categoria categoria){
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL2_NOMBRE_CAT, categoria.getNombre());
+
+        String[] args = new String[] {String.valueOf(categoria.getCodigo())};
+
+        db.update(CATEGORIAS_TABLE, contentValues,  COL1_CODIDO_CAT + " = ? ",args);
+
+        db.close();
+        return categoria;
+
+    }
+
     public Cursor getAllProductosCursor(){
 
         SQLiteDatabase db = getWritableDatabase();
@@ -191,7 +207,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         //Log.d("******", "DAR ALTA AL MOVIMIENTO: " + movimiento.toString());
 
         db.close();
-
         return resultado == -1 ? null : movimiento;
     }
 
@@ -211,22 +226,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String[] args = new String[]{String.valueOf(codigo)};
 
         return db.rawQuery("SELECT * FROM " + MOVIMIENTOS_TABLE + " WHERE " + COL_1_MOVIMIENTOS + " = ?", args);
-    }
-
-    public Categoria updateCategoria(Categoria categoria){
-
-        SQLiteDatabase db = getWritableDatabase();
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL2_NOMBRE_CAT, categoria.getNombre());
-
-        String[] args = new String[] {String.valueOf(categoria.getCodigo())};
-
-        db.update(CATEGORIAS_TABLE, contentValues,  COL1_CODIDO_CAT + " = ? ",args);
-
-        db.close();
-        return categoria;
-
     }
 
     public boolean deletingCategoria(Long codigo) {
@@ -277,8 +276,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             eliminado = true;
 
         }catch (Exception e){
-            eliminado = false;
-            e.printStackTrace();
+            if (eliminado == false) {
+                e.printStackTrace();
+            }else {
+                eliminado = true;
+            }
         }
         db.close();
         return true;

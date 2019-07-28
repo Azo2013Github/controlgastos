@@ -42,11 +42,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
+        //DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
 
         // Es necesario solicitar una instancia de SQLiteDatabase para entrar en onCreate o onUpgrade
-        SQLiteDatabase sql = dataBaseHelper.getWritableDatabase();
-        sql.close();*/
+        //SQLiteDatabase sql = dataBaseHelper.getWritableDatabase();
+        //Log.d("***", "SE HA CREADO" +sql.toString());
+        //sql.close();
 
         categoriaServices = new CategoriaServicesImpl(this);
 
@@ -58,36 +59,50 @@ public class MainActivity extends AppCompatActivity {
         categorias = categoriaServices.getAll();
         //Log.d("**", "MainActivity Categoria ALL: " + categorias.toString());
 
-        categoria = categoriaServices.read(11L);
+        categoria = categoriaServices.read(4L);
         //Log.d("**", "MainActivity Categoria codigo: "+categoria.getCodigo().toString());
 
         // la parte de productos:
-        productoServices = new ProductoServicesImpl(this);
+       productoServices = new ProductoServicesImpl(this);
         producto = productoServices.create(new Producto
            (null, ("prod_" + numeroAleatorio), "buen_producto_" + numeroAleatorio, 4.3, categoria));
 
-        //Log.d("**", "MainActivity Producto Crear: " +producto.toString());
+        Log.d("**", "MainActivity Producto Crear: " +producto.toString());
 
         productos = productoServices.getAll();
         //Log.d("**", "MainActivity Productos All: " + productos.toString());
 
-        producto = productoServices.read(5L);
+        producto = productoServices.read(3L);
 
-        //Log.d("**", "MainActivity Producto Codigo: " +producto.toString());
-
-        //numeroAleatorio = 0;
+        //Log.d("**", "MainActivity Producto Codigo: " + producto.getCodigo());
 
         movimientoServices = new MovimientoServicesImpl(this);
 
-        movimiento = movimientoServices.create(new Movimiento(null, 1.4, "descrip_" + numeroAleatorio, new Date(), 100.10, producto));
+        movimiento = movimientoServices.create(new Movimiento(null, 0.60, "descrip_" + numeroAleatorio,
+                new Date(), 5.12, producto));
 
         //Log.d("**", "MainActivity Movimiento Crear: " + movimiento.toString());
 
         movimientos = movimientoServices.getAll();
 
-        Log.d("***" , "Main: " + movimientos.toString());
+        //Log.d("***" , "MainActivity Movimiento getAll(): " + movimientos.toString());
 
-        /*  movimiento = movimientoServices.read(7L);*/
+        movimiento = movimientoServices.read(2L);
+
+        //Log.d("***" , "MainActivity Movimiento Codigo: " + movimientos.toString());
+
+        //boolean eleminadoMovimiento = movimientoServices.delete(2L);
+
+        //Log.d("***", movimientos.toString() + eleminadoMovimiento);
+
+        //boolean eliminadoProducto = productoServices.delete(2L);
+
+        //Log.d("**", productos.toString() + "eliminado Codigo producto: " +eliminadoProducto);
+
+        //boolean eliminadoCategoria = categoriaServices.delete(categoria.getCodigo());
+
+        //Log.d("**", categorias.toString() + "eliminado Codigo producto: " +eliminadoCategoria);
+
 
      }
 
