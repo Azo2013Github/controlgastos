@@ -7,7 +7,7 @@
     android:layout_marginLeft="4dp"
     android:layout_marginTop="14dp"
     android:orientation="vertical"
-    android:background="@drawable/icono"
+
     tools:context=".fragment.FormularioFragment">
 
     <TextView

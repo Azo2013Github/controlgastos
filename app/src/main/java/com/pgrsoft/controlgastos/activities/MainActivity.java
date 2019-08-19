@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.pgrsoft.controlgastos.R;
+import com.pgrsoft.controlgastos.fragment.FormularioFragment;
 import com.pgrsoft.controlgastos.fragment.MenuFragment;
 import com.pgrsoft.controlgastos.model.Categoria;
 import com.pgrsoft.controlgastos.model.Movimiento;
@@ -24,6 +25,7 @@ import com.pgrsoft.controlgastos.sqlite.DataBaseHelper;
 
 import java.util.Date;
 import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private Producto producto;
 
     private Fragment fragment;
-    private Fragment fragment1;
+    private Fragment fragmentMenu;
 
 
     @Override
@@ -49,12 +51,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fragment = new MenuFragment();
-
+        fragment = new FormularioFragment();
 
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
         fragmentTransaction.replace(R.id.destino, fragment);
+
+        //fragmentTransaction.replace(R.id.destino, fragmentMenu);
 
         fragmentTransaction.addToBackStack(null);
 
