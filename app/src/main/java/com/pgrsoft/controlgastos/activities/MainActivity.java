@@ -2,11 +2,15 @@ package com.pgrsoft.controlgastos.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.pgrsoft.controlgastos.R;
+import com.pgrsoft.controlgastos.fragment.MenuFragment;
 import com.pgrsoft.controlgastos.model.Categoria;
 import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.model.Producto;
@@ -36,11 +40,29 @@ public class MainActivity extends AppCompatActivity {
     private Movimiento movimiento;
     private Producto producto;
 
+    private Fragment fragment;
+    private Fragment fragment1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fragment = new MenuFragment();
+
+
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+        fragmentTransaction.replace(R.id.destino, fragment);
+
+        fragmentTransaction.addToBackStack(null);
+
+        fragmentTransaction.commit();
+
+
+
+
 
         //DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
 
@@ -49,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         //Log.d("***", "SE HA CREADO" +sql.toString());
         //sql.close();
 
-        categoriaServices = new CategoriaServicesImpl(this);
+        /*categoriaServices = new CategoriaServicesImpl(this);
 
         int numeroAleatorio = (int) (Math.random() * 10000);
 
@@ -103,8 +125,11 @@ public class MainActivity extends AppCompatActivity {
 
         //Log.d("**", categorias.toString() + "eliminado Codigo producto: " +eliminadoCategoria);
 
+        */
 
      }
+
+
 
 
 }

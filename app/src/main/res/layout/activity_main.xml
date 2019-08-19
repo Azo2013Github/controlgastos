@@ -5,18 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/control_1"
+    android:background="@drawable/icono"
     tools:context=".activities.MainActivity">
 
-    <fragment
+    <!--<fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/menu"
         android:name="com.pgrsoft.controlgastos.fragment.MenuFragment"
         tools:layout="@layout/fragment_menu">
-    </fragment>
-
-
+    </fragment>-->
 
     <RelativeLayout
         android:layout_width="match_parent"

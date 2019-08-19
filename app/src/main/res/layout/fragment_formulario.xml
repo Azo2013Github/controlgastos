@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="4dp"
     android:layout_marginTop="14dp"
     android:orientation="vertical"
+    android:background="@drawable/icono"
     tools:context=".fragment.FormularioFragment">
 
     <TextView
@@ -125,4 +127,30 @@
         android:layout_marginTop="-44dp"
         android:ems="10"
         android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="-292dp"
+        android:text="@string/introducir"
+        android:textSize="32sp" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="110dp"
+        android:layout_height="72dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="492dp"
+        android:src="@drawable/cesta" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="112dp"
+        android:layout_height="72dp"
+        android:layout_marginLeft="226dp"
+        android:layout_marginTop="-72dp"
+        android:src="@drawable/pagar" />
+
 </LinearLayout>
