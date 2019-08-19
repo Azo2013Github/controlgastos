@@ -48,17 +48,19 @@ public class FormularioActivity extends AppCompatActivity {
 
         List<Categoria> categorias = new ArrayList<>();
 
-        Categoria categoria1 = new Categoria(1L, "Carne");
-        Categoria categoria2 = new Categoria(2L, "Legumbre");
+        Categoria categoria1 = new Categoria(1L, "Carnes");
+        Categoria categoria2 = new Categoria(2L, "Legumbres");
         Categoria categoria3 = new Categoria(3L, "Bebida");
-        Categoria categoria4 = new Categoria(4L, "Fruta");
+        Categoria categoria4 = new Categoria(4L, "Frutas");
         Categoria categoria5 = new Categoria(5L, "Verduras");
+        Categoria categoria6 = new Categoria(6L, "Pescados");
 
         categorias.add(categoria1);
         categorias.add(categoria2);
         categorias.add(categoria3);
         categorias.add(categoria4);
         categorias.add(categoria5);
+        categorias.add(categoria6);
 
         String[] strNombres = new String[5];
         int i = 0;

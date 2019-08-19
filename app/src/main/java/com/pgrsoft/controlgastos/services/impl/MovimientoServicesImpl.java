@@ -119,7 +119,6 @@ public class MovimientoServicesImpl implements MovimientoServices {
     @Override
     public Movimiento update(Movimiento movimiento) {
 
-
         return dataBaseHelper.updatingMovimiento(movimiento);
     }
 
