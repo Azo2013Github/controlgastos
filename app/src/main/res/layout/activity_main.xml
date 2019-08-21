@@ -13,7 +13,9 @@
         android:name="com.pgrsoft.controlgastos.fragment.MenuFragment"
         android:layout_width="150dp"
         android:layout_height="match_parent"
-        tools:layout="@layout/fragment_menu"></fragment>
+        tools:layout="@layout/fragment_menu">
+
+    </fragment>
 
     <RelativeLayout
         android:layout_width="match_parent"

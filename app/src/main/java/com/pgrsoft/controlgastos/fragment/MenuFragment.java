@@ -1,6 +1,7 @@
 package com.pgrsoft.controlgastos.fragment;
 
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import android.app.Fragment;
@@ -25,6 +26,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
     private Button botonListar;
     private Button botonSalir;
 
+    private Fragment fragment;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -41,10 +43,9 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
         botonListar = (Button) miVista.findViewById(R.id.idListar);
         botonSalir = (Button) miVista.findViewById(R.id.idSalir);
 
+        botonCrear.setOnClickListener(this);
         botonSalir.setOnClickListener(this);
         botonListar.setOnClickListener(this);
-        botonSalir.setOnClickListener(this);
-
 
         return miVista;
     }
@@ -53,15 +54,45 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
-
         switch (view.getId()){
 
             case R.id.idCrear:
+
                 Log.d("***", "CREAR");
+
+                //Toast.makeText(getActivity(), "CREAR", Toast.LENGTH_LONG).show();
+
+                fragment = new FormularioFragment();
+
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+                fragmentTransaction.replace(R.id.destino, fragment);
+
+                fragmentTransaction.addToBackStack(null);
+
+                fragmentTransaction.commit();
+
                 break;
 
-        }
+            case R.id.idListar:
 
+                fragment = new MenuFragment();
+
+                fragmentTransaction = getFragmentManager().beginTransaction();
+
+                fragmentTransaction.replace(R.id.destino, fragment);
+
+                fragmentTransaction.addToBackStack(null);
+
+                break;
+
+            case R.id.idSalir:
+
+
+
+
+                break;
+        }
 
 
     }
