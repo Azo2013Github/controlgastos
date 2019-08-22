@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="150dp"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@android:color/holo_green_light"
 
+    android:orientation="vertical"
     tools:context=".fragment.MenuFragment">
 
     <ImageView
@@ -13,17 +14,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="48dp"
         android:src="@drawable/icono" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:paddingLeft="16dp"
+        android:layout_marginTop="22dp"
+        android:gravity="center"
         android:text="@string/titulo"
-        android:textSize="12sp" />
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/idCrear"
@@ -31,7 +33,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="36dp"
-        android:text="@string/crear" />
+        android:background="@color/BlanchedAlmond"
+        android:text="@string/crear"
+        android:textColor="@color/colorAccent" />
 
     <Button
         android:id="@+id/idListar"
@@ -39,7 +43,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="36dp"
-        android:text="@string/listar" />
+        android:background="@color/BlanchedAlmond"
+        android:text="@string/listar"
+        android:textColor="@color/colorAccent" />
 
     <Button
         android:id="@+id/idSalir"
@@ -47,6 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="38dp"
-        android:text="@string/salir" />
+        android:background="@color/BlanchedAlmond"
+        android:text="@string/salir"
+        android:textColor="@color/colorAccent" />
 
 </LinearLayout>

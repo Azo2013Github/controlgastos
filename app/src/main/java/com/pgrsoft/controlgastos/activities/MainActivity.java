@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*fragment = new MenuFragment();
+        fragment = new MenuFragment();
 
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentTransaction.addToBackStack(null);
 
-        fragmentTransaction.commit(); */
+        fragmentTransaction.commit();
 
 
 
