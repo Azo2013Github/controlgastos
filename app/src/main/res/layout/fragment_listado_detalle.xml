@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/control"
+    tools:context=".fragment.ListadoDetalleFragment">
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="@string/detalleProducto"
+        android:textColor="@color/colorAccent"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="89dp"
+        android:text="@string/nombre"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/iidDetalleNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="192dp"
+        android:layout_marginTop="89dp"
+        android:text="TextView"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="124dp"
+        android:text="@string/descripcion"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/idDetalleDescripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="192dp"
+        android:layout_marginTop="124dp"
+        android:text="TextView"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="162dp"
+        android:text="@string/importe"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/idImporte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="192dp"
+        android:layout_marginTop="162dp"
+        android:text="TextView"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="202dp"
+        android:text="@string/descripcionProducto"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/idDescripcionProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="192dp"
+        android:layout_marginTop="202dp"
+        android:text="TextView"
+        android:textColor="@color/colorAccent" />
+</FrameLayout>

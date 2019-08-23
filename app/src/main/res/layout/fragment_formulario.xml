@@ -64,7 +64,7 @@
         android:textColor="@color/colorAccent" />
 
     <EditText
-        android:id="@+id/idPrecio"
+        android:id="@+id/idNombreListado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="112dp"
@@ -141,7 +141,7 @@
         android:textColor="@color/colorAccent" />
 
     <EditText
-        android:id="@+id/idSaldo"
+        android:id="@+id/idSaldoListado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="112dp"
