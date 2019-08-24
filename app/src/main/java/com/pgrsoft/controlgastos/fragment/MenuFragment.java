@@ -76,13 +76,15 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
             case R.id.idListar:
 
-                fragment = new MenuFragment();
+                fragment = new ListadoFragment();
 
                 fragmentTransaction = getFragmentManager().beginTransaction();
 
                 fragmentTransaction.replace(R.id.destino, fragment);
 
                 fragmentTransaction.addToBackStack(null);
+
+                fragmentTransaction.commit();
 
                 break;
 

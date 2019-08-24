@@ -20,7 +20,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/idNombre"
+        app:layout_constraintBottom_toTopOf="@+id/idCategoria"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -57,7 +57,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <TextView
-        android:id="@+id/idNombre"
+        android:id="@+id/idCategoria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -117,7 +117,7 @@
         app:layout_constraintVertical_bias="0.481" />
 
     <TextView
-        android:id="@+id/idNombreListado"
+        android:id="@+id/idNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -129,7 +129,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.143"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/idNombre"
+        app:layout_constraintTop_toBottomOf="@+id/idCategoria"
         app:layout_constraintVertical_bias="0.371" />
 
     <TextView
@@ -149,7 +149,7 @@
         app:layout_constraintVertical_bias="0.153" />
 
     <TextView
-        android:id="@+id/idPrecioListado"
+        android:id="@+id/idPrecio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -172,7 +172,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/saldo"
+        android:text="@string/descripcion"
         app:layout_constraintBottom_toTopOf="@+id/guideline7"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.157"
@@ -181,7 +181,7 @@
         app:layout_constraintVertical_bias="0.317" />
 
     <TextView
-        android:id="@+id/idSaldoListado"
+        android:id="@+id/idDescripcion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

@@ -3,13 +3,18 @@ package com.pgrsoft.controlgastos.fragment;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
+import android.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.pgrsoft.controlgastos.R;
+import com.pgrsoft.controlgastos.adaptador.ProductosAdaptador;
+import com.pgrsoft.controlgastos.model.Producto;
+
+import java.util.List;
 
 
 /**
@@ -17,6 +22,8 @@ import com.pgrsoft.controlgastos.R;
  */
 public class ListadoFragment extends Fragment {
 
+
+    private List<Producto> productos = null;
 
     public ListadoFragment() {
         // Required empty public constructor
@@ -27,7 +34,24 @@ public class ListadoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_listado, container, false);
+        View miVista = inflater.inflate(R.layout.fragment_listado, container, false);
+
+        ListView lista = miVista.findViewById(R.id.idMiLista);
+
+        ProductosAdaptador productosAdaptador = new ProductosAdaptador(getActivity(), productos);
+
+        lista.setAdapter(productosAdaptador);
+
+
+
+        return miVista;
+    }
+
+    private void populateData(List<Producto> productos){
+
+
+
+
     }
 
 }
