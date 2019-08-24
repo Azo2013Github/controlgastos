@@ -14,8 +14,8 @@ public class Movimiento {
     public Movimiento() {
     }
 
-    public Movimiento(Long codigo, double importe, String descripcion, Date fecha, double saldo, Producto producto) {
-        this.codigo = codigo;
+    public Movimiento(double importe, String descripcion, Date fecha, double saldo, Producto producto) {
+        // this.codigo = codigo;
         this.importe = importe;
         this.producto = producto;
         this.descripcion = descripcion;

@@ -18,8 +18,10 @@ import android.widget.Toast;
 
 import com.pgrsoft.controlgastos.R;
 import com.pgrsoft.controlgastos.model.Categoria;
+import com.pgrsoft.controlgastos.model.Movimiento;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -66,6 +68,15 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editFecha = (EditText) miVista.findViewById(R.id.idFecha);
         editSaldo = (EditText) miVista.findViewById(R.id.idSaldo);
 
+
+        String nombre = editNombre.getText().toString();
+        double precio = Double.parseDouble(editPrecio.getText().toString());
+        double importe = Double.parseDouble(editImporte.getText().toString());
+
+        String descripcion = editDescripcion.getText().toString();
+        double saldo = Double.parseDouble(editSaldo.getText().toString());
+
+        Movimiento movimiento = new Movimiento(importe, descripcion, new Date(), saldo, );
 
 
         cargarSpinner();
