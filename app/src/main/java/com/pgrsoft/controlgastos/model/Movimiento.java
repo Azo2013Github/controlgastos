@@ -9,13 +9,13 @@ public class Movimiento {
     private Producto producto; // El nombre del producto en el que nos hemos gastado el dinero
     private String descripcion; // descripcion del movimeinto
     private Date fecha;
-    private double saldo;
+    private double saldo = 1200.00;
 
     public Movimiento() {
     }
 
-    public Movimiento(double importe, String descripcion, Date fecha, double saldo, Producto producto) {
-        // this.codigo = codigo;
+    public Movimiento(Long codigo, double importe, String descripcion, Date fecha, double saldo, Producto producto) {
+        this.codigo = codigo;
         this.importe = importe;
         this.producto = producto;
         this.descripcion = descripcion;
@@ -68,7 +68,7 @@ public class Movimiento {
     }
 
     public void setSaldo(double saldo) {
-        this.saldo = saldo;
+        this.saldo = saldo - producto.getPrecio();
     }
 
     @Override

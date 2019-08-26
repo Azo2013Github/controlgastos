@@ -58,10 +58,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
             case R.id.idCrear:
 
-                Log.d("***", "CREAR");
-
-                //Toast.makeText(getActivity(), "CREAR", Toast.LENGTH_LONG).show();
-
                 fragment = new FormularioFragment();
 
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
