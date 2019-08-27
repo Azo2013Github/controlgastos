@@ -86,9 +86,9 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
             case R.id.idSalir:
 
-
-
-
+                Log.d("***", "Aplicacion finalizada");
+                this.getActivity().finish();
+                System.exit(0);
                 break;
         }
 
