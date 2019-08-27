@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pgrsoft.controlgastos.R;
@@ -47,16 +48,21 @@ public class ProductosAdaptador extends BaseAdapter {
         TextView textCategoria = (TextView) miVista.findViewById(R.id.idCategoria);
         TextView textNombre = (TextView) miVista.findViewById(R.id.idNombre);
         TextView textPrecio = (TextView) miVista.findViewById(R.id.idPrecio);
-        TextView textDescripcion = (TextView) miVista.findViewById(R.id.idDescripcion);
+        ImageView imageView = (ImageView) miVista.findViewById(R.id.idImage);
+
+        //TextView textDescripcion = (TextView) miVista.findViewById(R.id.idDescripcion);
+
 
         Producto producto = productos.get(position);
 
         Log.d("***", "Productos no es null: " + producto.getNombre());
 
         textCategoria.setText(producto.getCategoria().getNombre());
-        //textCodigoCategoria.setText(producto.getCategoria().getCodigo().toString());
+
         textNombre.setText(producto.getNombre());
         textPrecio.setText(String.valueOf(producto.getPrecio()));
+
+        imageView.setImageResource(R.drawable.bebidas);
 
         return miVista;
     }

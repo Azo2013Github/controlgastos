@@ -1,6 +1,8 @@
 package com.pgrsoft.controlgastos.model;
 
-public class Producto {
+import java.io.Serializable;
+
+public class Producto implements Serializable {
 
     private Long codigo; //codigo del producto que se autoincrementa PK.
     private Categoria categoria;

@@ -52,15 +52,17 @@ public class ProductoServicesImpl implements ProductoServices {
                 Long codigoCategoria = cursor.getLong(4);
 
                 categoria = categoriaServices.read(codigoCategoria);
-                if (categoria != null){
+
+                Log.d("***", "PORQUE SALE NULL: " +categoria);
+                //if (categoria != null){
 
                     Producto producto = new Producto(codigo, nombre, descripcion, precio, categoria);
                     producto.setCodigo(codigo);
                     productos.add(producto);
 
-                }else{
-                    Log.d("***", "categoria es nulo: " );
-                }
+                //}else{
+
+                //}
 
 
                 Log.d("***:", "Categoria dentro de producto: " + codigoCategoria);

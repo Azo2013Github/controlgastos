@@ -37,21 +37,17 @@ public class CategoriaServicesImpl implements CategoriaServices {
 
         if (cursor != null && cursor.getCount() > 0) {
 
-            Log.d("***", "Cursor : "+cursor.getCount());
-
-            Log.d("***", "Estoy aqui despues del if: ");
-
             cursor.moveToNext();
             Long code = cursor.getLong(0);
             String nombre = cursor.getString(1);
 
             categoria = new Categoria(code, nombre);
-            categoria.setCodigo(codigo1);
+            categoria.setCodigo(code);
 
-            Log.d("***", "Categoria " +categoria.getNombre());
-            }
+            //Log.d("***", "Categoria Su nombre y code: " +code + " " + nombre);
 
-        //Log.d("**", "LEADO CODIGO CATEGORIA: " +categoria.toString());
+        }
+
         dataBaseHelper.close();
         return categoria;
     }

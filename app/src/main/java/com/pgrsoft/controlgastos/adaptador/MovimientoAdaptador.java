@@ -35,6 +35,8 @@ public class MovimientoAdaptador extends BaseAdapter {
         View miVista = inflater.inflate(R.layout.listado_row_model, null);
 
 
+
+
         return miVista;
     }
 
