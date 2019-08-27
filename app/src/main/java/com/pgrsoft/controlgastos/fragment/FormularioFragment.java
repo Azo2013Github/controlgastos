@@ -172,7 +172,17 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                     movimientoServices.create(movimientos.get(i));
                 }
 
-                Log.d("***", "Productos Comprados ");
+                /*fragment = new ListadoFragment();
+
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+                fragmentTransaction.replace(R.id.destino, fragment);
+
+                fragmentTransaction.addToBackStack(null);
+
+                fragmentTransaction.commit();
+
+                Log.d("***", "Productos Comprados ");*/
 
 
                 break;

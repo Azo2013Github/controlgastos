@@ -29,18 +29,27 @@ public class CategoriaServicesImpl implements CategoriaServices {
     @Override
     public Categoria read(Long codigo) {
 
-        Cursor cursor = dataBaseHelper.getCategoria(codigo);
+        Long codigo1 = codigo;
+
+        Cursor cursor = dataBaseHelper.getCategoria(codigo1);
 
         Categoria categoria = null;
 
         if (cursor != null && cursor.getCount() > 0) {
+
+            Log.d("***", "Cursor : "+cursor.getCount());
+
+            Log.d("***", "Estoy aqui despues del if: ");
+
             cursor.moveToNext();
             Long code = cursor.getLong(0);
             String nombre = cursor.getString(1);
 
             categoria = new Categoria(code, nombre);
-            categoria.setCodigo(codigo);
-        }
+            categoria.setCodigo(codigo1);
+
+            Log.d("***", "Categoria " +categoria.getNombre());
+            }
 
         //Log.d("**", "LEADO CODIGO CATEGORIA: " +categoria.toString());
         dataBaseHelper.close();

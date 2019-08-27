@@ -23,8 +23,6 @@ import java.util.List;
 public class ListadoFragment extends Fragment {
 
 
-    private List<Producto> productos = null;
-
     public ListadoFragment() {
         // Required empty public constructor
     }
@@ -38,20 +36,14 @@ public class ListadoFragment extends Fragment {
 
         ListView lista = miVista.findViewById(R.id.idMiLista);
 
-        ProductosAdaptador productosAdaptador = new ProductosAdaptador(getActivity(), productos);
+
+
+        ProductosAdaptador productosAdaptador = new ProductosAdaptador(miVista.getContext());
 
         lista.setAdapter(productosAdaptador);
-
-
 
         return miVista;
     }
 
-    private void populateData(List<Producto> productos){
-
-
-
-
-    }
 
 }

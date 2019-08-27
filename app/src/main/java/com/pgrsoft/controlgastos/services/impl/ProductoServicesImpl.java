@@ -33,6 +33,8 @@ public class ProductoServicesImpl implements ProductoServices {
     @Override
     public List<Producto> getAll() {
 
+        Categoria categoria = new Categoria();
+
         CategoriaServices categoriaServices = new CategoriaServicesImpl(this.context);
 
         Cursor cursor = dataBaseHelper.getAllProductosCursor();
@@ -49,15 +51,23 @@ public class ProductoServicesImpl implements ProductoServices {
                 double precio = cursor.getDouble(3);
                 Long codigoCategoria = cursor.getLong(4);
 
-                Categoria categoria = categoriaServices.read(codigoCategoria);
-                Producto producto = new Producto(codigo, nombre, descripcion, precio, categoria);
-                producto.setCodigo(codigo);
-                productos.add(producto);
+                categoria = categoriaServices.read(codigoCategoria);
+                if (categoria != null){
 
+                    Producto producto = new Producto(codigo, nombre, descripcion, precio, categoria);
+                    producto.setCodigo(codigo);
+                    productos.add(producto);
+
+                }else{
+                    Log.d("***", "categoria es nulo: " );
+                }
+
+
+                Log.d("***:", "Categoria dentro de producto: " + codigoCategoria);
 
             }
         }
-        //Log.d("***: Datos productos", productos.toString());
+
         dataBaseHelper.close();
         return productos;
     }
@@ -71,6 +81,7 @@ public class ProductoServicesImpl implements ProductoServices {
         Cursor cursor = dataBaseHelper.getProducto(codigo);
 
         if (cursor != null && cursor.getCount() > 0) {
+
             cursor.moveToNext();
             Long code = cursor.getLong(0);
             String nombre = cursor.getString(1);
