@@ -103,16 +103,9 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         productos = new ArrayList<>();
         movimientos = new ArrayList<>();
 
-        /* ****************************
-        Esta parte sirve para hacer foto y con el boton botonGuardar guardamos las imagenes que hemos echo: */
-        String [] permissions = new String[]{
-                Manifest.permission.CAMERA,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-        };
-        magicalPermissions = new MagicalPermissions(this,permissions);
-        magicalCamera = new MagicalCamera(this.getActivity(), RESIZE_PHOTO_PIXEL_PERCENTAGE, magicalPermissions);
         /***********************************************/
+        hacerFoto();
+
         botonComprar.setOnClickListener(this);
         botonPagar.setOnClickListener(this);
         botonGuardar.setOnClickListener(this);
@@ -183,8 +176,9 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
                 break;
             case R.id.idGuardar:
-
                 magicalCamera.takePhoto();
+                fragment = new ListadoDetalleFragment();
+                //fragment.getActivity().startActivities();
 
                 break;
         }
@@ -192,6 +186,17 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     }
 
 
+    private void hacerFoto(){
+        /* ****************************
+        Esta parte sirve para hacer foto y con el boton botonGuardar guardamos las imagenes que hemos echo: */
+        String [] permissions = new String[]{
+                Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+        };
+        magicalPermissions = new MagicalPermissions(this,permissions);
+        magicalCamera = new MagicalCamera(this.getActivity(), RESIZE_PHOTO_PIXEL_PERCENTAGE, magicalPermissions);
+    }
 
 
     /* Funciones a implementar para usar la camara son:
