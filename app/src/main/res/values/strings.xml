@@ -19,5 +19,6 @@
     <string name="salir">SALIR</string>
     <string name="descripcionProducto">DESCRIPCION PRODUCTO:</string>
     <string name="detalleProducto">DETALLE DE LAS COMPRAS</string>
+    <string name="guardar">GUARDAR IMAGEN</string>
 
 </resources>

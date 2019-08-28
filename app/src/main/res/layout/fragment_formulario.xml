@@ -13,11 +13,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="@string/introducir"
         android:textColor="@color/colorAccent"
         android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/idImage"
+        android:layout_width="97dp"
+        android:layout_height="83dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/casa" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -164,9 +172,17 @@
         android:id="@+id/idPagar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="92dp"
-        android:layout_marginTop="-46dp"
+        android:layout_marginLeft="138dp"
+        android:layout_marginTop="-69dp"
         android:background="@color/colorAccent"
         android:src="@drawable/pago" />
+
+    <ImageButton
+        android:id="@+id/idGuardar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="262dp"
+        android:layout_marginTop="-78dp"
+        android:src="@drawable/camara" />
 
 </LinearLayout>

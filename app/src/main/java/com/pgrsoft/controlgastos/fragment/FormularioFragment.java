@@ -1,7 +1,8 @@
 package com.pgrsoft.controlgastos.fragment;
 
 
-import android.app.FragmentTransaction;
+import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.app.Fragment;
@@ -13,9 +14,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.frosquivel.magicalcamera.MagicalCamera;
+import com.frosquivel.magicalcamera.MagicalPermissions;
 import com.pgrsoft.controlgastos.R;
 import com.pgrsoft.controlgastos.model.Categoria;
 import com.pgrsoft.controlgastos.model.Movimiento;
@@ -31,23 +35,32 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static android.app.Activity.RESULT_OK;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FormularioFragment extends Fragment implements View.OnClickListener{
 
-    private ImageButton comprar;
-    private ImageButton pago;
+    private ImageButton botonComprar;
+    private ImageButton botonPagar;
+    private ImageButton botonGuardar;
+
     private Spinner spinner;
+
     private EditText editNombre;
     private EditText editPrecio;
     private EditText editDescripcion;
     private EditText editImporte;
     private EditText editFecha;
     private EditText editSaldo;
+    private ImageView imageView;
 
     private ArrayAdapter<String> stringArrayAdapter;
+    private List<Categoria> categoriaListas;
+    private List<Producto> productos;
+    private List<Movimiento> movimientos;
 
     private MovimientoServices movimientoServices;
     private ProductoServices productoServices;
@@ -57,15 +70,13 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     private Producto producto;
     private Movimiento movimiento;
 
-    private List<Categoria> categoriaListas;
-    private List<Producto> productos;
-    private List<Movimiento> movimientos;
-
+    private final static int RESIZE_PHOTO_PIXEL_PERCENTAGE = 50; //esta variable sirve para la calidad de la imagen:
+    private MagicalPermissions magicalPermissions;
+    private MagicalCamera magicalCamera;
 
     public FormularioFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,8 +84,9 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         // Inflate the layout for this fragment
         View miVista = inflater.inflate(R.layout.fragment_formulario, container, false);
 
-        comprar = (ImageButton) miVista.findViewById(R.id.idCompra);
-        pago = (ImageButton) miVista.findViewById(R.id.idPagar);
+        botonComprar = (ImageButton) miVista.findViewById(R.id.idCompra);
+        botonPagar = (ImageButton) miVista.findViewById(R.id.idPagar);
+        botonGuardar = (ImageButton) miVista.findViewById(R.id.idGuardar);
 
         spinner = (Spinner) miVista.findViewById(R.id.idCategoria);
         cargarSpinner();
@@ -85,18 +97,28 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editImporte = (EditText) miVista.findViewById(R.id.idImporte);
         editFecha = (EditText) miVista.findViewById(R.id.idFecha);
         editSaldo = (EditText) miVista.findViewById(R.id.idSaldo);
+        imageView = (ImageView) miVista.findViewById(R.id.idImage);
 
         categoriaListas = new ArrayList<>();
         productos = new ArrayList<>();
         movimientos = new ArrayList<>();
 
-        comprar.setOnClickListener(this);
-        pago.setOnClickListener(this);
+        /* ****************************
+        Esta parte sirve para hacer foto y con el boton botonGuardar guardamos las imagenes que hemos echo: */
+        String [] permissions = new String[]{
+                Manifest.permission.CAMERA,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+        };
+        magicalPermissions = new MagicalPermissions(this,permissions);
+        magicalCamera = new MagicalCamera(this.getActivity(), RESIZE_PHOTO_PIXEL_PERCENTAGE, magicalPermissions);
+        /***********************************************/
+        botonComprar.setOnClickListener(this);
+        botonPagar.setOnClickListener(this);
+        botonGuardar.setOnClickListener(this);
 
         return miVista;
     }
-
-
 
     @Override
     public void onClick(View view) {
@@ -125,20 +147,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                 productos.add(producto);
                 movimientos.add(movimiento);
 
-                /*categoriaServices = new CategoriaServicesImpl(this.getActivity());
-                categoriaServices.create(categoria);
-
-                productoServices = new ProductoServicesImpl(this.getActivity());
-                productoServices.create(producto);
-
-                movimientoServices = new MovimientoServicesImpl(this.getActivity());
-                movimientoServices.create(movimiento);*/
-
-
-
                 Toast.makeText(this.getActivity(), "Producto en cesta", Toast.LENGTH_LONG).show();
-
-
                 editSaldo.setText("");
                 editFecha.setText("");
                 editDescripcion.setText("");
@@ -172,24 +181,52 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                     movimientoServices.create(movimientos.get(i));
                 }
 
-                /*fragment = new ListadoFragment();
+                break;
+            case R.id.idGuardar:
 
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-
-                fragmentTransaction.replace(R.id.destino, fragment);
-
-                fragmentTransaction.addToBackStack(null);
-
-                fragmentTransaction.commit();
-
-                Log.d("***", "Productos Comprados ");*/
-
+                magicalCamera.takePhoto();
 
                 break;
         }
 
     }
 
+
+
+
+    /* Funciones a implementar para usar la camara son:
+    * 1) */
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK){
+            magicalCamera.resultPhoto(requestCode, resultCode, data);
+
+            imageView.setImageBitmap(magicalCamera.getPhoto());
+
+            String path = magicalCamera.savePhotoInMemoryDevice(magicalCamera.getPhoto(),
+                          "myPhotoName",
+                        "myDirectoryName",
+                                      magicalCamera.JPEG,
+                    true);
+
+
+        }
+
+       /* if (requestCode == 1 && resultCode == RESULT_OK){ // RESULT_OK devuelve -1 si las cosas han ido bien
+
+            Bundle extras = data.getExtras(); // Ya tengo referencia al Bundle a partir de Intent
+            Bitmap imageBitmap = (Bitmap) extras.get("data"); // Lo de "data" hay que saberlo..
+            imageView.setImageBitmap(imageBitmap);
+
+            // Como posiblemente guarde este bitmap en el sistema de archivos
+            // me interesara tb guardar el bitmap en la variable de instancia de esta Actvity
+            imageActual = imageBitmap;
+
+        }*/
+
+    }
 
     private void cargarSpinner(){
 
