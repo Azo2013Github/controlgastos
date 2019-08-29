@@ -1,6 +1,10 @@
 package com.pgrsoft.controlgastos.adaptador;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pgrsoft.controlgastos.R;
-import com.pgrsoft.controlgastos.model.Categoria;
 import com.pgrsoft.controlgastos.model.Producto;
-import com.pgrsoft.controlgastos.services.CategoriaServices;
 import com.pgrsoft.controlgastos.services.ProductoServices;
-import com.pgrsoft.controlgastos.services.impl.CategoriaServicesImpl;
 import com.pgrsoft.controlgastos.services.impl.ProductoServicesImpl;
 
 import java.util.List;
@@ -43,14 +44,13 @@ public class ProductosAdaptador extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
 
-        View miVista = inflater.inflate(R.layout.listado_row_model, null);
+        View miVista = inflater.inflate(R.layout.producto_row_model, null);
 
         TextView textCategoria = (TextView) miVista.findViewById(R.id.idCategoria);
         TextView textNombre = (TextView) miVista.findViewById(R.id.idNombre);
         TextView textPrecio = (TextView) miVista.findViewById(R.id.idPrecio);
         ImageView imageView = (ImageView) miVista.findViewById(R.id.idImage);
-
-        //TextView textDescripcion = (TextView) miVista.findViewById(R.id.idDescripcion);
+        TextView textDescripcion = (TextView) miVista.findViewById(R.id.idDescripcion);
 
 
         Producto producto = productos.get(position);
@@ -58,11 +58,16 @@ public class ProductosAdaptador extends BaseAdapter {
         Log.d("***", "Productos no es null: " + producto.getNombre());
 
         textCategoria.setText(producto.getCategoria().getNombre());
-
         textNombre.setText(producto.getNombre());
         textPrecio.setText(String.valueOf(producto.getPrecio()));
+        textDescripcion.setText(String.valueOf(producto.getDescripcion()));
 
-        imageView.setImageResource(R.drawable.bebidas);
+        byte [] imagen = producto.getImagen();
+        Bitmap bitmap = getImage(imagen);
+        //Convert bitmap to drawable
+        Drawable drawable = new BitmapDrawable(miVista.getResources(), bitmap);
+        imageView.setImageDrawable(drawable);
+        imageView.setTag(position);
 
         return miVista;
     }
@@ -73,16 +78,20 @@ public class ProductosAdaptador extends BaseAdapter {
         return productos.size();
     }
 
-    @Override
+        @Override
     public Object getItem(int i) {
 
         return productos.get(i);
     }
 
     @Override
-    public long getItemId(int i)
-    {
+    public long getItemId(int i) {
         return productos.get(i).getCodigo();
+    }
+
+    // convert from byte array to bitmap
+    public static Bitmap getImage(byte[] image) {
+        return BitmapFactory.decodeByteArray(image, 0, image.length);
     }
 
 

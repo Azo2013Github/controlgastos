@@ -3,6 +3,9 @@ package com.pgrsoft.controlgastos.fragment;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import android.app.Fragment;
@@ -31,6 +34,7 @@ import com.pgrsoft.controlgastos.services.impl.CategoriaServicesImpl;
 import com.pgrsoft.controlgastos.services.impl.MovimientoServicesImpl;
 import com.pgrsoft.controlgastos.services.impl.ProductoServicesImpl;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -58,7 +62,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     private ImageView imageView;
 
     private ArrayAdapter<String> stringArrayAdapter;
-    private List<Categoria> categoriaListas;
+    private List<Categoria> categorias;
     private List<Producto> productos;
     private List<Movimiento> movimientos;
 
@@ -99,7 +103,9 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editSaldo = (EditText) miVista.findViewById(R.id.idSaldo);
         imageView = (ImageView) miVista.findViewById(R.id.idImage);
 
-        categoriaListas = new ArrayList<>();
+        //imageView.setImageResource(R.drawable.bebidas);
+
+        categorias = new ArrayList<>();
         productos = new ArrayList<>();
         movimientos = new ArrayList<>();
 
@@ -130,29 +136,19 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                 String descripcion = editDescripcion.getText().toString();
                 double saldo = Double.parseDouble(editSaldo.getText().toString());
 
-                categoria = new Categoria(1L, strCategoria);
+                categoria = new Categoria(strCategoria);
 
-                producto = new Producto(1L, nombre, descripcion, precio, categoria);
+                byte[] image = changeImageListView(categoria.getNombre());
+
+                producto = new Producto(nombre, descripcion, precio, image, categoria);
 
                 movimiento = new Movimiento(1L, importe, descripcion, new Date(), saldo, producto);
 
-                categoriaListas.add(categoria);
+                categorias.add(categoria);
                 productos.add(producto);
                 movimientos.add(movimiento);
 
-                Toast.makeText(this.getActivity(), "Producto en cesta", Toast.LENGTH_LONG).show();
-                editSaldo.setText("");
-                editFecha.setText("");
-                editDescripcion.setText("");
-                editImporte.setText("");
-                editPrecio.setText("");
-                editNombre.setText("");
-
-                Log.d("***", "Valor categoria: "+categoriaListas.size());
-                Log.d("***", "Valor de productos: " +productos.size());
-                Log.d("***", "Categoria: " +categoria.getNombre());
-                Log.d("***", "Producto: " + producto.getNombre());
-                Log.d("***", "Movimiento: " +movimiento.getSaldo());
+                vaciarEditText();
 
                 break;
 
@@ -165,9 +161,9 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
                 movimientoServices = new MovimientoServicesImpl(this.getActivity());
 
-                for (int i=0; i< categoriaListas.size(); i++) {
+                for (int i=0; i< categorias.size(); i++) {
 
-                    categoriaServices.create(categoriaListas.get(i));
+                    categoriaServices.create(categorias.get(i));
 
                     productoServices.create(productos.get(i));
 
@@ -176,15 +172,29 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
                 break;
             case R.id.idGuardar:
-                magicalCamera.takePhoto();
-                fragment = new ListadoDetalleFragment();
-                //fragment.getActivity().startActivities();
+
+                magicalCamera.takeFragmentPhoto(FormularioFragment.this);
+
+
+                //fragment = new ListadoDetalleFragment();
+
+                //magicalCamera.takeFragmentPhoto(fragment);
+
+                //magicalCamera.takeFragmentPhoto(FormularioFragment.this);
+
+                //startActivityForResult(magicalCamera.getIntentFragment(), magicalCamera.TAKE_PHOTO);
 
                 break;
         }
 
     }
 
+    // convert from bitmap to byte array
+    public static byte[] getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+        return stream.toByteArray();
+    }
 
     private void hacerFoto(){
         /* ****************************
@@ -204,10 +214,10 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        Log.d("***", "ENTRA AQUI resultCode: ");
         if (resultCode == RESULT_OK){
-            magicalCamera.resultPhoto(requestCode, resultCode, data);
 
+            magicalCamera.resultPhoto(requestCode, resultCode, data);
             imageView.setImageBitmap(magicalCamera.getPhoto());
 
             String path = magicalCamera.savePhotoInMemoryDevice(magicalCamera.getPhoto(),
@@ -218,33 +228,20 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
 
         }
-
-       /* if (requestCode == 1 && resultCode == RESULT_OK){ // RESULT_OK devuelve -1 si las cosas han ido bien
-
-            Bundle extras = data.getExtras(); // Ya tengo referencia al Bundle a partir de Intent
-            Bitmap imageBitmap = (Bitmap) extras.get("data"); // Lo de "data" hay que saberlo..
-            imageView.setImageBitmap(imageBitmap);
-
-            // Como posiblemente guarde este bitmap en el sistema de archivos
-            // me interesara tb guardar el bitmap en la variable de instancia de esta Actvity
-            imageActual = imageBitmap;
-
-        }*/
-
     }
 
     private void cargarSpinner(){
 
-        List<Categoria> categorias = new ArrayList<>();
+        categorias = new ArrayList<>();
 
-        Categoria categoria1 = new Categoria(1L, "CARNE");
-        Categoria categoria2 = new Categoria(2L, "VERDURA");
-        Categoria categoria3 = new Categoria(3L, "SUMINISTROS");
-        Categoria categoria4 = new Categoria(4L, "LEGUMBRE");
-        Categoria categoria5 = new Categoria(5L, "BEBIDAS");
-        Categoria categoria6 = new Categoria(6L, "ROPA");
-        Categoria categoria8 = new Categoria(8L, "ALQUILER");
-        Categoria categoria7 = new Categoria(7L, "EXTRAS");
+        Categoria categoria1 = new Categoria("CARNE");
+        Categoria categoria2 = new Categoria("VERDURA");
+        Categoria categoria3 = new Categoria("SUMINISTROS");
+        Categoria categoria4 = new Categoria("LEGUMBRE");
+        Categoria categoria5 = new Categoria("BEBIDAS");
+        Categoria categoria6 = new Categoria("ROPA");
+        Categoria categoria8 = new Categoria("ALQUILER");
+        Categoria categoria7 = new Categoria("EXTRAS");
 
         categorias.add(categoria1);
         categorias.add(categoria2);
@@ -260,14 +257,56 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
         for (Categoria categoria: categorias) {
             strNombres [i] = categoria.getNombre(); //cogemos los nombres de los agentes en cada posicion
-            Toast.makeText(getActivity(), strNombres[i], Toast.LENGTH_LONG).show();
             i++; //Incrementamos el i para que salga todos los nombres de los agentes
         }
-
         stringArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, strNombres);
-
         spinner.setAdapter(stringArrayAdapter);
 
+    }
+
+    /* Esta funcion sirve qua que las imagenes vayan cambiando segun categoria */
+    private byte[] changeImageListView(String nombre){
+
+        switch (nombre){
+
+            case "CARNE":
+                imageView.setImageResource(R.drawable.carne);
+                break;
+            case "VERDURA":
+                imageView.setImageResource(R.drawable.verduras);
+                break;
+            case"SUMINISTROS":
+                imageView.setImageResource(R.drawable.grifo);
+                break;
+            case"LEGUMBRE":
+                imageView.setImageResource(R.drawable.legumbres);
+                break;
+            case"BEBIDAS":
+                imageView.setImageResource(R.drawable.bebidas);
+                break;
+            case"ROPA":
+                imageView.setImageResource(R.drawable.ropa);
+                break;
+            case"ALQUILER":
+                imageView.setImageResource(R.drawable.casa);
+                break;
+            case"EXTRAS":
+                imageView.setImageResource(R.drawable.extras);
+                break;
+
+        }
+        Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+        byte [] imagen = getBytes(bitmap);
+        return imagen;
+    }
+
+    private void vaciarEditText(){
+        editSaldo.setText("");
+        editFecha.setText("");
+        editDescripcion.setText("");
+        editImporte.setText("");
+        editPrecio.setText("");
+        editNombre.setText("");
     }
 
 }

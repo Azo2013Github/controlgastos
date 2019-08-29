@@ -13,16 +13,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/introducir"
         android:textColor="@color/colorAccent"
-        android:textSize="30sp" />
+        android:textSize="24sp" />
 
     <ImageView
         android:id="@+id/idImage"
-        android:layout_width="97dp"
-        android:layout_height="83dp"
+        android:layout_width="69dp"
+        android:layout_height="64dp"
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:src="@drawable/casa" />
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="22dp"
         android:text="@string/categoria"
         android:textColor="@color/colorAccent" />
 
@@ -40,8 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="112dp"
-        android:layout_marginTop="-26dp"
-        />
+        android:layout_marginTop="-20dp" />
 
     <TextView
         android:id="@+id/textView7"
@@ -161,28 +160,28 @@
 
     <ImageButton
         android:id="@+id/idCompra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:background="@color/colorAccent"
         android:src="@drawable/cesta" />
 
     <ImageButton
         android:id="@+id/idPagar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="138dp"
-        android:layout_marginTop="-69dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="128dp"
+        android:layout_marginTop="-49dp"
         android:background="@color/colorAccent"
         android:src="@drawable/pago" />
 
     <ImageButton
         android:id="@+id/idGuardar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="262dp"
-        android:layout_marginTop="-78dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="246dp"
+        android:layout_marginTop="-49dp"
         android:src="@drawable/camara" />
 
 </LinearLayout>

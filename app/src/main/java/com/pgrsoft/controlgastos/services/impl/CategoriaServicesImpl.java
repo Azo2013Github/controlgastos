@@ -41,7 +41,7 @@ public class CategoriaServicesImpl implements CategoriaServices {
             Long code = cursor.getLong(0);
             String nombre = cursor.getString(1);
 
-            categoria = new Categoria(code, nombre);
+            categoria = new Categoria(nombre);
             categoria.setCodigo(code);
 
             //Log.d("***", "Categoria Su nombre y code: " +code + " " + nombre);
@@ -64,7 +64,7 @@ public class CategoriaServicesImpl implements CategoriaServices {
                 Long codigo = cursor.getLong(0);
                 String nombre = cursor.getString(1);
 
-                Categoria categoria = new Categoria(codigo, nombre);
+                Categoria categoria = new Categoria(nombre);
                 categorias.add(categoria);
             }
         }

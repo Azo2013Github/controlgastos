@@ -26,7 +26,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String COL_2_PRODUCTOS = "NOMBRE";
     private static final String COL_3_PRODUCTOS = "DESCRIPCION";
     private static final String COL_4_PRODUCTOS = "PRECIO";
-    private static final String COL_5_PRODUCTOS = "CODIGO_CATEGORIA";
+    private static final String COL_5_PRODUCTOS = "IMAGEN";
+    private static final String COL_6_PRODUCTOS = "CODIGO_CATEGORIA";
 
     public static final String MOVIMIENTOS_TABLE = "MOVIMIENTOS"; // Tabla Movimiento
     private static final String COL_1_MOVIMIENTOS = "CODIGO";
@@ -61,8 +62,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 .append(COL_2_PRODUCTOS).append(" TEXT NOT NULL, ")
                 .append(COL_3_PRODUCTOS).append(" TEXT NOT NULL, ")
                 .append(COL_4_PRODUCTOS).append(" REAL NOT NULL, ")
-                .append(COL_5_PRODUCTOS).append(" INTEGER NOT NULL, ")
-                .append(" FOREIGN KEY " + "( " + COL_5_PRODUCTOS + " ) REFERENCES " + CATEGORIAS_TABLE + " (" + COL1_CODIDO_CAT + "  ))");
+                .append(COL_5_PRODUCTOS).append(" BLOB, ")
+                .append(COL_6_PRODUCTOS).append(" INTEGER NOT NULL, ")
+                .append(" FOREIGN KEY " + "( " + COL_6_PRODUCTOS + " ) REFERENCES " + CATEGORIAS_TABLE + " (" + COL1_CODIDO_CAT + "  ))");
         strDDL = builder.toString();
         sqLiteDatabase.execSQL(strDDL);
 
@@ -129,7 +131,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_2_PRODUCTOS, producto.getNombre());
         contentValues.put(COL_3_PRODUCTOS, producto.getDescripcion());
         contentValues.put(COL_4_PRODUCTOS, producto.getPrecio());
-        contentValues.put(COL_5_PRODUCTOS, producto.getCategoria().getCodigo());
+        contentValues.put(COL_5_PRODUCTOS, producto.getImagen());
+        contentValues.put(COL_6_PRODUCTOS, producto.getCategoria().getCodigo());
 
         //Categoria categoria = Ca
 

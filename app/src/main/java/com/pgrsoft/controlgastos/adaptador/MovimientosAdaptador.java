@@ -8,22 +8,27 @@ import android.widget.BaseAdapter;
 
 import com.pgrsoft.controlgastos.R;
 import com.pgrsoft.controlgastos.model.Movimiento;
+import com.pgrsoft.controlgastos.services.MovimientoServices;
+import com.pgrsoft.controlgastos.services.impl.MovimientoServicesImpl;
 
 import java.util.List;
 
-public class MovimientoAdaptador extends BaseAdapter {
+public class MovimientosAdaptador extends BaseAdapter {
 
     private Context contexto;
     private List<Movimiento> movimientos;
+    private MovimientoServices movimientoServices;
 
     private LayoutInflater inflater;
 
-    public MovimientoAdaptador (Context contexto, List<Movimiento> movimientos){
+    public MovimientosAdaptador(Context contexto){
 
         this.contexto = contexto;
-        this.movimientos = movimientos;
 
         this.inflater = (LayoutInflater) contexto.getSystemService(contexto.LAYOUT_INFLATER_SERVICE);
+        movimientoServices = new MovimientoServicesImpl(this.contexto);
+
+        movimientos = movimientoServices.getAll();
 
     }
 
@@ -32,7 +37,7 @@ public class MovimientoAdaptador extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        View miVista = inflater.inflate(R.layout.listado_row_model, null);
+        View miVista = inflater.inflate(R.layout.producto_row_model, null);
 
 
 

@@ -8,7 +8,7 @@ public class Categoria {
     public Categoria() {
     }
 
-    public Categoria(Long codigo, String nombre) {
+    public Categoria(String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;
     }

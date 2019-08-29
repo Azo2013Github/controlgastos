@@ -49,14 +49,15 @@ public class ProductoServicesImpl implements ProductoServices {
                 String nombre = cursor.getString(1);
                 String descripcion = cursor.getString(2);
                 double precio = cursor.getDouble(3);
-                Long codigoCategoria = cursor.getLong(4);
+                byte[] image = cursor.getBlob(4);
+                Long codigoCategoria = cursor.getLong(5);
 
                 categoria = categoriaServices.read(codigoCategoria);
 
                 Log.d("***", "PORQUE SALE NULL: " +categoria);
                 //if (categoria != null){
 
-                    Producto producto = new Producto(codigo, nombre, descripcion, precio, categoria);
+                    Producto producto = new Producto(nombre, descripcion, precio, image, categoria);
                     producto.setCodigo(codigo);
                     productos.add(producto);
 
@@ -65,7 +66,7 @@ public class ProductoServicesImpl implements ProductoServices {
                 //}
 
 
-                Log.d("***:", "Categoria dentro de producto: " + codigoCategoria);
+                Log.d("***:", "Categoria dentro de producto ****: " + codigoCategoria);
 
             }
         }
@@ -89,14 +90,15 @@ public class ProductoServicesImpl implements ProductoServices {
             String nombre = cursor.getString(1);
             String descripcion = cursor.getString(2);
             double precio = cursor.getDouble(3);
-            Long codigoCategoria = cursor.getLong(4);
+            byte[] image = cursor.getBlob(4);
+            Long codigoCategoria = cursor.getLong(5);
 
             Categoria categoria = categoriaServices.read(codigoCategoria);
 
-            producto = new Producto(codigo, nombre, descripcion, precio, categoria);
+            producto = new Producto(nombre, descripcion, precio, image, categoria);
             producto.setCodigo(codigo);
 
-            //Log.d("**", "LEYENDO UN PRODUCTO: " +producto.toString());
+            Log.d("**", "LEYENDO UN PRODUCTO *****: " +producto.toString());
 
         }
 
