@@ -44,7 +44,7 @@ public class ProductoListadoFragment extends Fragment implements ListView.OnItem
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View miVista = inflater.inflate(R.layout.fragment_Producto_listado, container, false);
+        View miVista = inflater.inflate(R.layout.fragment_listado, container, false);
 
         lista = miVista.findViewById(R.id.idMiLista);
 
