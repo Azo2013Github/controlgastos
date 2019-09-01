@@ -199,6 +199,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         ContentValues contentValues = new ContentValues();
 
+        //contentValues.put(COL_1_MOVIMIENTOS, movimiento.getCodigo());
         contentValues.put(COL_2_MOVIMIENTOS, movimiento.getImporte());
         contentValues.put(COL_3_MOVIMIENTOS, movimiento.getDescripcion());
         contentValues.put(COL_4_MOVIMIENTOS, strFecha);
@@ -212,7 +213,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return resultado == -1 ? null : movimiento;
     }
-
 
     public Cursor getAllMovimientosCursor(){
 

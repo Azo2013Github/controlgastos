@@ -59,6 +59,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     private EditText editImporte;
     private EditText editFecha;
     private EditText editSaldo;
+    private EditText editDesMovimiento;
     private ImageView imageView;
 
     private ArrayAdapter<String> stringArrayAdapter;
@@ -101,6 +102,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editImporte = (EditText) miVista.findViewById(R.id.idImporte);
         editFecha = (EditText) miVista.findViewById(R.id.idFecha);
         editSaldo = (EditText) miVista.findViewById(R.id.idSaldo);
+        editDesMovimiento = (EditText) miVista.findViewById(R.id.idDesMovimiento);
         imageView = (ImageView) miVista.findViewById(R.id.idImage);
 
         //imageView.setImageResource(R.drawable.bebidas);
@@ -134,6 +136,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                 double importe = Double.parseDouble(editImporte.getText().toString());
 
                 String descripcion = editDescripcion.getText().toString();
+                String desMovimiento = editDesMovimiento.getText().toString();
                 double saldo = Double.parseDouble(editSaldo.getText().toString());
 
                 categoria = new Categoria(strCategoria);
@@ -142,7 +145,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
                 producto = new Producto(nombre, descripcion, precio, image, categoria);
 
-                movimiento = new Movimiento(1L, importe, descripcion, new Date(), saldo, producto);
+                movimiento = new Movimiento(importe, desMovimiento, new Date(), saldo, producto);
 
                 categorias.add(categoria);
                 productos.add(producto);
@@ -307,6 +310,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editImporte.setText("");
         editPrecio.setText("");
         editNombre.setText("");
+        editDesMovimiento.setText("");
     }
 
 }

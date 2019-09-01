@@ -2,14 +2,15 @@
     <string name="app_name">controlgastos</string>
     <string name="titulo">CONTROL DE GASTOS</string>
     <string name="crear">CREAR</string>
-    <string name="listar">LISTAR</string>
+    <string name="listarProducto">PRODUCTOS</string>
+    <string name="listarMovimiento">MOVIMIENTOS</string>
     <string name="categoria">CATEGORIA:</string>
     <string name="precio">PRECIO:</string>
     <string name="descripcion">DESCRIPCION:</string>
     <string name="nombre">NOMBRE:</string>
     <string name="fecha">FECHA:</string>
     <string name="importe">IMPORTE:</string>
-    <string name="descrpcionMovimiento">DESCRIPCION MOVIMIENTO</string>
+    <string name="descrpcionMovimiento">MOVIMIENTO</string>
     <string name="saldo">SALDO</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -20,5 +21,6 @@
     <string name="descripcionProducto">DESCRIPCION PRODUCTO:</string>
     <string name="detalleProducto">DETALLE DE LAS COMPRAS</string>
     <string name="guardar">GUARDAR IMAGEN</string>
+    <string name="descripcionMovimiento">DESP MOVIMIENTO</string>
 
 </resources>

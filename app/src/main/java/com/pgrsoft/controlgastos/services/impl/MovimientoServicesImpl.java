@@ -55,7 +55,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
                 Date fecha = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                 // Habrá un try catch....
-                strFecha = "21/08/1994 16:14";
+                strFecha = "21/08/1994";
                 try {
                     fecha = sdf.parse(strFecha);
                 }catch (ParseException e){
@@ -64,8 +64,9 @@ public class MovimientoServicesImpl implements MovimientoServices {
 
                 ProductoServices productoServices = new ProductoServicesImpl(this.context);
                 Producto producto = productoServices.read(codigoProducto);
-                Movimiento movimiento = new Movimiento(codigo, importe, descripcion, fecha, saldo, producto);
+                Movimiento movimiento = new Movimiento(importe, descripcion, fecha, saldo, producto);
 
+                movimiento.setCodigo(codigo);
                 movimientos.add(movimiento);
                 //Log.d("***",  movimientos.toString());
             }
@@ -95,7 +96,6 @@ public class MovimientoServicesImpl implements MovimientoServices {
             Date fecha = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             // Habrá un try catch....
-            strFecha = "21/08/1994 16:14";
             try {
                 fecha = sdf.parse(strFecha);
             }catch (ParseException e){
@@ -105,8 +105,8 @@ public class MovimientoServicesImpl implements MovimientoServices {
             ProductoServices productoServices = new ProductoServicesImpl(this.context);
             Producto producto = productoServices.read(codigoProducto);
 
-            movimiento = new Movimiento (code, importe, descripcion, fecha, saldo, producto);
-            movimiento.setCodigo(codigo);
+            movimiento = new Movimiento (importe, descripcion, fecha, saldo, producto);
+            movimiento.setCodigo(code);
 
 
         }
@@ -128,6 +128,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
         return dataBaseHelper.deletingMovimientoCodigo(codigo);
     }
 
+ /* Transformar las fecha: */
 
 
 

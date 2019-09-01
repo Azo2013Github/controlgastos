@@ -1,16 +1,19 @@
 package com.pgrsoft.controlgastos.adaptador;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.pgrsoft.controlgastos.R;
 import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.services.MovimientoServices;
 import com.pgrsoft.controlgastos.services.impl.MovimientoServicesImpl;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class MovimientosAdaptador extends BaseAdapter {
@@ -19,6 +22,9 @@ public class MovimientosAdaptador extends BaseAdapter {
     private List<Movimiento> movimientos;
     private MovimientoServices movimientoServices;
 
+    private static final SimpleDateFormat SDF_FECHA = new SimpleDateFormat("dd/MM/yyyy");
+    private static final SimpleDateFormat SDF_HORA = new SimpleDateFormat("HH:mm");
+
     private LayoutInflater inflater;
 
     public MovimientosAdaptador(Context contexto){
@@ -26,8 +32,8 @@ public class MovimientosAdaptador extends BaseAdapter {
         this.contexto = contexto;
 
         this.inflater = (LayoutInflater) contexto.getSystemService(contexto.LAYOUT_INFLATER_SERVICE);
-        movimientoServices = new MovimientoServicesImpl(this.contexto);
 
+        movimientoServices = new MovimientoServicesImpl(this.contexto);
         movimientos = movimientoServices.getAll();
 
     }
@@ -35,29 +41,42 @@ public class MovimientosAdaptador extends BaseAdapter {
 
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(int posicion, View view, ViewGroup viewGroup) {
 
-        View miVista = inflater.inflate(R.layout.producto_row_model, null);
+        View miVista = inflater.inflate(R.layout.movimiento_row_model, null);
+
+        TextView textImporte = (TextView) miVista.findViewById(R.id.idImporte);
+        TextView textSaldo = (TextView) miVista.findViewById(R.id.idSaldo);
+        TextView textFecha = (TextView) miVista.findViewById(R.id.idFecha);
+
+        Movimiento movimiento = movimientos.get(posicion);
 
 
-
+        //Log.d("***", "ENTRA EN MOVIMIENTOSADAPDATOR: " + movimiento.getFecha());
+        //hora.setText(SDF_HORA.format(lectura.getFechaHora()));
+        textFecha.setText(SDF_FECHA.format(movimiento.getFecha()) + " " + SDF_HORA.format(movimiento.getFecha()));
+        textImporte.setText(String.valueOf(movimiento.getImporte()));
+        textSaldo.setText(String.valueOf(movimiento.getSaldo()));
 
         return miVista;
     }
 
     @Override
     public int getCount() {
-        return 0;
+
+        return movimientos.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return null;
+
+        return movimientos.get(i);
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+
+        return movimientos.get(i).getCodigo();
     }
 
 

@@ -14,47 +14,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="29dp"
         android:src="@drawable/icono" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="18dp"
         android:gravity="center"
         android:text="@string/titulo"
         android:textColor="@color/colorAccent"
         android:textSize="24sp" />
 
     <Button
-        android:id="@+id/idCrear"
+        android:id="@+id/idBtnCrear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="36dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="29dp"
         android:background="@color/BlanchedAlmond"
         android:text="@string/crear"
         android:textColor="@color/colorAccent" />
 
     <Button
-        android:id="@+id/idListar"
+        android:id="@+id/idBtnSalir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="36dp"
+        android:layout_marginLeft="189dp"
+        android:layout_marginTop="-48dp"
         android:background="@color/BlanchedAlmond"
-        android:text="@string/listar"
+        android:text="@string/salir"
         android:textColor="@color/colorAccent" />
 
     <Button
-        android:id="@+id/idSalir"
+        android:id="@+id/idBtnProducto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="38dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="48dp"
         android:background="@color/BlanchedAlmond"
-        android:text="@string/salir"
+        android:text="@string/listarProducto"
+        android:textColor="@color/colorAccent" />
+
+    <Button
+        android:id="@+id/idBtnMovimiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="189dp"
+        android:layout_marginTop="-48dp"
+        android:background="@color/BlanchedAlmond"
+        android:text="@string/listarMovimiento"
         android:textColor="@color/colorAccent" />
 
 </LinearLayout>

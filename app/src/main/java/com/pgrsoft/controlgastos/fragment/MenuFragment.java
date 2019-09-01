@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.pgrsoft.controlgastos.R;
 
@@ -22,9 +21,10 @@ import com.pgrsoft.controlgastos.R;
 public class MenuFragment extends Fragment implements View.OnClickListener{
 
 
-    private Button botonCrear;
-    private Button botonListar;
-    private Button botonSalir;
+    private Button btnCrear;
+    private Button btnListarProducto;
+    private Button btnSalir;
+    private Button btnListarMovimiento;
 
     private Fragment fragment;
 
@@ -39,24 +39,25 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
         View miVista = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        botonCrear = (Button) miVista.findViewById(R.id.idCrear);
-        botonListar = (Button) miVista.findViewById(R.id.idListar);
-        botonSalir = (Button) miVista.findViewById(R.id.idSalir);
+        btnCrear = (Button) miVista.findViewById(R.id.idBtnCrear);
+        btnListarProducto = (Button) miVista.findViewById(R.id.idBtnProducto);
+        btnSalir = (Button) miVista.findViewById(R.id.idBtnSalir);
+        btnListarMovimiento = (Button) miVista.findViewById(R.id.idBtnMovimiento);
 
-        botonCrear.setOnClickListener(this);
-        botonSalir.setOnClickListener(this);
-        botonListar.setOnClickListener(this);
+        btnCrear.setOnClickListener(this);
+        btnSalir.setOnClickListener(this);
+        btnListarProducto.setOnClickListener(this);
+        btnListarMovimiento.setOnClickListener(this);
 
         return miVista;
     }
-
 
     @Override
     public void onClick(View view) {
 
         switch (view.getId()){
 
-            case R.id.idCrear:
+            case R.id.idBtnCrear:
 
                 fragment = new FormularioFragment();
 
@@ -70,9 +71,9 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
                 break;
 
-            case R.id.idListar:
+            case R.id.idBtnProducto:
 
-                fragment = new ListadoFragment();
+                fragment = new ProductoListadoFragment();
 
                 fragmentTransaction = getFragmentManager().beginTransaction();
 
@@ -84,7 +85,22 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
                 break;
 
-            case R.id.idSalir:
+            case R.id.idBtnMovimiento:
+
+                fragment = new MovimientoListadoFragment();
+
+                fragmentTransaction = getFragmentManager().beginTransaction();
+
+                fragmentTransaction.replace(R.id.destino, fragment);
+
+                fragmentTransaction.addToBackStack(null);
+
+                fragmentTransaction.commit();
+
+
+                break;
+
+            case R.id.idBtnSalir:
 
                 Log.d("***", "Aplicacion finalizada");
                 this.getActivity().finish();
