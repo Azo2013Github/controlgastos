@@ -13,7 +13,9 @@ import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.services.MovimientoServices;
 import com.pgrsoft.controlgastos.services.impl.MovimientoServicesImpl;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MovimientosAdaptador extends BaseAdapter {
@@ -38,8 +40,6 @@ public class MovimientosAdaptador extends BaseAdapter {
 
     }
 
-
-
     @Override
     public View getView(int posicion, View view, ViewGroup viewGroup) {
 
@@ -51,10 +51,12 @@ public class MovimientosAdaptador extends BaseAdapter {
 
         Movimiento movimiento = movimientos.get(posicion);
 
+        String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
 
-        //Log.d("***", "ENTRA EN MOVIMIENTOSADAPDATOR: " + movimiento.getFecha());
-        //hora.setText(SDF_HORA.format(lectura.getFechaHora()));
-        textFecha.setText(SDF_FECHA.format(movimiento.getFecha()) + " " + SDF_HORA.format(movimiento.getFecha()));
+//      textView is the TextView view that should display it
+        textFecha.setText(currentDateTimeString);
+
+        //textFecha.setText(SDF_FECHA.format(movimiento.getFecha()) + " " + SDF_HORA.format(movimiento.getFecha()));
         textImporte.setText(String.valueOf(movimiento.getImporte()));
         textSaldo.setText(String.valueOf(movimiento.getSaldo()));
 

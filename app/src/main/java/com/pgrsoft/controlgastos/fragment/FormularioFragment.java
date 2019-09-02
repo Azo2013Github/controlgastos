@@ -19,10 +19,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.frosquivel.magicalcamera.MagicalCamera;
-import com.frosquivel.magicalcamera.MagicalPermissions;
+//import com.frosquivel.magicalcamera.MagicalCamera;
+//import com.frosquivel.magicalcamera.MagicalPermissions;
 import com.pgrsoft.controlgastos.R;
 import com.pgrsoft.controlgastos.model.Categoria;
 import com.pgrsoft.controlgastos.model.Movimiento;
@@ -57,7 +58,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     private EditText editPrecio;
     private EditText editDescripcion;
     private EditText editImporte;
-    private EditText editFecha;
+    private TextView textfecha;
     private EditText editSaldo;
     private EditText editDesMovimiento;
     private ImageView imageView;
@@ -76,8 +77,8 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     private Movimiento movimiento;
 
     private final static int RESIZE_PHOTO_PIXEL_PERCENTAGE = 50; //esta variable sirve para la calidad de la imagen:
-    private MagicalPermissions magicalPermissions;
-    private MagicalCamera magicalCamera;
+    //private MagicalPermissions magicalPermissions;
+    //private MagicalCamera magicalCamera;
 
     public FormularioFragment() {
         // Required empty public constructor
@@ -100,7 +101,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editPrecio = (EditText) miVista.findViewById(R.id.idPrecio);
         editDescripcion = (EditText) miVista.findViewById(R.id.idDescripcion);
         editImporte = (EditText) miVista.findViewById(R.id.idImporte);
-        editFecha = (EditText) miVista.findViewById(R.id.idFecha);
+        //textfecha = (TextView) miVista.findViewById(R.id.idFecha);
         editSaldo = (EditText) miVista.findViewById(R.id.idSaldo);
         editDesMovimiento = (EditText) miVista.findViewById(R.id.idDesMovimiento);
         imageView = (ImageView) miVista.findViewById(R.id.idImage);
@@ -176,7 +177,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                 break;
             case R.id.idGuardar:
 
-                magicalCamera.takeFragmentPhoto(FormularioFragment.this);
+                //magicalCamera.takeFragmentPhoto(FormularioFragment.this);
 
 
                 //fragment = new ListadoDetalleFragment();
@@ -207,8 +208,8 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
         };
-        magicalPermissions = new MagicalPermissions(this,permissions);
-        magicalCamera = new MagicalCamera(this.getActivity(), RESIZE_PHOTO_PIXEL_PERCENTAGE, magicalPermissions);
+        // magicalPermissions = new MagicalPermissions(this,permissions);
+        // magicalCamera = new MagicalCamera(this.getActivity(), RESIZE_PHOTO_PIXEL_PERCENTAGE, magicalPermissions);
     }
 
 
@@ -220,14 +221,14 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         Log.d("***", "ENTRA AQUI resultCode: ");
         if (resultCode == RESULT_OK){
 
-            magicalCamera.resultPhoto(requestCode, resultCode, data);
+            /*magicalCamera.resultPhoto(requestCode, resultCode, data);
             imageView.setImageBitmap(magicalCamera.getPhoto());
 
             String path = magicalCamera.savePhotoInMemoryDevice(magicalCamera.getPhoto(),
                           "myPhotoName",
                         "myDirectoryName",
                                       magicalCamera.JPEG,
-                    true);
+                    true);*/
 
 
         }
@@ -305,7 +306,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
     private void vaciarEditText(){
         editSaldo.setText("");
-        editFecha.setText("");
+        //editFecha.setText("");
         editDescripcion.setText("");
         editImporte.setText("");
         editPrecio.setText("");
