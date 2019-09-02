@@ -2,7 +2,6 @@ package com.pgrsoft.controlgastos.services.impl;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import com.pgrsoft.controlgastos.model.Categoria;
 import com.pgrsoft.controlgastos.model.Producto;
@@ -54,19 +53,9 @@ public class ProductoServicesImpl implements ProductoServices {
 
                 categoria = categoriaServices.read(codigoCategoria);
 
-                Log.d("***", "PORQUE SALE NULL: " +categoria);
-                //if (categoria != null){
-
-                    Producto producto = new Producto(nombre, descripcion, precio, image, categoria);
-                    producto.setCodigo(codigo);
-                    productos.add(producto);
-
-                //}else{
-
-                //}
-
-
-                Log.d("***:", "Categoria dentro de producto ****: " + codigoCategoria);
+                Producto producto = new Producto(nombre, descripcion, precio, image, categoria);
+                producto.setCodigo(codigo);
+                productos.add(producto);
 
             }
         }
@@ -97,8 +86,6 @@ public class ProductoServicesImpl implements ProductoServices {
 
             producto = new Producto(nombre, descripcion, precio, image, categoria);
             producto.setCodigo(codigo);
-
-            Log.d("**", "LEYENDO UN PRODUCTO *****: " +producto.toString());
 
         }
 

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
 
 import com.pgrsoft.controlgastos.model.Categoria;
 import com.pgrsoft.controlgastos.model.Movimiento;
@@ -79,7 +79,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 .append(" FOREIGN KEY " + "( " + COL_6_MOVIMIENTOS + ") REFERENCES " + PRODUCTOS_TABLE + " (" + COL_1_PRODUCTOS + " )) ");
 
         strDDL = builder.toString();
-        //Log.d("****", strDDL);
+
         sqLiteDatabase.execSQL(strDDL);
 
     }
@@ -103,7 +103,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         categoria.setCodigo(resultado);
 
-        //Log.d("**: ", categoria.toString());
         db.close();
         return resultado == -1 ? null : categoria;
     }
@@ -134,11 +133,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_5_PRODUCTOS, producto.getImagen());
         contentValues.put(COL_6_PRODUCTOS, producto.getCategoria().getCodigo());
 
-        //Categoria categoria = Ca
-
         long resultado = db.insert(PRODUCTOS_TABLE, null, contentValues);
         producto.setCodigo(resultado);
-        //Log.d("******", "DAR ALTA AL PRODUCTO: " + producto.toString());
 
         db.close();
         return resultado == -1 ? null : producto;
@@ -198,8 +194,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String strFecha = sdf.format(movimiento.getFecha());
 
         ContentValues contentValues = new ContentValues();
-
-        //contentValues.put(COL_1_MOVIMIENTOS, movimiento.getCodigo());
         contentValues.put(COL_2_MOVIMIENTOS, movimiento.getImporte());
         contentValues.put(COL_3_MOVIMIENTOS, movimiento.getDescripcion());
         contentValues.put(COL_4_MOVIMIENTOS, strFecha);
@@ -208,7 +202,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         long resultado = db.insert(MOVIMIENTOS_TABLE, null, contentValues);
         movimiento.setCodigo(resultado);
-        //Log.d("******", "DAR ALTA AL MOVIMIENTO: " + movimiento.toString());
 
         db.close();
         return resultado == -1 ? null : movimiento;

@@ -2,7 +2,6 @@ package com.pgrsoft.controlgastos.services.impl;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.model.Producto;
@@ -54,8 +53,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
                 // Convertir el String en Date pour la fecha:
                 Date fecha = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                // Habrá un try catch....
-                strFecha = "21/08/1994";
+
                 try {
                     fecha = sdf.parse(strFecha);
                 }catch (ParseException e){
@@ -68,7 +66,6 @@ public class MovimientoServicesImpl implements MovimientoServices {
 
                 movimiento.setCodigo(codigo);
                 movimientos.add(movimiento);
-                //Log.d("***",  movimientos.toString());
             }
         }
 
@@ -111,7 +108,6 @@ public class MovimientoServicesImpl implements MovimientoServices {
 
         }
 
-        //Log.d("**", "LEADO CODIGO: " +movimiento.toString());
         dataBaseHelper.close();
         return movimiento;
     }
@@ -124,13 +120,8 @@ public class MovimientoServicesImpl implements MovimientoServices {
 
     @Override
     public boolean delete(Long codigo) {
-        //Log.d("**", "BORANDO CODIGO: " + codigo);
+
         return dataBaseHelper.deletingMovimientoCodigo(codigo);
     }
-
- /* Transformar las fecha: */
-
-
-
 
 }

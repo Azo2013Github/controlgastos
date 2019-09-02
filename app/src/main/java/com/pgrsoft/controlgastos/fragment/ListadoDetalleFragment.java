@@ -23,9 +23,9 @@ import java.util.List;
  */
 public class ListadoDetalleFragment extends Fragment {
 
-
     private List<Producto> productos;
     private ProductoServices productoServices;
+
     public ListadoDetalleFragment() {
         // Required empty public constructor
     }
@@ -41,7 +41,6 @@ public class ListadoDetalleFragment extends Fragment {
         TextView textDescripcion = (TextView) miVista.findViewById(R.id.idDetalleDescripcion);
 
         Bundle bundle = getArguments();
-
         Producto producto = (Producto) bundle.getSerializable("DATOS");
 
         textNombre.setText(producto.getNombre());

@@ -52,10 +52,7 @@ public class ProductosAdaptador extends BaseAdapter {
         ImageView imageView = (ImageView) miVista.findViewById(R.id.idImage);
         TextView textDescripcion = (TextView) miVista.findViewById(R.id.idDescripcion);
 
-
         Producto producto = productos.get(position);
-
-        Log.d("***", "Productos no es null: " + producto.getNombre());
 
         textCategoria.setText(producto.getCategoria().getNombre());
         textNombre.setText(producto.getNombre());
@@ -86,6 +83,7 @@ public class ProductosAdaptador extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
+
         return productos.get(i).getCodigo();
     }
 

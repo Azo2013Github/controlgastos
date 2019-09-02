@@ -2,7 +2,6 @@ package com.pgrsoft.controlgastos.services.impl;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 
 import com.pgrsoft.controlgastos.model.Categoria;
 import com.pgrsoft.controlgastos.services.CategoriaServices;
@@ -44,8 +43,6 @@ public class CategoriaServicesImpl implements CategoriaServices {
             categoria = new Categoria(nombre);
             categoria.setCodigo(code);
 
-            //Log.d("***", "Categoria Su nombre y code: " +code + " " + nombre);
-
         }
 
         dataBaseHelper.close();
@@ -68,10 +65,7 @@ public class CategoriaServicesImpl implements CategoriaServices {
                 categorias.add(categoria);
             }
         }
-        //Log.d("**", "TODAS CATEGORIA." +categorias.toString());
-
         dataBaseHelper.close();
-
         return categorias;
     }
 

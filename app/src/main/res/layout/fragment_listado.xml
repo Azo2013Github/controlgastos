@@ -12,5 +12,8 @@
     <ListView
         android:id="@+id/idMiLista"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:divider="@android:color/holo_orange_dark"
+        android:dividerHeight="1dp"
+        />
 </FrameLayout>

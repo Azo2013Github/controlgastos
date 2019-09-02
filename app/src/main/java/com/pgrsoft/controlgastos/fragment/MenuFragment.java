@@ -23,7 +23,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
     private Button btnCrear;
     private Button btnListarProducto;
-    private Button btnSalir;
+    //private Button btnSalir;
     private Button btnListarMovimiento;
 
     private Fragment fragment;
@@ -41,11 +41,11 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
         btnCrear = (Button) miVista.findViewById(R.id.idBtnCrear);
         btnListarProducto = (Button) miVista.findViewById(R.id.idBtnProducto);
-        btnSalir = (Button) miVista.findViewById(R.id.idBtnSalir);
+        //btnSalir = (Button) miVista.findViewById(R.id.idBtnSalir);
         btnListarMovimiento = (Button) miVista.findViewById(R.id.idBtnMovimiento);
 
         btnCrear.setOnClickListener(this);
-        btnSalir.setOnClickListener(this);
+        //btnSalir.setOnClickListener(this);
         btnListarProducto.setOnClickListener(this);
         btnListarMovimiento.setOnClickListener(this);
 
@@ -100,12 +100,12 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
                 break;
 
-            case R.id.idBtnSalir:
+            /*case R.id.idBtnSalir:
 
                 Log.d("***", "Aplicacion finalizada");
                 this.getActivity().finish();
                 System.exit(0);
-                break;
+                break;*/
         }
 
 

@@ -58,7 +58,6 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     private EditText editPrecio;
     private EditText editDescripcion;
     private EditText editImporte;
-    private TextView textfecha;
     private EditText editSaldo;
     private EditText editDesMovimiento;
     private ImageView imageView;
@@ -101,12 +100,9 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editPrecio = (EditText) miVista.findViewById(R.id.idPrecio);
         editDescripcion = (EditText) miVista.findViewById(R.id.idDescripcion);
         editImporte = (EditText) miVista.findViewById(R.id.idImporte);
-        //textfecha = (TextView) miVista.findViewById(R.id.idFecha);
         editSaldo = (EditText) miVista.findViewById(R.id.idSaldo);
         editDesMovimiento = (EditText) miVista.findViewById(R.id.idDesMovimiento);
         imageView = (ImageView) miVista.findViewById(R.id.idImage);
-
-        //imageView.setImageResource(R.drawable.bebidas);
 
         categorias = new ArrayList<>();
         productos = new ArrayList<>();
@@ -124,8 +120,6 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-
-        Fragment fragment;
 
         switch (view.getId()){
 
@@ -157,8 +151,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                 break;
 
             case R.id.idPagar:
-                Log.d("***", "PAGAR");
-                //categoriaListas
+
                 categoriaServices = new CategoriaServicesImpl(this.getActivity());
 
                 productoServices = new ProductoServicesImpl(this.getActivity());
@@ -306,7 +299,6 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
     private void vaciarEditText(){
         editSaldo.setText("");
-        //editFecha.setText("");
         editDescripcion.setText("");
         editImporte.setText("");
         editPrecio.setText("");

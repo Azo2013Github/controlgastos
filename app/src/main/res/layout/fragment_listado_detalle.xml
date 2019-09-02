@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="89dp"
+        android:layout_marginTop="72dp"
         android:text="@string/nombre"
         android:textColor="@color/colorAccent" />
 
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="192dp"
-        android:layout_marginTop="89dp"
+        android:layout_marginTop="72dp"
         android:text="TextView"
         android:textColor="@color/colorAccent" />
 
@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="102dp"
         android:text="@string/descripcion"
         android:textColor="@color/colorAccent" />
 
@@ -48,43 +48,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="192dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="102dp"
         android:text="TextView"
         android:textColor="@color/colorAccent" />
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="162dp"
-        android:text="@string/importe"
-        android:textColor="@color/colorAccent" />
-
-    <TextView
-        android:id="@+id/idImporte"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="192dp"
-        android:layout_marginTop="162dp"
-        android:text="TextView"
-        android:textColor="@color/colorAccent" />
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="202dp"
-        android:text="@string/descripcionProducto"
-        android:textColor="@color/colorAccent" />
-
-    <TextView
-        android:id="@+id/idDescripcionProducto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="192dp"
-        android:layout_marginTop="202dp"
-        android:text="TextView"
-        android:textColor="@color/colorAccent" />
 </FrameLayout>
