@@ -23,9 +23,17 @@
         android:id="@+id/idImage"
         android:layout_width="69dp"
         android:layout_height="64dp"
-        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/casa" />
+
+    <ImageView
+        android:id="@+id/idImageCamara"
+        android:layout_width="69dp"
+        android:layout_height="64dp"
+        android:layout_marginLeft="259dp"
+        android:layout_marginTop="-65dp"
+        tools:src="@tools:sample/avatars[0]" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -188,17 +196,25 @@
         android:id="@+id/idPagar"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="128dp"
-        android:layout_marginTop="-50dp"
+        android:layout_marginLeft="89dp"
+        android:layout_marginTop="-51dp"
         android:background="@color/colorAccent"
         android:src="@drawable/pago" />
 
     <ImageButton
-        android:id="@+id/idGuardar"
+        android:id="@+id/idCamera"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginLeft="246dp"
-        android:layout_marginTop="-50dp"
+        android:layout_marginLeft="178dp"
+        android:layout_marginTop="-51dp"
         android:src="@drawable/camara" />
+
+    <ImageButton
+        android:id="@+id/idSave"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="267dp"
+        android:layout_marginTop="-51dp"
+        android:src="@drawable/save" />
 
 </LinearLayout>

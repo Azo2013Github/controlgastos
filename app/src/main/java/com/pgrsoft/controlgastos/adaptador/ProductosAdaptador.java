@@ -31,7 +31,6 @@ public class ProductosAdaptador extends BaseAdapter {
     public ProductosAdaptador(Context contexto){
 
         this.contexto = contexto;
-        //this.productos = productos;
         this.inflater = (LayoutInflater) contexto.getSystemService(contexto.LAYOUT_INFLATER_SERVICE);
 
         productoServices = new ProductoServicesImpl(this.contexto);
@@ -61,6 +60,7 @@ public class ProductosAdaptador extends BaseAdapter {
 
         byte [] imagen = producto.getImagen();
         Bitmap bitmap = getImage(imagen);
+
         //Convert bitmap to drawable
         Drawable drawable = new BitmapDrawable(miVista.getResources(), bitmap);
         imageView.setImageDrawable(drawable);

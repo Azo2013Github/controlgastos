@@ -4,12 +4,12 @@ package com.pgrsoft.controlgastos.fragment;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import android.app.Fragment;
 
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +19,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 //import com.frosquivel.magicalcamera.MagicalCamera;
 //import com.frosquivel.magicalcamera.MagicalPermissions;
@@ -36,6 +34,10 @@ import com.pgrsoft.controlgastos.services.impl.MovimientoServicesImpl;
 import com.pgrsoft.controlgastos.services.impl.ProductoServicesImpl;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,9 +50,10 @@ import static android.app.Activity.RESULT_OK;
  */
 public class FormularioFragment extends Fragment implements View.OnClickListener{
 
-    private ImageButton botonComprar;
-    private ImageButton botonPagar;
-    private ImageButton botonGuardar;
+    private ImageButton btnCompra;
+    private ImageButton btnPago;
+    private ImageButton btnCamara;
+    private ImageButton btnSave;
 
     private Spinner spinner;
 
@@ -61,6 +64,9 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     private EditText editSaldo;
     private EditText editDesMovimiento;
     private ImageView imageView;
+    private ImageView imageCamara;
+
+    private Bitmap imageActual = null;
 
     private ArrayAdapter<String> stringArrayAdapter;
     private List<Categoria> categorias;
@@ -89,9 +95,10 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         // Inflate the layout for this fragment
         View miVista = inflater.inflate(R.layout.fragment_formulario, container, false);
 
-        botonComprar = (ImageButton) miVista.findViewById(R.id.idCompra);
-        botonPagar = (ImageButton) miVista.findViewById(R.id.idPagar);
-        botonGuardar = (ImageButton) miVista.findViewById(R.id.idGuardar);
+        btnCompra = (ImageButton) miVista.findViewById(R.id.idCompra);
+        btnPago = (ImageButton) miVista.findViewById(R.id.idPagar);
+        btnCamara = (ImageButton) miVista.findViewById(R.id.idCamera);
+        btnSave = (ImageButton) miVista.findViewById(R.id.idSave);
 
         spinner = (Spinner) miVista.findViewById(R.id.idCategoria);
         cargarSpinner();
@@ -103,17 +110,19 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editSaldo = (EditText) miVista.findViewById(R.id.idSaldo);
         editDesMovimiento = (EditText) miVista.findViewById(R.id.idDesMovimiento);
         imageView = (ImageView) miVista.findViewById(R.id.idImage);
+        imageCamara = (ImageView) miVista.findViewById(R.id.idImageCamara);
 
         categorias = new ArrayList<>();
         productos = new ArrayList<>();
         movimientos = new ArrayList<>();
 
         /***********************************************/
-        hacerFoto();
+        //hacerFoto();
 
-        botonComprar.setOnClickListener(this);
-        botonPagar.setOnClickListener(this);
-        botonGuardar.setOnClickListener(this);
+        btnCompra.setOnClickListener(this);
+        btnPago.setOnClickListener(this);
+        btnCamara.setOnClickListener(this);
+        btnSave.setOnClickListener(this);
 
         return miVista;
     }
@@ -135,11 +144,9 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                 double saldo = Double.parseDouble(editSaldo.getText().toString());
 
                 categoria = new Categoria(strCategoria);
-
-                byte[] image = changeImageListView(categoria.getNombre());
-
+                byte[] image = changeImageListView(categoria.getNombre()); //Guardar las categorias
+                // en funcion de las Imagenes para añadir en la BBDD.
                 producto = new Producto(nombre, descripcion, precio, image, categoria);
-
                 movimiento = new Movimiento(importe, desMovimiento, new Date(), saldo, producto);
 
                 categorias.add(categoria);
@@ -153,49 +160,49 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
             case R.id.idPagar:
 
                 categoriaServices = new CategoriaServicesImpl(this.getActivity());
-
                 productoServices = new ProductoServicesImpl(this.getActivity());
-
                 movimientoServices = new MovimientoServicesImpl(this.getActivity());
 
                 for (int i=0; i< categorias.size(); i++) {
-
                     categoriaServices.create(categorias.get(i));
-
                     productoServices.create(productos.get(i));
-
                     movimientoServices.create(movimientos.get(i));
                 }
 
                 break;
-            case R.id.idGuardar:
+            case R.id.idCamera:
+
+                // Hacer foto llamando al metodo abrir camara:
+                abrirCamara();
 
                 //magicalCamera.takeFragmentPhoto(FormularioFragment.this);
-
-
                 //fragment = new ListadoDetalleFragment();
-
                 //magicalCamera.takeFragmentPhoto(fragment);
-
                 //magicalCamera.takeFragmentPhoto(FormularioFragment.this);
-
                 //startActivityForResult(magicalCamera.getIntentFragment(), magicalCamera.TAKE_PHOTO);
+
+                break;
+
+            case R.id.idSave:
+                // Guardar las imagenes en un fichero:
+                guardarFoto();
 
                 break;
         }
 
     }
 
-    // convert from bitmap to byte array
+    // convert from bitmap to byte array para guardar las imagen en la bbdd
     public static byte[] getBytes(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
         return stream.toByteArray();
     }
 
-    private void hacerFoto(){
-        /* ****************************
-        Esta parte sirve para hacer foto y con el boton botonGuardar guardamos las imagenes que hemos echo: */
+    //Codigo anterior que no funciona :
+    /*private void hacerFoto(){
+         ****************************
+        Esta parte sirve para hacer foto y con el boton btnCamara guardamos las imagenes que hemos echo:
         String [] permissions = new String[]{
                 Manifest.permission.CAMERA,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -203,13 +210,13 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         };
         // magicalPermissions = new MagicalPermissions(this,permissions);
         // magicalCamera = new MagicalCamera(this.getActivity(), RESIZE_PHOTO_PIXEL_PERCENTAGE, magicalPermissions);
-    }
+    }*/
 
 
     /* Funciones a implementar para usar la camara son:
     * 1) */
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    /*public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d("***", "ENTRA AQUI resultCode: ");
         if (resultCode == RESULT_OK){
@@ -221,10 +228,84 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                           "myPhotoName",
                         "myDirectoryName",
                                       magicalCamera.JPEG,
-                    true);*/
+                    true);
 
 
         }
+    }*/
+
+    private void abrirCamara(){
+
+        // Se trata de un Intent ya definido en el sistema .....
+        Intent hacerFotoIntent = new Intent (MediaStore.ACTION_IMAGE_CAPTURE);
+
+        // estamos comprobando que la aplicacion de la camara se puede abrir con normalidad
+        if (hacerFotoIntent.resolveActivity(getActivity().getPackageManager()) != null){
+
+            // abrir la camara.. el requesCode es 1 que nos dice si volvemos en la activitdad el codigo dw la actividad
+            startActivityForResult(hacerFotoIntent, 1);
+
+
+
+        }
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1 && resultCode == RESULT_OK){ // RESULT_OK devuelve -1 si las cosas han ido bien
+
+            Bundle extras = data.getExtras(); // Ya tengo referencia al Bundle a partir de Intent
+            Bitmap imageBitmap = (Bitmap) extras.get("data"); // Lo de "data" hay que saberlo..
+            imageCamara.setImageBitmap(imageBitmap);
+
+            // Como posiblemente guarde este bitmap en el sistema de archivos
+            // me interesara tb guardar el bitmap en la variable de instancia de esta Actvity
+            imageActual = imageBitmap;
+
+        }
+
+    }
+
+    /* Guardar las fotos en un fichero: */
+    // Vamos a necesitar 2 methodos 1 que camboara el nombre de la imagen para que no haya conflicto..
+    private File createImageFile() throws IOException {
+
+        String strName = "name" + ((int)(Math.random() * 10000)) ;
+
+        // El constructor de File  necesita saber
+        // 1. - El directorio (en este caso el directorio de nuestra app)
+        // 2. - Necesita conocer el nombre del archivo...
+        File file = new File(this.getActivity().getFilesDir(), strName);
+
+        return file;
+    }
+
+    // La segundo metodo que guarde fotos:
+    private void guardarFoto(){
+
+        try{
+
+            // lo primero que necesitamos es el File
+            File file = createImageFile();
+            Log.d("**", "File: " +file.getAbsolutePath());
+
+            // Un FileOutputStream IS-A OutputStream espacializada en archivos...
+            OutputStream out = new FileOutputStream(file);
+
+            // Ahora vamos a "enviar" la imagen actial a traves de stream imageActual
+            imageActual.compress(Bitmap.CompressFormat.JPEG, 100 , out);
+
+            out.flush(); // El flush() lleva la orden que la imagen  "fluya por la tuberia"
+            out.close(); // y
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     private void cargarSpinner(){

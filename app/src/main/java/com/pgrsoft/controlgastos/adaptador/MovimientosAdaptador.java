@@ -24,9 +24,6 @@ public class MovimientosAdaptador extends BaseAdapter {
     private List<Movimiento> movimientos;
     private MovimientoServices movimientoServices;
 
-    private static final SimpleDateFormat SDF_FECHA = new SimpleDateFormat("dd/MM/yyyy");
-    private static final SimpleDateFormat SDF_HORA = new SimpleDateFormat("HH:mm");
-
     private LayoutInflater inflater;
 
     public MovimientosAdaptador(Context contexto){
