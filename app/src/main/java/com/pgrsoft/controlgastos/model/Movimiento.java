@@ -36,7 +36,7 @@ public class Movimiento {
     }
 
     public void setImporte(double importe) {
-        this.importe = importe;
+        this.importe = importe * producto.getPrecio();
     }
 
     public Producto getProducto() {

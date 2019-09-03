@@ -24,22 +24,22 @@
         android:layout_width="69dp"
         android:layout_height="64dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="28dp"
         android:src="@drawable/casa" />
 
     <ImageView
         android:id="@+id/idImageCamara"
         android:layout_width="69dp"
         android:layout_height="64dp"
-        android:layout_marginLeft="259dp"
-        android:layout_marginTop="-65dp"
-        tools:src="@tools:sample/avatars[0]" />
+        android:layout_marginLeft="289dp"
+        android:layout_marginTop="-63dp"
+        tools:src="@tools:sample/avatars[1]" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="22dp"
         android:text="@string/categoria"
         android:textColor="@color/colorAccent" />
 
@@ -48,7 +48,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="112dp"
-        android:layout_marginTop="-22dp" />
+        android:layout_marginTop="-22dp"
+        android:singleLine="true" />
 
     <TextView
         android:id="@+id/textView7"
@@ -67,7 +68,6 @@
         android:layout_marginTop="-41dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
         android:textColor="@color/colorAccent" />
 
     <TextView
@@ -106,7 +106,6 @@
         android:layout_marginTop="-42dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/placeholder"
         android:textColor="@color/colorAccent" />
 
     <TextView
@@ -180,7 +179,6 @@
         android:layout_marginTop="-40dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name"
         android:textColor="@color/colorAccent" />
 
     <ImageButton

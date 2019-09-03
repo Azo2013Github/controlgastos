@@ -11,10 +11,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="29dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="16dp"
         android:src="@drawable/icono" />
 
     <TextView
@@ -31,30 +31,33 @@
         android:id="@+id/idBtnCrear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="29dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="28dp"
         android:background="@color/BlanchedAlmond"
         android:text="@string/crear"
-        android:textColor="@color/colorAccent" />
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/idBtnProducto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="28dp"
         android:background="@color/BlanchedAlmond"
         android:text="@string/listarProducto"
-        android:textColor="@color/colorAccent" />
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/idBtnMovimiento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="189dp"
-        android:layout_marginTop="-48dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="28dp"
         android:background="@color/BlanchedAlmond"
         android:text="@string/listarMovimiento"
-        android:textColor="@color/colorAccent" />
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp" />
 
 </LinearLayout>
