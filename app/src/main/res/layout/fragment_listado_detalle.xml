@@ -7,9 +7,19 @@
     tools:context=".fragment.ListadoDetalleFragment">
 
     <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="158dp"
+        android:text="@string/fecha"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
         android:id="@+id/textView20"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="@string/detalleProducto"
@@ -24,12 +34,6 @@
         android:layout_marginTop="72dp"
         android:text="@string/nombre"
         android:textColor="@color/colorAccent" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button" />
 
     <TextView
         android:id="@+id/idDetalleNombre"
@@ -55,7 +59,34 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="192dp"
         android:layout_marginTop="102dp"
-        android:text="TextView"
+        android:text="@string/descripcion"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="132dp"
+        android:text="@string/importe"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/idImporte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="192dp"
+        android:layout_marginTop="132dp"
+        android:text="@string/importe"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/idFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="192dp"
+        android:layout_marginTop="158dp"
+        android:text="@string/fecha"
         android:textColor="@color/colorAccent" />
 
 </FrameLayout>

@@ -5,6 +5,7 @@
     <dimen name="medio">32dp</dimen>
     <dimen name="largo">60dp</dimen>
     <dimen name="maximo">600dp</dimen>
+    <dimen name="textSize">16dp</dimen>
 
 
 </resources>

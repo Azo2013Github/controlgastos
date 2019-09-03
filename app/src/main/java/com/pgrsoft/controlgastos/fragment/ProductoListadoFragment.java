@@ -18,6 +18,7 @@ import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.model.Producto;
 import com.pgrsoft.controlgastos.services.MovimientoServices;
 import com.pgrsoft.controlgastos.services.ProductoServices;
+import com.pgrsoft.controlgastos.services.impl.MovimientoServicesImpl;
 import com.pgrsoft.controlgastos.services.impl.ProductoServicesImpl;
 
 import java.util.List;
@@ -32,8 +33,6 @@ public class ProductoListadoFragment extends Fragment implements ListView.OnItem
 
     private List<Producto> productos;
     private ProductoServices productoServices;
-    private MovimientoServices movimientoServices;
-    private List<Movimiento> movimientos;
 
 
     public ProductoListadoFragment() {
@@ -62,14 +61,19 @@ public class ProductoListadoFragment extends Fragment implements ListView.OnItem
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
         productoServices = new ProductoServicesImpl(this.getActivity());
+        MovimientoServices movimientoServices = new MovimientoServicesImpl(this.getActivity());
 
         productos = productoServices.getAll();
+        List<Movimiento> movimientos = movimientoServices.getAll();
 
         Producto producto = productos.get(i);
 
+        Movimiento movimiento = movimientos.get(i);
+
         Bundle bundle = new Bundle();
 
-        bundle.putSerializable("DATOS", producto);
+        bundle.putSerializable("PRODUCTOS", producto);
+        bundle.putSerializable("MOVIMIENTOS", movimiento);
 
         Fragment fragment = new ListadoDetalleFragment();
 

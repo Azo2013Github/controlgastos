@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_green_light"
-
+    android:background="@color/blueLighter"
+    android:textColor="@dimen/textSize"
     android:orientation="vertical"
     tools:context=".fragment.MenuFragment">
 
@@ -27,11 +27,30 @@
         android:textColor="@color/colorAccent"
         android:textSize="24sp" />
 
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/saldo"
+        android:textSize="18sp"
+        android:textColor="@color/colorAccent"/>
+
+    <EditText
+        android:id="@+id/idSaldo"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="89dp"
+        android:layout_marginTop="-41dp"
+        android:ems="10"
+        android:textColor="@color/colorAccent"
+        android:inputType="numberDecimal" />
+
     <Button
         android:id="@+id/idBtnCrear"
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
+        android:layout_marginLeft="80dp"
         android:layout_marginTop="28dp"
         android:background="@color/BlanchedAlmond"
         android:text="@string/crear"
@@ -40,9 +59,9 @@
 
     <Button
         android:id="@+id/idBtnProducto"
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
+        android:layout_marginLeft="80dp"
         android:layout_marginTop="28dp"
         android:background="@color/BlanchedAlmond"
         android:text="@string/listarProducto"
@@ -51,9 +70,9 @@
 
     <Button
         android:id="@+id/idBtnMovimiento"
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
+        android:layout_marginLeft="80dp"
         android:layout_marginTop="28dp"
         android:background="@color/BlanchedAlmond"
         android:text="@string/listarMovimiento"

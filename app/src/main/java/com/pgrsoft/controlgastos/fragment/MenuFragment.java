@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.pgrsoft.controlgastos.R;
 
@@ -24,6 +25,8 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
     private Button btnCrear;
     private Button btnListarProducto;
     private Button btnListarMovimiento;
+
+    private EditText editTextSaldo;
 
     private Fragment fragment;
 
@@ -41,6 +44,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
         btnCrear = (Button) miVista.findViewById(R.id.idBtnCrear);
         btnListarProducto = (Button) miVista.findViewById(R.id.idBtnProducto);
         btnListarMovimiento = (Button) miVista.findViewById(R.id.idBtnMovimiento);
+        editTextSaldo = (EditText) miVista.findViewById(R.id.idSaldo);
 
         btnCrear.setOnClickListener(this);
         btnListarProducto.setOnClickListener(this);
@@ -56,7 +60,15 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
             case R.id.idBtnCrear:
 
+                double saldo = Double.parseDouble(editTextSaldo.getText().toString());
+
+                Bundle bundle = new Bundle();
+
+                bundle.putDouble("SALDO", saldo);
+
                 fragment = new FormularioFragment();
+
+                fragment.setArguments(bundle);
 
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 

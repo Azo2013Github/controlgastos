@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 //import com.frosquivel.magicalcamera.MagicalCamera;
 //import com.frosquivel.magicalcamera.MagicalPermissions;
@@ -60,11 +61,12 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     private EditText editNombre;
     private EditText editPrecio;
     private EditText editDescripcion;
-    private EditText editImporte;
     private EditText editSaldo;
     private EditText editDesMovimiento;
+    private EditText editCantidad;
     private ImageView imageView;
     private ImageView imageCamara;
+
 
     private Bitmap imageActual = null;
 
@@ -106,15 +108,32 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editNombre = (EditText) miVista.findViewById(R.id.idNombre);
         editPrecio = (EditText) miVista.findViewById(R.id.idPrecio);
         editDescripcion = (EditText) miVista.findViewById(R.id.idDescripcion);
-        editImporte = (EditText) miVista.findViewById(R.id.idImporte);
         editSaldo = (EditText) miVista.findViewById(R.id.idSaldo);
+        editCantidad = (EditText) miVista.findViewById(R.id.idCantidad);
         editDesMovimiento = (EditText) miVista.findViewById(R.id.idDesMovimiento);
         imageView = (ImageView) miVista.findViewById(R.id.idImage);
         imageCamara = (ImageView) miVista.findViewById(R.id.idImageCamara);
 
+        categoriaServices = new CategoriaServicesImpl(this.getActivity());
+        productoServices = new ProductoServicesImpl(this.getActivity());
+        movimientoServices = new MovimientoServicesImpl(this.getActivity());
+
+        /*Introducimos un Saldo inicial en la applicacion:
+         * Desde la primera pantalla que es MenuFragment: */
+        Bundle bundle = getArguments();
+        double saldo = bundle.getDouble("SALDO");
+
         categorias = new ArrayList<>();
         productos = new ArrayList<>();
         movimientos = new ArrayList<>();
+
+        movimientos = movimientoServices.getAll();
+        int indice = movimientos.size() -1 ;
+        saldo = saldo + movimientos.get(indice).getSaldo();
+
+        editSaldo.setText(String.valueOf(saldo));
+
+        movimientos.clear();
 
         /***********************************************/
         //hacerFoto();
@@ -137,11 +156,11 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                 String strCategoria = spinner.getSelectedItem().toString();
                 String nombre = editNombre.getText().toString();
                 double precio = Double.parseDouble(editPrecio.getText().toString());
-                double importe = Double.parseDouble(editImporte.getText().toString());
+                double importe = Double.parseDouble(editCantidad.getText().toString()) * Double.parseDouble(editPrecio.getText().toString());
 
                 String descripcion = editDescripcion.getText().toString();
                 String desMovimiento = editDesMovimiento.getText().toString();
-                double saldo = Double.parseDouble(editSaldo.getText().toString());
+                double saldo = Double.parseDouble(editSaldo.getText().toString()) - importe;
 
                 categoria = new Categoria(strCategoria);
                 byte[] image = changeImageListView(categoria.getNombre()); //Guardar las categorias
@@ -158,10 +177,6 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                 break;
 
             case R.id.idPagar:
-
-                categoriaServices = new CategoriaServicesImpl(this.getActivity());
-                productoServices = new ProductoServicesImpl(this.getActivity());
-                movimientoServices = new MovimientoServicesImpl(this.getActivity());
 
                 for (int i=0; i< categorias.size(); i++) {
                     categoriaServices.create(categorias.get(i));
@@ -318,8 +333,9 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         Categoria categoria4 = new Categoria("LEGUMBRE");
         Categoria categoria5 = new Categoria("BEBIDAS");
         Categoria categoria6 = new Categoria("ROPA");
-        Categoria categoria8 = new Categoria("ALQUILER");
-        Categoria categoria7 = new Categoria("EXTRAS");
+        Categoria categoria7 = new Categoria("ALQUILER");
+        Categoria categoria8 = new Categoria("EXTRAS");
+        Categoria categoria9 = new Categoria("FARMACIA");
 
         categorias.add(categoria1);
         categorias.add(categoria2);
@@ -329,9 +345,9 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         categorias.add(categoria6);
         categorias.add(categoria7);
         categorias.add(categoria8);
-
+        categorias.add(categoria9);
         int i = 0;
-        String [] strNombres = new String [8];
+        String [] strNombres = new String [9];
 
         for (Categoria categoria: categorias) {
             strNombres [i] = categoria.getNombre(); //cogemos los nombres de los agentes en cada posicion
@@ -371,6 +387,9 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
             case"EXTRAS":
                 imageView.setImageResource(R.drawable.extras);
                 break;
+            case "FARMACIA":
+                imageView.setImageResource(R.drawable.farmacia);
+                break;
 
         }
         Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
@@ -381,7 +400,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     private void vaciarEditText(){
         editSaldo.setText("");
         editDescripcion.setText("");
-        editImporte.setText("");
+        editCantidad.setText("");
         editPrecio.setText("");
         editNombre.setText("");
         editDesMovimiento.setText("");

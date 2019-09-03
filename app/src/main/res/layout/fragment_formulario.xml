@@ -49,7 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="112dp"
         android:layout_marginTop="-22dp"
-        android:singleLine="true" />
+        android:singleLine="true"
+        />
 
     <TextView
         android:id="@+id/textView7"
@@ -90,6 +91,25 @@
         android:textColor="@color/colorAccent" />
 
     <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/cantidad"
+        android:textColor="@color/colorAccent" />
+
+    <EditText
+        android:id="@+id/idCantidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="112dp"
+        android:layout_marginTop="-42dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -107,41 +127,6 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:textColor="@color/colorAccent" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/importe"
-        android:textColor="@color/colorAccent" />
-
-    <EditText
-        android:id="@+id/idImporte"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="112dp"
-        android:layout_marginTop="-42dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:textColor="@color/colorAccent" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/fecha"
-        android:textColor="@color/colorAccent" />
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="301dp"
-        android:layout_height="27dp"
-        android:layout_marginLeft="112dp"
-        android:layout_marginTop="-20dp" />
 
     <TextView
         android:id="@+id/textView11"

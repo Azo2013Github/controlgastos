@@ -11,7 +11,7 @@
     <string name="fecha">FECHA:</string>
     <string name="importe">IMPORTE:</string>
     <string name="descrpcionMovimiento">MOVIMIENTO</string>
-    <string name="saldo">SALDO</string>
+    <string name="saldo">SALDO:</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -22,5 +22,6 @@
     <string name="detalleProducto">DETALLE DE LAS COMPRAS</string>
     <string name="guardar">GUARDAR IMAGEN</string>
     <string name="descripcionMovimiento">DESP MOVIMIENTO</string>
+    <string name="cantidad">CANTIDAD</string>
 
 </resources>

@@ -212,7 +212,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         return db.rawQuery("SELECT * FROM " + MOVIMIENTOS_TABLE +
-                " ORDER BY " + COL_1_MOVIMIENTOS + " DESC", null);
+                " ORDER BY " + COL_1_MOVIMIENTOS + " ASC", null);
 
     }
 

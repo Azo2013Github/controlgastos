@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.pgrsoft.controlgastos.R;
+import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.model.Producto;
 import com.pgrsoft.controlgastos.services.ProductoServices;
 import com.pgrsoft.controlgastos.services.impl.ProductoServicesImpl;
@@ -39,12 +40,17 @@ public class ListadoDetalleFragment extends Fragment {
 
         TextView textNombre = (TextView) miVista.findViewById(R.id.idDetalleNombre);
         TextView textDescripcion = (TextView) miVista.findViewById(R.id.idDetalleDescripcion);
+        TextView textImporte = (TextView) miVista.findViewById(R.id.idImporte);
+        TextView textFecha = (TextView) miVista.findViewById(R.id.idFecha);
 
         Bundle bundle = getArguments();
-        Producto producto = (Producto) bundle.getSerializable("DATOS");
+        Producto producto = (Producto) bundle.getSerializable("PRODUCTOS");
+        Movimiento movimiento = (Movimiento) bundle.getSerializable("MOVIMIENTOS");
 
         textNombre.setText(producto.getNombre());
         textDescripcion.setText(producto.getDescripcion());
+        textImporte.setText(String.valueOf(movimiento.getImporte()));
+        textFecha.setText(String.valueOf(movimiento.getFecha()));
 
         return miVista;
     }

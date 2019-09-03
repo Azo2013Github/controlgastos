@@ -1,15 +1,16 @@
 package com.pgrsoft.controlgastos.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Movimiento {
+public class Movimiento implements Serializable {
 
     private Long codigo; // PK
     private double importe; // precio del producto
     private Producto producto; // El nombre del producto en el que nos hemos gastado el dinero
     private String descripcion; // descripcion del movimeinto
     private Date fecha;
-    private double saldo = 1200.00;
+    private double saldo;
 
     public Movimiento() {
     }
@@ -36,7 +37,7 @@ public class Movimiento {
     }
 
     public void setImporte(double importe) {
-        this.importe = importe * producto.getPrecio();
+        this.importe = importe;
     }
 
     public Producto getProducto() {
