@@ -10,18 +10,15 @@ public class Movimiento implements Serializable {
     private Producto producto; // El nombre del producto en el que nos hemos gastado el dinero
     private String descripcion; // descripcion del movimeinto
     private Date fecha;
-    private double saldo;
 
     public Movimiento() {
     }
 
-    public Movimiento(double importe, String descripcion, Date fecha, double saldo, Producto producto) {
-
+    public Movimiento(double importe, String descripcion, Date fecha,Producto producto) {
         this.importe = importe;
         this.producto = producto;
         this.descripcion = descripcion;
         this.fecha = fecha;
-        this.saldo = saldo;
     }
 
     public Long getCodigo() {
@@ -64,23 +61,14 @@ public class Movimiento implements Serializable {
         this.fecha = fecha;
     }
 
-    public double getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(double saldo) {
-        this.saldo = saldo - producto.getPrecio();
-    }
-
     @Override
     public String toString() {
         return "Movimiento{" +
                 "codigo=" + codigo +
                 ", importe=" + importe +
                 ", producto=" + producto +
-                ", descripion='" + descripcion + '\'' +
+                ", descripcion='" + descripcion + '\'' +
                 ", fecha=" + fecha +
-                ", saldo=" + saldo +
                 '}';
     }
 }

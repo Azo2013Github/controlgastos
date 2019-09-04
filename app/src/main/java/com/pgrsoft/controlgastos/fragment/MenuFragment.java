@@ -6,12 +6,10 @@ import android.os.Bundle;
 
 import android.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.pgrsoft.controlgastos.R;
 
@@ -21,12 +19,9 @@ import com.pgrsoft.controlgastos.R;
  */
 public class MenuFragment extends Fragment implements View.OnClickListener{
 
-
     private Button btnCrear;
     private Button btnListarProducto;
     private Button btnListarMovimiento;
-
-    private EditText editTextSaldo;
 
     private Fragment fragment;
 
@@ -42,9 +37,9 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
         View miVista = inflater.inflate(R.layout.fragment_menu, container, false);
 
         btnCrear = (Button) miVista.findViewById(R.id.idBtnCrear);
-        btnListarProducto = (Button) miVista.findViewById(R.id.idBtnProducto);
-        btnListarMovimiento = (Button) miVista.findViewById(R.id.idBtnMovimiento);
-        editTextSaldo = (EditText) miVista.findViewById(R.id.idSaldo);
+        btnListarProducto = (Button) miVista.findViewById(R.id.idBtnListar);
+        btnListarMovimiento = (Button) miVista.findViewById(R.id.idBtnDiagrama);
+
 
         btnCrear.setOnClickListener(this);
         btnListarProducto.setOnClickListener(this);
@@ -60,15 +55,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
             case R.id.idBtnCrear:
 
-                double saldo = Double.parseDouble(editTextSaldo.getText().toString());
-
-                Bundle bundle = new Bundle();
-
-                bundle.putDouble("SALDO", saldo);
-
                 fragment = new FormularioFragment();
-
-                fragment.setArguments(bundle);
 
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
@@ -80,9 +67,9 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
                 break;
 
-            case R.id.idBtnProducto:
+            case R.id.idBtnListar:
 
-                fragment = new ProductoListadoFragment();
+                fragment = new GastoListadoFragment();
 
                 fragmentTransaction = getFragmentManager().beginTransaction();
 
@@ -94,7 +81,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
                 break;
 
-            case R.id.idBtnMovimiento:
+            case R.id.idBtnDiagrama:
 
                 fragment = new MovimientoListadoFragment();
 

@@ -129,25 +129,6 @@
         android:textColor="@color/colorAccent" />
 
     <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/saldo"
-        android:textColor="@color/colorAccent" />
-
-    <EditText
-        android:id="@+id/idSaldo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="112dp"
-        android:layout_marginTop="-46dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:textColor="@color/colorAccent" />
-
-    <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

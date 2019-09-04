@@ -2,8 +2,8 @@
     <string name="app_name">controlgastos</string>
     <string name="titulo">CONTROL DE GASTOS</string>
     <string name="crear">CREAR</string>
-    <string name="listarProducto">PRODUCTOS</string>
-    <string name="listarMovimiento">MOVIMIENTOS</string>
+    <string name="listarGastos">LISTADO GASTOS</string>
+    <string name="diagrama">DIAGRAMA</string>
     <string name="categoria">CATEGORIA:</string>
     <string name="precio">PRECIO:</string>
     <string name="descripcion">DESCRIPCION:</string>

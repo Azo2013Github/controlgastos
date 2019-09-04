@@ -2,6 +2,7 @@ package com.pgrsoft.controlgastos.services.impl;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.model.Producto;
@@ -14,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MovimientoServicesImpl implements MovimientoServices {
 
@@ -47,8 +49,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
                 double importe = cursor.getDouble(1);
                 String descripcion = cursor.getString(2);
                 String strFecha = cursor.getString(3);
-                double saldo = cursor.getDouble(4);
-                Long codigoProducto = cursor.getLong(5);
+                Long codigoProducto = cursor.getLong(4);
 
                 // Convertir el String en Date pour la fecha:
                 Date fecha = new Date();
@@ -62,7 +63,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
 
                 ProductoServices productoServices = new ProductoServicesImpl(this.context);
                 Producto producto = productoServices.read(codigoProducto);
-                Movimiento movimiento = new Movimiento(importe, descripcion, fecha, saldo, producto);
+                Movimiento movimiento = new Movimiento(importe, descripcion, fecha, producto);
 
                 movimiento.setCodigo(codigo);
                 movimientos.add(movimiento);
@@ -72,6 +73,10 @@ public class MovimientoServicesImpl implements MovimientoServices {
         dataBaseHelper.close();
         return movimientos;
     }
+
+
+
+
 
     @Override
     public Movimiento read(Long codigo) {
@@ -86,8 +91,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
             double importe = cursor.getDouble(1);
             String descripcion = cursor.getString(2);
             String strFecha = cursor.getString(3);
-            double saldo = cursor.getDouble(4);
-            Long codigoProducto = cursor.getLong(5);
+            Long codigoProducto = cursor.getLong(4);
 
             // Transformar la fecha en Date()
             Date fecha = new Date();
@@ -102,7 +106,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
             ProductoServices productoServices = new ProductoServicesImpl(this.context);
             Producto producto = productoServices.read(codigoProducto);
 
-            movimiento = new Movimiento (importe, descripcion, fecha, saldo, producto);
+            movimiento = new Movimiento (importe, descripcion, fecha, producto);
             movimiento.setCodigo(code);
 
 
@@ -122,6 +126,48 @@ public class MovimientoServicesImpl implements MovimientoServices {
     public boolean delete(Long codigo) {
 
         return dataBaseHelper.deletingMovimientoCodigo(codigo);
+    }
+
+    @Override
+    public Date getDateBetween(Date date) {
+
+        Date fecha = null;
+        Log.d("***", " Antes de Entrar ");
+        List<Movimiento> movimientos = new ArrayList<>();
+        Cursor cursor = dataBaseHelper.getDateBetweenQuery();
+        if (cursor != null && cursor.getCount() > 0) {
+            if  (cursor.moveToFirst()) {
+                while (cursor.moveToNext()){
+                    Long codigo = cursor.getLong(1);
+                    double importe = cursor.getDouble(2);
+                    String descripcion = cursor.getString(3);
+                    String strFecha = cursor.getString(4);
+                    Long coidgoProducto = cursor.getLong(5);
+
+                    //convert tempUnixTime to Date
+                    fecha = new java.util.Date(strFecha);
+
+                    //create SimpleDateFormat formatter
+                    SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
+
+                    try {
+                        fecha = formatter1.parse(strFecha);
+                    }catch (ParseException e){
+                        e.printStackTrace();
+                    }
+
+                    ProductoServices productoServices = new ProductoServicesImpl(this.context);
+                    Producto producto = productoServices.read(coidgoProducto);
+                    Movimiento movimiento = new Movimiento(importe, descripcion, fecha, producto);
+
+                    movimiento.setCodigo(codigo);
+                    movimientos.add(movimiento);
+
+
+                }
+            }
+        }
+        return fecha;
     }
 
 }

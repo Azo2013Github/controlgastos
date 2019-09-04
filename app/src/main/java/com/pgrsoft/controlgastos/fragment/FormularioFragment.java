@@ -61,7 +61,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     private EditText editNombre;
     private EditText editPrecio;
     private EditText editDescripcion;
-    private EditText editSaldo;
+    //private EditText editSaldo;
     private EditText editDesMovimiento;
     private EditText editCantidad;
     private ImageView imageView;
@@ -108,7 +108,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editNombre = (EditText) miVista.findViewById(R.id.idNombre);
         editPrecio = (EditText) miVista.findViewById(R.id.idPrecio);
         editDescripcion = (EditText) miVista.findViewById(R.id.idDescripcion);
-        editSaldo = (EditText) miVista.findViewById(R.id.idSaldo);
+        // editSaldo = (EditText) miVista.findViewById(R.id.idSaldo);
         editCantidad = (EditText) miVista.findViewById(R.id.idCantidad);
         editDesMovimiento = (EditText) miVista.findViewById(R.id.idDesMovimiento);
         imageView = (ImageView) miVista.findViewById(R.id.idImage);
@@ -120,20 +120,20 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
         /*Introducimos un Saldo inicial en la applicacion:
          * Desde la primera pantalla que es MenuFragment: */
-        Bundle bundle = getArguments();
-        double saldo = bundle.getDouble("SALDO");
+        //Bundle bundle = getArguments();
+        //double saldo = bundle.getDouble("SALDO");
 
         categorias = new ArrayList<>();
         productos = new ArrayList<>();
         movimientos = new ArrayList<>();
 
-        movimientos = movimientoServices.getAll();
+        /*movimientos = movimientoServices.getAll();
         int indice = movimientos.size() -1 ;
-        saldo = saldo + movimientos.get(indice).getSaldo();
+        saldo = saldo + movimientos.get(indice).getSaldo();*/
 
-        editSaldo.setText(String.valueOf(saldo));
+        //editSaldo.setText(String.valueOf(saldo));
 
-        movimientos.clear();
+        //movimientos.clear();
 
         /***********************************************/
         //hacerFoto();
@@ -160,29 +160,32 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
                 String descripcion = editDescripcion.getText().toString();
                 String desMovimiento = editDesMovimiento.getText().toString();
-                double saldo = Double.parseDouble(editSaldo.getText().toString()) - importe;
+                //double saldo = Double.parseDouble(editSaldo.getText().toString()) - importe;
 
                 categoria = new Categoria(strCategoria);
                 byte[] image = changeImageListView(categoria.getNombre()); //Guardar las categorias
                 // en funcion de las Imagenes para añadir en la BBDD.
                 producto = new Producto(nombre, descripcion, precio, image, categoria);
-                movimiento = new Movimiento(importe, desMovimiento, new Date(), saldo, producto);
+                movimiento = new Movimiento(importe, desMovimiento, new Date(), producto);
 
-                categorias.add(categoria);
+                categoriaServices.create(categoria);
+                productoServices.create(producto);
+                movimientoServices.create(movimiento);
+
+                /*categorias.add(categoria);
                 productos.add(producto);
-                movimientos.add(movimiento);
+                movimientos.add(movimiento);*/
+
+
 
                 vaciarEditText();
 
                 break;
 
             case R.id.idPagar:
+               /*for (int i=0; i< categorias.size(); i++) {
 
-                for (int i=0; i< categorias.size(); i++) {
-                    categoriaServices.create(categorias.get(i));
-                    productoServices.create(productos.get(i));
-                    movimientoServices.create(movimientos.get(i));
-                }
+                }*/
 
                 break;
             case R.id.idCamera:
@@ -398,7 +401,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     }
 
     private void vaciarEditText(){
-        editSaldo.setText("");
+        //editSaldo.setText("");
         editDescripcion.setText("");
         editCantidad.setText("");
         editPrecio.setText("");

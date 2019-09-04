@@ -13,7 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.pgrsoft.controlgastos.R;
-import com.pgrsoft.controlgastos.adaptador.ProductosAdaptador;
+import com.pgrsoft.controlgastos.adaptador.GastosAdaptador;
 import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.model.Producto;
 import com.pgrsoft.controlgastos.services.MovimientoServices;
@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProductoListadoFragment extends Fragment implements ListView.OnItemClickListener{
+public class GastoListadoFragment extends Fragment implements ListView.OnItemClickListener{
 
     private ListView lista;
 
@@ -35,7 +35,7 @@ public class ProductoListadoFragment extends Fragment implements ListView.OnItem
     private ProductoServices productoServices;
 
 
-    public ProductoListadoFragment() {
+    public GastoListadoFragment() {
         // Required empty public constructor
     }
 
@@ -47,9 +47,9 @@ public class ProductoListadoFragment extends Fragment implements ListView.OnItem
 
         lista = miVista.findViewById(R.id.idMiLista);
 
-        ProductosAdaptador productosAdaptador = new ProductosAdaptador(miVista.getContext());
+        GastosAdaptador gastosAdaptador = new GastosAdaptador(miVista.getContext());
 
-        lista.setAdapter(productosAdaptador);
+        lista.setAdapter(gastosAdaptador);
 
         lista.setOnItemClickListener(this);
 

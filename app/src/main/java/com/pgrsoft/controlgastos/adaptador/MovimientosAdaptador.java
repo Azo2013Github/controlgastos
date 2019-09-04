@@ -34,6 +34,7 @@ public class MovimientosAdaptador extends BaseAdapter {
 
         movimientoServices = new MovimientoServicesImpl(this.contexto);
         movimientos = movimientoServices.getAll();
+        Date date = movimientoServices.getDateBetween(new Date());
 
     }
 
@@ -43,7 +44,7 @@ public class MovimientosAdaptador extends BaseAdapter {
         View miVista = inflater.inflate(R.layout.movimiento_row_model, null);
 
         TextView textImporte = (TextView) miVista.findViewById(R.id.idImporte);
-        TextView textSaldo = (TextView) miVista.findViewById(R.id.idSaldo);
+
         TextView textFecha = (TextView) miVista.findViewById(R.id.idFecha);
 
         Movimiento movimiento = movimientos.get(posicion);
@@ -55,7 +56,7 @@ public class MovimientosAdaptador extends BaseAdapter {
 
         //textFecha.setText(SDF_FECHA.format(movimiento.getFecha()) + " " + SDF_HORA.format(movimiento.getFecha()));
         textImporte.setText(String.valueOf(movimiento.getImporte()));
-        textSaldo.setText(String.valueOf(movimiento.getSaldo()));
+
 
         return miVista;
     }

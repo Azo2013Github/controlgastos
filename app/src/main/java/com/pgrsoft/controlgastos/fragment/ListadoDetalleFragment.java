@@ -24,10 +24,7 @@ import java.util.List;
  */
 public class ListadoDetalleFragment extends Fragment {
 
-    private List<Producto> productos;
-    private ProductoServices productoServices;
-
-    public ListadoDetalleFragment() {
+      public ListadoDetalleFragment() {
         // Required empty public constructor
     }
 
@@ -48,7 +45,7 @@ public class ListadoDetalleFragment extends Fragment {
         Movimiento movimiento = (Movimiento) bundle.getSerializable("MOVIMIENTOS");
 
         textNombre.setText(producto.getNombre());
-        textDescripcion.setText(producto.getDescripcion());
+        textDescripcion.setText(movimiento.getDescripcion());
         textImporte.setText(String.valueOf(movimiento.getImporte()));
         textFecha.setText(String.valueOf(movimiento.getFecha()));
 

@@ -11,7 +11,10 @@ import com.pgrsoft.controlgastos.model.Categoria;
 import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.model.Producto;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
 
@@ -34,7 +37,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     private static final String COL_2_MOVIMIENTOS = "IMPORTE";
     private static final String COL_3_MOVIMIENTOS = "DESCRIPCION";
     private static final String COL_4_MOVIMIENTOS = "FECHA";
-    private static final String COL_5_MOVIMIENTOS = "SALDO";
     private static final String COL_6_MOVIMIENTOS = "CODIGO_PRODUCTO";
 
 
@@ -74,7 +76,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 .append(COL_2_MOVIMIENTOS).append(" REAL NOT NULL, ")
                 .append(COL_3_MOVIMIENTOS).append(" TEXT NOT NULL, ")
                 .append(COL_4_MOVIMIENTOS).append(" TEXT NOT NULL, ")
-                .append(COL_5_MOVIMIENTOS).append(" REAL NOT NULL, ")
                 .append(COL_6_MOVIMIENTOS).append(" INTEGER NOT NULL, ")
                 .append(" FOREIGN KEY " + "( " + COL_6_MOVIMIENTOS + ") REFERENCES " + PRODUCTOS_TABLE + " (" + COL_1_PRODUCTOS + " )) ");
 
@@ -171,7 +172,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         return db.rawQuery("SELECT * FROM " + PRODUCTOS_TABLE +
-                " ORDER BY " + COL_1_PRODUCTOS + " ASC", null);
+                " ORDER BY " + COL_1_PRODUCTOS + " DESC", null);
 
     }
 
@@ -197,7 +198,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_2_MOVIMIENTOS, movimiento.getImporte());
         contentValues.put(COL_3_MOVIMIENTOS, movimiento.getDescripcion());
         contentValues.put(COL_4_MOVIMIENTOS, strFecha);
-        contentValues.put(COL_5_MOVIMIENTOS, movimiento.getSaldo());
         contentValues.put(COL_6_MOVIMIENTOS, movimiento.getProducto().getCodigo());
 
         long resultado = db.insert(MOVIMIENTOS_TABLE, null, contentValues);
@@ -212,7 +212,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         return db.rawQuery("SELECT * FROM " + MOVIMIENTOS_TABLE +
-                " ORDER BY " + COL_1_MOVIMIENTOS + " ASC", null);
+                " ORDER BY " + COL_1_MOVIMIENTOS + " DESC", null);
 
     }
 
@@ -223,6 +223,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         return db.rawQuery("SELECT * FROM " + MOVIMIENTOS_TABLE + " WHERE " + COL_1_MOVIMIENTOS + " = ?", args);
     }
+
+    /* ESTE PARTE ES PARA HACER UNA QUERY SOBRE LA FECHA: */
+
+    public Cursor getDateBetweenQuery(){
+
+        Date date1;
+        Calendar cal = Calendar.getInstance();
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+
+        SQLiteDatabase db = getWritableDatabase();
+        String currentDate = sdf.format(cal.getTimeInMillis());
+        cal.add(Calendar.DAY_OF_WEEK, -1);
+
+        String previusdDate = sdf.format(cal.getTimeInMillis());
+
+        /*https://stackoverflow.com/questions/14207494/android-sqlite-select-between-date1-and-date2 LINK para 2 fechas*/
+
+        return db.rawQuery("SELECT * FROM " + MOVIMIENTOS_TABLE + " WHERE DATE BETWEEN "
+                + COL_4_MOVIMIENTOS+ " = " + currentDate + " AND " + COL_4_MOVIMIENTOS + " = " +previusdDate + " ORDER BY DATE ASC ",null);
+    }
+
 
     public boolean deletingCategoria(Long codigo) {
 
@@ -297,7 +319,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_2_MOVIMIENTOS, movimiento.getImporte());
         contentValues.put(COL_3_MOVIMIENTOS, movimiento.getDescripcion());
         contentValues.put(COL_4_MOVIMIENTOS, strFecha);
-        contentValues.put(COL_5_MOVIMIENTOS, movimiento.getSaldo());
         contentValues.put(COL_6_MOVIMIENTOS, movimiento.getProducto().getCodigo());
 
         db.update(MOVIMIENTOS_TABLE, contentValues, COL_1_MOVIMIENTOS + " = " , args);
