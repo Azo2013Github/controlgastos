@@ -58,10 +58,10 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
         editFechaInicial = (EditText) myView.findViewById(R.id.idFechaInicial);
         editFechaFinal = (EditText) myView.findViewById(R.id.idFechaFinal);
 
-        Cal = Calendar.getInstance();
+        /*Cal = Calendar.getInstance();
         sMonthIni = Cal.get(Calendar.MONTH);
         sDayIni = Cal.get(Calendar.DAY_OF_MONTH);
-        sYearIni = Cal.get(Calendar.YEAR);
+        sYearIni = Cal.get(Calendar.YEAR);*/
 
         movimientoServices = new MovimientoServicesImpl(this.getActivity());
 
@@ -70,7 +70,7 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
         return myView;
     }
 
-    protected Dialog showDialog() {
+    /*protected Dialog showDialog() {
         DatePickerDialog mDataPicker =
                 new DatePickerDialog(this.getActivity(), new DatePickerDialog.OnDateSetListener() {
 
@@ -86,7 +86,7 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
         mDataPicker.show();
 
         return null;
-    }
+    }*/
 
 
     @Override
@@ -94,7 +94,9 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
 
         switch (view.getId()){
             case R.id.idFechaInicial:
-                showDialog();
+                //showDialog();
+
+                Log.d("***", "ENTRADO EDITTEXT: ");
                 String strFechaInicio = "10/12/1990";
                 String strFechaFin = "5/9/2019";
                 Date fechaInicio = null;
@@ -110,10 +112,12 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
 
                 List<Movimiento> movimientos = movimientoServices.getDateBetween(fechaInicio, fechaFin);
 
+
+
                 Log.d("***", "MOVIMIENTOS ARRAY: " + movimientos.toString());
                 break;
             case R.id.idFechaFinal:
-                showDialog();
+                //showDialog();
                 break;
         }
 

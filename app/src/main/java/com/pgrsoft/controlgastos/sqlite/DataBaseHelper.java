@@ -237,8 +237,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String strDateFinal = "";
 
         /*String consulta = "SELECT * from " + MOVIMIENTOS_TABLE + " where "  + COL_4_MOVIMIENTOS +
-                            " > '05/09/2019 19:00' AND " + COL_4_MOVIMIENTOS + " < '05/09/2019 19:14' ORDER BY " +
+                            " > '05/09/2019 19:00' AND "
+                + COL_4_MOVIMIENTOS + " < '05/09/2019 19:14' ORDER BY " +
                     COL_1_MOVIMIENTOS + " DESC ";*/
+
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
         strDateFinal = sdf.format(dateFinal);
@@ -248,6 +251,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 COL_1_MOVIMIENTOS + " DESC ";
 
         Cursor cursor = db.rawQuery(consulta, null);
+        Log.d("***", "ENTRADO QUERY: ");
         return cursor;
     }
 
