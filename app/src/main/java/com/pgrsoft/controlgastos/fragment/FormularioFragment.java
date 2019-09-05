@@ -24,6 +24,7 @@ import android.widget.TextView;
 //import com.frosquivel.magicalcamera.MagicalCamera;
 //import com.frosquivel.magicalcamera.MagicalPermissions;
 import com.pgrsoft.controlgastos.R;
+import com.pgrsoft.controlgastos.activities.DiagramaActivity;
 import com.pgrsoft.controlgastos.model.Categoria;
 import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.model.Producto;
@@ -39,6 +40,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -186,6 +189,49 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                /*for (int i=0; i< categorias.size(); i++) {
 
                 }*/
+
+                // Necesitamos una fecha de inicio y una de fin.
+                // Esto es "hardcodeado" para pruebas....
+                String strFechaInicio = "10/12/1990";
+                String strFechaFin = "5/9/2019";
+                Date fechaInicio = null;
+                Date fechaFin = null;
+                SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy");
+
+                try {
+                    fechaInicio = sdf.parse(strFechaInicio);
+                    fechaFin = sdf.parse(strFechaFin);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                movimientos = movimientoServices.getDateBetween(fechaInicio, fechaFin);
+
+                Log.d("***", "MOVIMIENTOS ARRAY: " +movimientos.toString());
+
+                // movimientos contiene el listado de movimientos entre fechas (admás ordenado)
+
+                // Ahora simplemente vamos a constatar que los datos son correctos....
+
+
+
+
+
+                //i++;
+                //Movimiento movimiento = movimientos.get(i);
+
+                Bundle bundle = new Bundle();
+
+                //bundle.putSerializable("PRODUCTOS", producto);
+                //bundle.putSerializable("MOVIMIENTOS", movimiento);
+
+                Intent intent = new Intent (this.getActivity(), DiagramaActivity.class);
+                intent.putExtra("MOVIMIENTOS", movimiento);
+                startActivity(intent);
+
+
+
+                Fragment fragment = new ListadoDetalleFragment();
+
 
                 break;
             case R.id.idCamera:

@@ -13,7 +13,7 @@ public interface MovimientoServices {
     public List<Movimiento> getAll();
     public Movimiento update(Movimiento movimiento);       // TODO
     public boolean delete(Long codigo);
-    public Date getDateBetween(Date date);
+    public List<Movimiento> getDateBetween(Date date, Date date1);
 
 
 

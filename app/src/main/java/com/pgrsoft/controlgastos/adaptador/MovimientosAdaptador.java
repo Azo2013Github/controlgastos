@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pgrsoft.controlgastos.R;
 import com.pgrsoft.controlgastos.model.Movimiento;
@@ -33,8 +34,6 @@ public class MovimientosAdaptador extends BaseAdapter {
         this.inflater = (LayoutInflater) contexto.getSystemService(contexto.LAYOUT_INFLATER_SERVICE);
 
         movimientoServices = new MovimientoServicesImpl(this.contexto);
-        movimientos = movimientoServices.getAll();
-        Date date = movimientoServices.getDateBetween(new Date());
 
     }
 

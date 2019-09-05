@@ -41,9 +41,9 @@ public class MovimientoServicesImpl implements MovimientoServices {
 
         List<Movimiento> movimientos = new ArrayList<>();
 
-        if (cursor != null && cursor.getCount() > 0){
+        if (cursor != null && cursor.getCount() > 0) {
 
-            while (cursor.moveToNext()){
+            while (cursor.moveToNext()) {
 
                 Long codigo = cursor.getLong(0);
                 double importe = cursor.getDouble(1);
@@ -57,7 +57,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
 
                 try {
                     fecha = sdf.parse(strFecha);
-                }catch (ParseException e){
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
 
@@ -74,17 +74,10 @@ public class MovimientoServicesImpl implements MovimientoServices {
         return movimientos;
     }
 
-
-
-
-
     @Override
     public Movimiento read(Long codigo) {
-
         Movimiento movimiento = null;
-
         Cursor cursor = this.dataBaseHelper.getMovimiento(codigo);
-
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToNext();
             Long code = cursor.getLong(0);
@@ -99,17 +92,14 @@ public class MovimientoServicesImpl implements MovimientoServices {
             // Habrá un try catch....
             try {
                 fecha = sdf.parse(strFecha);
-            }catch (ParseException e){
+            } catch (ParseException e) {
                 e.printStackTrace();
             }
 
             ProductoServices productoServices = new ProductoServicesImpl(this.context);
             Producto producto = productoServices.read(codigoProducto);
-
-            movimiento = new Movimiento (importe, descripcion, fecha, producto);
+            movimiento = new Movimiento(importe, descripcion, fecha, producto);
             movimiento.setCodigo(code);
-
-
         }
 
         dataBaseHelper.close();
@@ -129,6 +119,49 @@ public class MovimientoServicesImpl implements MovimientoServices {
     }
 
     @Override
+    public List<Movimiento> getDateBetween(Date date, Date date1) {
+
+        List<Movimiento> movimientos = new ArrayList<>();
+        // = new Date();
+        Cursor cursor = dataBaseHelper.getDateBetweenQuery();
+
+        if (cursor != null) {
+            Log.d("***", " Entra aqui: " +cursor.toString());
+            while (cursor.moveToNext()) {
+
+                Log.d("***", "CURSOR MOVE TO NEXT:  ");
+                Long codigo = cursor.getLong(1);
+                double importe = cursor.getDouble(2);
+                String descripcion = cursor.getString(3);
+                String strFecha = cursor.getString(4);
+                Long coidgoProducto = cursor.getLong(5);
+
+                //convert tempUnixTime to Date
+
+                //create SimpleDateFormat formatter
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+                try {
+
+                    date = sdf.parse(strFecha);
+                    date1 = sdf.parse(strFecha);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                ProductoServices productoServices = new ProductoServicesImpl(this.context);
+                Producto producto = productoServices.read(coidgoProducto);
+                Movimiento movimiento = new Movimiento(importe, descripcion, date, producto);
+
+                movimiento.setCodigo(codigo);
+                movimientos.add(movimiento);
+            }
+
+        }
+        return movimientos;
+    }
+
+    /*@Override
     public Date getDateBetween(Date date) {
 
         Date fecha = null;
@@ -167,7 +200,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
                 }
             }
         }
-        return fecha;
-    }
+        return fecha;*/
+
 
 }

@@ -42,13 +42,13 @@ public class MovimientoListadoFragment extends Fragment implements ListView.OnIt
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_movimiento_listado, container, false);
 
-        lista = (ListView) view.findViewById(R.id.idMiLista);
+        //lista = (ListView) view.findViewById(R.id.idMiLista);
 
-        MovimientosAdaptador movimientosAdaptador = new MovimientosAdaptador(view.getContext());
+        /*MovimientosAdaptador movimientosAdaptador = new MovimientosAdaptador(view.getContext());
 
         lista.setAdapter(movimientosAdaptador);
 
-        lista.setOnItemClickListener(this);
+        lista.setOnItemClickListener(this);*/
 
         return view;
     }

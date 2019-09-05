@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 
 import com.pgrsoft.controlgastos.model.Categoria;
@@ -224,26 +225,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM " + MOVIMIENTOS_TABLE + " WHERE " + COL_1_MOVIMIENTOS + " = ?", args);
     }
 
-    /* ESTE PARTE ES PARA HACER UNA QUERY SOBRE LA FECHA: */
 
+    /* ESTE PARTE ES PARA HACER UNA QUERY SOBRE LA FECHA: */
     public Cursor getDateBetweenQuery(){
 
-        Date date1;
-        Calendar cal = Calendar.getInstance();
-        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-
         SQLiteDatabase db = getWritableDatabase();
-        String currentDate = sdf.format(cal.getTimeInMillis());
-        cal.add(Calendar.DAY_OF_WEEK, -1);
 
-        String previusdDate = sdf.format(cal.getTimeInMillis());
-
-        /*https://stackoverflow.com/questions/14207494/android-sqlite-select-between-date1-and-date2 LINK para 2 fechas*/
-
-        return db.rawQuery("SELECT * FROM " + MOVIMIENTOS_TABLE + " WHERE DATE BETWEEN "
-                + COL_4_MOVIMIENTOS+ " = " + currentDate + " AND " + COL_4_MOVIMIENTOS + " = " +previusdDate + " ORDER BY DATE ASC ",null);
+        return db.rawQuery("SELECT " + COL_2_MOVIMIENTOS + " , " +  COL_4_MOVIMIENTOS +
+                               " FROM " + MOVIMIENTOS_TABLE +
+                               " WHERE " + COL_4_MOVIMIENTOS + " BETWEEN "
+                                                + "' 2014-01-01'  AND  ' 2014-12-31 '  ORDER BY " +COL_1_MOVIMIENTOS+ " ASC ",null);
     }
+
+
+
+
+
 
 
     public boolean deletingCategoria(Long codigo) {

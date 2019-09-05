@@ -23,5 +23,7 @@
     <string name="guardar">GUARDAR IMAGEN</string>
     <string name="descripcionMovimiento">DESP MOVIMIENTO</string>
     <string name="cantidad">CANTIDAD</string>
+    <string name="diagramaGastos">DIAGRAMA DE IMPORTE DE LOS GASTOS</string>
+    <string name="fechaUnaSemana">FECHA UNA SEMANA</string>
 
 </resources>
