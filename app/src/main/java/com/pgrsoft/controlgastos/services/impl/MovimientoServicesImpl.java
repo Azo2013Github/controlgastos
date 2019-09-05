@@ -125,16 +125,16 @@ public class MovimientoServicesImpl implements MovimientoServices {
         // = new Date();
         Cursor cursor = dataBaseHelper.getDateBetweenQuery();
 
-        if (cursor != null) {
+        if (cursor != null && cursor.getCount() > 0) {
             Log.d("***", " Entra aqui: " +cursor.toString());
             while (cursor.moveToNext()) {
 
                 Log.d("***", "CURSOR MOVE TO NEXT:  ");
-                Long codigo = cursor.getLong(1);
-                double importe = cursor.getDouble(2);
-                String descripcion = cursor.getString(3);
-                String strFecha = cursor.getString(4);
-                Long coidgoProducto = cursor.getLong(5);
+                Long codigo = cursor.getLong(0);
+                double importe = cursor.getDouble(1);
+                String descripcion = cursor.getString(2);
+                String strFecha = cursor.getString(3);
+                Long codigoProducto = cursor.getLong(4);;
 
                 //convert tempUnixTime to Date
 
@@ -150,7 +150,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
                 }
 
                 ProductoServices productoServices = new ProductoServicesImpl(this.context);
-                Producto producto = productoServices.read(coidgoProducto);
+                Producto producto = productoServices.read(codigoProducto);
                 Movimiento movimiento = new Movimiento(importe, descripcion, date, producto);
 
                 movimiento.setCodigo(codigo);
