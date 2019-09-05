@@ -119,11 +119,11 @@ public class MovimientoServicesImpl implements MovimientoServices {
     }
 
     @Override
-    public List<Movimiento> getDateBetween(Date date, Date date1) {
+    public List<Movimiento> getDateBetween(Date dateInicial, Date dateFinal) {
 
         List<Movimiento> movimientos = new ArrayList<>();
         // = new Date();
-        Cursor cursor = dataBaseHelper.getDateBetweenQuery();
+        Cursor cursor = dataBaseHelper.getDateBetweenQuery(dateInicial, dateInicial);
 
         if (cursor != null && cursor.getCount() > 0) {
             Log.d("***", " Entra aqui: " +cursor.toString());
@@ -134,24 +134,19 @@ public class MovimientoServicesImpl implements MovimientoServices {
                 double importe = cursor.getDouble(1);
                 String descripcion = cursor.getString(2);
                 String strFecha = cursor.getString(3);
-                Long codigoProducto = cursor.getLong(4);;
+                Long codigoProducto = cursor.getLong(4);
 
-                //convert tempUnixTime to Date
-
-                //create SimpleDateFormat formatter
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
                 try {
-
-                    date = sdf.parse(strFecha);
-                    date1 = sdf.parse(strFecha);
+                    dateInicial = sdf.parse(strFecha);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
 
                 ProductoServices productoServices = new ProductoServicesImpl(this.context);
                 Producto producto = productoServices.read(codigoProducto);
-                Movimiento movimiento = new Movimiento(importe, descripcion, date, producto);
+                Movimiento movimiento = new Movimiento(importe, descripcion, dateInicial, producto);
 
                 movimiento.setCodigo(codigo);
                 movimientos.add(movimiento);
@@ -160,47 +155,6 @@ public class MovimientoServicesImpl implements MovimientoServices {
         }
         return movimientos;
     }
-
-    /*@Override
-    public Date getDateBetween(Date date) {
-
-        Date fecha = null;
-        Log.d("***", " Antes de Entrar ");
-        List<Movimiento> movimientos = new ArrayList<>();
-        Cursor cursor = dataBaseHelper.getDateBetweenQuery();
-        if (cursor != null && cursor.getCount() > 0) {
-            if  (cursor.moveToFirst()) {
-                while (cursor.moveToNext()){
-                    Long codigo = cursor.getLong(1);
-                    double importe = cursor.getDouble(2);
-                    String descripcion = cursor.getString(3);
-                    String strFecha = cursor.getString(4);
-                    Long coidgoProducto = cursor.getLong(5);
-
-                    //convert tempUnixTime to Date
-                    fecha = new java.util.Date(strFecha);
-
-                    //create SimpleDateFormat formatter
-                    SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
-
-                    try {
-                        fecha = formatter1.parse(strFecha);
-                    }catch (ParseException e){
-                        e.printStackTrace();
-                    }
-
-                    ProductoServices productoServices = new ProductoServicesImpl(this.context);
-                    Producto producto = productoServices.read(coidgoProducto);
-                    Movimiento movimiento = new Movimiento(importe, descripcion, fecha, producto);
-
-                    movimiento.setCodigo(codigo);
-                    movimientos.add(movimiento);
-
-
-                }
-            }
-        }
-        return fecha;*/
 
 
 }

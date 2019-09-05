@@ -228,50 +228,27 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
     /* ESTE PARTE ES PARA HACER UNA QUERY SOBRE LA FECHA: */
-    public Cursor getDateBetweenQuery(){
+    public Cursor getDateBetweenQuery(Date dateInicial, Date dateFinal){
 
         SQLiteDatabase db = getWritableDatabase();
 
-        Date hoy = new Date();
+        //String strDateInicial = "05/09/2019 19:00";
+        String strDateInicial = "";
+        String strDateFinal = "";
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        /*String consulta = "SELECT * from " + MOVIMIENTOS_TABLE + " where "  + COL_4_MOVIMIENTOS +
+                            " > '05/09/2019 19:00' AND " + COL_4_MOVIMIENTOS + " < '05/09/2019 19:14' ORDER BY " +
+                    COL_1_MOVIMIENTOS + " DESC ";*/
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-        String consulta = "SELECT * from " + MOVIMIENTOS_TABLE + " where "  + COL_4_MOVIMIENTOS +
-                            " > '04/09/2019 10:14' AND " + COL_4_MOVIMIENTOS + " < '05/09/2019 10:16' ORDER BY " +
-                    COL_1_MOVIMIENTOS + " DESC ";
+        strDateFinal = sdf.format(dateFinal);
+        strDateInicial = sdf.format(dateInicial);
+        String consulta = "SELECT * FROM " + MOVIMIENTOS_TABLE + " WHERE " + COL_4_MOVIMIENTOS +
+                " > '" + strDateInicial + "' AND " + COL_4_MOVIMIENTOS + " < '" + strDateFinal + "' ORDER BY " +
+                COL_1_MOVIMIENTOS + " DESC ";
 
         Cursor cursor = db.rawQuery(consulta, null);
-
         return cursor;
-
-/*
-        SQLiteDatabase db = getWritableDatabase();
-
-        Cursor cursor = db.rawQuery("SELECT " + COL_2_MOVIMIENTOS +
-                                        " FROM " + MOVIMIENTOS_TABLE +
-                                        " WHERE " + COL_4_MOVIMIENTOS +
-                                        " >= '05/09/2012 ' AND " + COL_4_MOVIMIENTOS + " <= '05/09/2020' " +
-                                        " ORDER BY " + COL_1_MOVIMIENTOS + " ASC ", null);
-                                        201909051415
-
-        // String strQuery = "SELECT * FROM " + MOVIMIENTOS_TABLE;
-
-        //Cursor cursor = db.rawQuery(strQuery, null);
-
-        // Cursor cursor = db.query(MOVIMIENTOS_TABLE,new String[]{COL_1_MOVIMIENTOS,COL_2_MOVIMIENTOS},null,null,null,null,null);
-
-        */
-/*return db.rawQuery("SELECT " + COL_2_MOVIMIENTOS + " , " +  COL_4_MOVIMIENTOS +
-                               " FROM " + MOVIMIENTOS_TABLE +
-                               " WHERE " + COL_4_MOVIMIENTOS + " BETWEEN "
-                                                + "' >= 05/09/2019'  AND  ' <= 12/31/2014 ' " +
-
-
-                                " ORDER BY " + COL_1_MOVIMIENTOS + " ASC ",null);*//*
-
-
-        return cursor;
-*/
     }
 
 

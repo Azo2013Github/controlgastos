@@ -17,7 +17,6 @@ public class DiagramaActivity extends AppCompatActivity {
 
     private TextView dateToDay;
     private TextView dateToUNWeek;
-    private List<Movimiento> movimientos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +25,6 @@ public class DiagramaActivity extends AppCompatActivity {
 
         dateToDay = (TextView) findViewById(R.id.idDateToDay);
         dateToUNWeek = (TextView) findViewById(R.id.idDateToWeek);
-
-        Bundle bundle = getIntent().getExtras();
-
-        Movimiento movimiento = (Movimiento) bundle.getSerializable("MOVIMIENTOS");
-
-        dateToDay.setText(String.valueOf(movimiento.getFecha()));
-        dateToUNWeek.setText(String.valueOf(movimiento.getFecha()));
-
-
-
 
     }
 }

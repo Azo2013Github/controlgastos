@@ -1,7 +1,6 @@
 package com.pgrsoft.controlgastos.fragment;
 
 
-import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -19,12 +18,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 //import com.frosquivel.magicalcamera.MagicalCamera;
 //import com.frosquivel.magicalcamera.MagicalPermissions;
 import com.pgrsoft.controlgastos.R;
-import com.pgrsoft.controlgastos.activities.DiagramaActivity;
 import com.pgrsoft.controlgastos.model.Categoria;
 import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.model.Producto;
@@ -449,4 +446,23 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editDesMovimiento.setText("");
     }
 
+    /**
+     * A simple {@link androidx.fragment.app.Fragment} subclass.
+     */
+    public static class EstadisticaFragment extends androidx.fragment.app.Fragment {
+
+
+        public EstadisticaFragment() {
+            // Required empty public constructor
+        }
+
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            // Inflate the layout for this fragment
+            return inflater.inflate(R.layout.fragment_estadistica, container, false);
+        }
+
+    }
 }
