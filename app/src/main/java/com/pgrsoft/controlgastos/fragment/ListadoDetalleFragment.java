@@ -2,12 +2,10 @@ package com.pgrsoft.controlgastos.fragment;
 
 
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 
 import android.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.pgrsoft.controlgastos.R;
-import com.pgrsoft.controlgastos.activities.DiagramaActivity;
 import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.model.Producto;
 import com.pgrsoft.controlgastos.services.MovimientoServices;
-import com.pgrsoft.controlgastos.services.ProductoServices;
-import com.pgrsoft.controlgastos.services.impl.MovimientoServicesImpl;
-import com.pgrsoft.controlgastos.services.impl.ProductoServicesImpl;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 
 /**
