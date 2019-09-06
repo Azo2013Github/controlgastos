@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">controlgastos</string>
     <string name="titulo">CONTROL DE GASTOS</string>
-    <string name="crear">CREAR</string>
+    <string name="create">CREATE</string>
     <string name="listarGastos">LISTADO GASTOS</string>
     <string name="diagrama">DIAGRAMA</string>
     <string name="categoria">CATEGORIA:</string>
@@ -24,10 +24,11 @@
     <string name="descripcionMovimiento">DESP MOVIMIENTO</string>
     <string name="cantidad">CANTIDAD</string>
     <string name="diagramaGastos">DIAGRAMA DE IMPORTE DE LOS GASTOS</string>
-    <string name="fechaUnaSemana">FECHA FINAL</string>
-    <string name="fechaInicial">FECHA INICIAL</string>
-    <string name="estadisticas">ESTADISTICAS</string>
+    <string name="endDate">DateToEnd</string>
+    <string name="startToDate">DateOfToday</string>
+    <string name="estadisticas">ESTATISTICS</string>
     <string name="pick_date">DATE</string>
     <string name="compra">COMPRA</string>
+    <string name="formMovimiento">MOVEMENTS FORM</string>
 
 </resources>

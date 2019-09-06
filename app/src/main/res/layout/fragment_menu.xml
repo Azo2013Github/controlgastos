@@ -27,13 +27,12 @@
         android:textSize="24sp" />
 
     <Button
-        android:id="@+id/idBtnCrear"
+        android:id="@+id/idBtnForm"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
         android:layout_marginTop="28dp"
-        android:background="@color/colorAccent"
-        android:text="@string/crear"
+        android:text="@string/formMovimiento"
         android:textColor="@color/beige"
         android:textSize="18sp" />
 

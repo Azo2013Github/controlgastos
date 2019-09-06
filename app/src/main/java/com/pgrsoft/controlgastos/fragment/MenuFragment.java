@@ -36,7 +36,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
         View miVista = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        btnCrear = (Button) miVista.findViewById(R.id.idBtnCrear);
+        btnCrear = (Button) miVista.findViewById(R.id.idBtnForm);
         btnListarProducto = (Button) miVista.findViewById(R.id.idBtnListar);
         btnListarMovimiento = (Button) miVista.findViewById(R.id.idBtnDiagrama);
 
@@ -53,7 +53,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
         switch (view.getId()){
 
-            case R.id.idBtnCrear:
+            case R.id.idBtnForm:
 
                 fragment = new FormularioFragment();
 

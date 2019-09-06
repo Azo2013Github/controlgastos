@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -51,7 +52,7 @@ import static android.app.Activity.RESULT_OK;
  */
 public class FormularioFragment extends Fragment implements View.OnClickListener{
 
-    private ImageButton btnCompra;
+    private Button btnAdd;
     private ImageButton btnPago;
     private ImageButton btnCamara;
     private ImageButton btnSave;
@@ -97,7 +98,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         // Inflate the layout for this fragment
         View miVista = inflater.inflate(R.layout.fragment_formulario, container, false);
 
-        btnCompra = (ImageButton) miVista.findViewById(R.id.idCompra);
+        btnAdd = (Button) miVista.findViewById(R.id.idBtnAdd);
         btnPago = (ImageButton) miVista.findViewById(R.id.idPagar);
         //btnCamara = (ImageButton) miVista.findViewById(R.id.idCamera);
         //btnSave = (ImageButton) miVista.findViewById(R.id.idSave);
@@ -138,7 +139,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         /***********************************************/
         //hacerFoto();
 
-        btnCompra.setOnClickListener(this);
+        btnAdd.setOnClickListener(this);
         btnPago.setOnClickListener(this);
         //btnCamara.setOnClickListener(this);
         //btnSave.setOnClickListener(this);
@@ -151,33 +152,31 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
         switch (view.getId()){
 
-            case R.id.idCompra:
+            case R.id.idBtnAdd:
+                if (spinner.toString().equals("") || editCantidad.getText().toString().equals("") || editPrecio.getText().toString().equals("") ||
+                    editDesMovimiento.getText().toString().equals("") || editNombre.getText().toString().equals("")
+                    || editDescripcion.getText().toString().equals("")){
+                    Log.d("***", "The EditTexts are Empty ");
+                }else{
+                    String strCategoria = spinner.getSelectedItem().toString();
+                    String nombre = editNombre.getText().toString();
+                    double precio = Double.parseDouble(editPrecio.getText().toString());
+                    double importe = Double.parseDouble(editCantidad.getText().toString()) * Double.parseDouble(editPrecio.getText().toString());
 
-                String strCategoria = spinner.getSelectedItem().toString();
-                String nombre = editNombre.getText().toString();
-                double precio = Double.parseDouble(editPrecio.getText().toString());
-                double importe = Double.parseDouble(editCantidad.getText().toString()) * Double.parseDouble(editPrecio.getText().toString());
+                    String descripcion = editDescripcion.getText().toString();
+                    String desMovimiento = editDesMovimiento.getText().toString();
+                    //double saldo = Double.parseDouble(editSaldo.getText().toString()) - importe;
 
-                String descripcion = editDescripcion.getText().toString();
-                String desMovimiento = editDesMovimiento.getText().toString();
-                //double saldo = Double.parseDouble(editSaldo.getText().toString()) - importe;
+                    categoria = new Categoria(strCategoria);
+                    byte[] image = changeImageListView(categoria.getNombre()); //Guardar las categorias
+                    // en funcion de las Imagenes para añadir en la BBDD.
+                    producto = new Producto(nombre, descripcion, precio, image, categoria);
+                    movimiento = new Movimiento(importe, desMovimiento, new Date(), producto);
 
-                categoria = new Categoria(strCategoria);
-                byte[] image = changeImageListView(categoria.getNombre()); //Guardar las categorias
-                // en funcion de las Imagenes para añadir en la BBDD.
-                producto = new Producto(nombre, descripcion, precio, image, categoria);
-                movimiento = new Movimiento(importe, desMovimiento, new Date(), producto);
-
-                categoriaServices.create(categoria);
-                productoServices.create(producto);
-                movimientoServices.create(movimiento);
-
-                /*categorias.add(categoria);
-                productos.add(producto);
-                movimientos.add(movimiento);*/
-
-
-
+                    categoriaServices.create(categoria);
+                    productoServices.create(producto);
+                    movimientoServices.create(movimiento);
+                }
                 vaciarEditText();
 
                 break;
