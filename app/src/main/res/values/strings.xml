@@ -27,5 +27,7 @@
     <string name="fechaUnaSemana">FECHA FINAL</string>
     <string name="fechaInicial">FECHA INICIAL</string>
     <string name="estadisticas">ESTADISTICAS</string>
+    <string name="pick_date">DATE</string>
+    <string name="compra">COMPRA</string>
 
 </resources>

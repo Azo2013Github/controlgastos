@@ -232,26 +232,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
 
-        String strFechaInicial = "05/09/2019 10:10";
-        String strFechaFinal = "06/09/2019 07:50";
+        //TODO Dase 2 --> Una vez comprobado que la Fase1 funciona hemos de convertir los Date
+        // exacatamente en el formato que necesitamos.
 
-        /*SELECT
-         fecha
-        FROM
-         Mytable
-        WHERE
-         DATE(substr(fecha ,1,4) ||substr(fecha ,6,2)||substr(fecha ,9,2))
-        BETWEEN
-         DATE(20140105)
-        AND
-         DATE(20140105);*/
+        //String strFechaInicial = "05/09/2019 10:10";
+        //String strFechaFinal = "06/09/2019 07:50";
 
         //TODO Fase 1 --> Cambiar las fechas hardcoded por los strings y comprobar que funciona
 
+        if (dateInicial == null || dateFinal == null){
+            Log.d("***", "OJO ALGUNA FECHA ES NULL!!!!");
+        }
+
+        dateInicial = new Date();
+        dateFinal = new Date();
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        
-        strFechaFinal = sdf.format(dateFinal);
-        strFechaInicial = sdf.format(dateInicial);
+
+        String strFechaInicial = sdf.format(dateInicial);
+        String strFechaFinal = sdf.format(dateFinal);
 
         String consulta2 = "SELECT " + COL_1_MOVIMIENTOS + " , "
                 +COL_2_MOVIMIENTOS + " , " + COL_3_MOVIMIENTOS + " , " + COL_4_MOVIMIENTOS + " ,"  + COL_6_MOVIMIENTOS+
@@ -259,15 +258,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + COL_4_MOVIMIENTOS + " > '" + strFechaInicial + "' AND " + COL_4_MOVIMIENTOS + " < '" + strFechaFinal + "' ORDER BY " +
                     COL_1_MOVIMIENTOS + " DESC ";
 
-        Log.d("***zzz", consulta2);
-
-
         /*String consulta = "SELECT * from " + MOVIMIENTOS_TABLE + " where "  + COL_4_MOVIMIENTOS + " > '05/09/2019 10:10' AND "
                 + COL_4_MOVIMIENTOS + " < '06/09/2019 07:50' ORDER BY " +
                     COL_1_MOVIMIENTOS + " DESC ";*/
 
         Cursor cursor = db.rawQuery(consulta2, null);
-        Log.d("***", "ENTRADO QUERY: ");
+        Log.d("***c", consulta2);
         return cursor;
     }
 

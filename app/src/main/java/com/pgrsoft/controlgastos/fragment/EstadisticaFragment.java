@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.pgrsoft.controlgastos.R;
 import com.pgrsoft.controlgastos.model.Movimiento;
@@ -33,6 +35,9 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
 
     private EditText editFechaInicial;
     private EditText editFechaFinal;
+    private Button btnGenerar;
+    private TextView textFechaIni;
+    private TextView textFechaFin;
 
     static int mYearIni;
     static int mMonthIni;
@@ -41,7 +46,8 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
     private int sMonthIni;
     private int sDayIni;
 
-    private Calendar Cal;
+    private DatePicker datePicker;
+    private Calendar calendar;
     private MovimientoServices movimientoServices;
 
 
@@ -57,6 +63,10 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
         View myView = inflater.inflate(R.layout.fragment_estadistica, container, false);
         editFechaInicial = (EditText) myView.findViewById(R.id.idFechaInicial);
         editFechaFinal = (EditText) myView.findViewById(R.id.idFechaFinal);
+        textFechaIni = (TextView) myView.findViewById(R.id.idTextfechaInicial);
+        textFechaFin = (TextView) myView.findViewById(R.id.idTextFechaFinal);
+
+        btnGenerar = (Button) myView.findViewById(R.id.idBtnGenerar);
 
         /*Cal = Calendar.getInstance();
         sMonthIni = Cal.get(Calendar.MONTH);
@@ -64,9 +74,48 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
         sYearIni = Cal.get(Calendar.YEAR);*/
 
         movimientoServices = new MovimientoServicesImpl(this.getActivity());
+        btnGenerar.setOnClickListener(this);
 
-        editFechaInicial.setOnClickListener(this);
-        editFechaFinal.setOnClickListener(this);
+        editFechaInicial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendar = Calendar.getInstance();
+
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
+                        editFechaInicial.setText(mDay + "/" + (mMonth+1) + "/" + mYear);
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
+        editFechaFinal.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                calendar = Calendar.getInstance();
+
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
+                        editFechaFinal.setText(mDay + "/" + (mMonth-1) + "/" + mYear);
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
+            }
+        });
+
         return myView;
     }
 
@@ -93,15 +142,15 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
     public void onClick(View view) {
 
         switch (view.getId()){
-            case R.id.idFechaInicial:
+            case R.id.idBtnGenerar:
                 //showDialog();
 
                 Log.d("***", "ENTRADO EDITTEXT: ");
-                String strFechaInicio = "10/12/1990";
-                String strFechaFin = "5/9/2019";
                 Date fechaInicio = null;
                 Date fechaFin = null;
                 SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy HH:mm");
+                String strFechaInicio = "";
+                String strFechaFin = "";
 
                 try {
                     fechaInicio = sdf.parse(strFechaInicio);
@@ -111,13 +160,42 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
                 }
 
                 List<Movimiento> movimientos = movimientoServices.getDateBetween(fechaInicio, fechaFin);
+                textFechaIni.setText(String.valueOf(fechaInicio));
+                textFechaFin.setText(String.valueOf(fechaFin));
 
                 Log.d("***", "MOVIMIENTOS ARRAY: " + movimientos.toString());
                 break;
-            case R.id.idFechaFinal:
-                //showDialog();
-                break;
+            /*case R.id.idFechaInicial:
+                Cal = Calendar.getInstance();
+                int day = Cal.get(Calendar.DAY_OF_YEAR);
+                int month = Cal.get(Calendar.DAY_OF_MONTH - 1);
+                int year = Cal.get(Calendar.DATE);
+                showDialog();
+                break;*/
         }
 
     }
+
+    /*dateTextView = (EditText) view.findViewById(R.id.idFechaNacimiento);
+
+        dateTextView.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                calendar = Calendar.getInstance();
+
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month = calendar.get(Calendar.MONTH);
+                int year = calendar.get(Calendar.YEAR);
+
+                datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
+                        dateTextView.setText(mDay + "/" + (mMonth+1) + "/" + mYear);
+                    }
+                }, year, month, day);
+                datePickerDialog.show();
+            }
+        });*/
 }

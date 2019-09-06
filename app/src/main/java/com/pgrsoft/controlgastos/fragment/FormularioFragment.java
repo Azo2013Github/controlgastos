@@ -99,10 +99,10 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
         btnCompra = (ImageButton) miVista.findViewById(R.id.idCompra);
         btnPago = (ImageButton) miVista.findViewById(R.id.idPagar);
-        btnCamara = (ImageButton) miVista.findViewById(R.id.idCamera);
-        btnSave = (ImageButton) miVista.findViewById(R.id.idSave);
+        //btnCamara = (ImageButton) miVista.findViewById(R.id.idCamera);
+        //btnSave = (ImageButton) miVista.findViewById(R.id.idSave);
 
-        spinner = (Spinner) miVista.findViewById(R.id.idCategoria);
+        spinner = (Spinner) miVista.findViewById(R.id.idSpinnerCategory);
         cargarSpinner();
 
         editNombre = (EditText) miVista.findViewById(R.id.idNombre);
@@ -112,7 +112,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editCantidad = (EditText) miVista.findViewById(R.id.idCantidad);
         editDesMovimiento = (EditText) miVista.findViewById(R.id.idDesMovimiento);
         imageView = (ImageView) miVista.findViewById(R.id.idImage);
-        imageCamara = (ImageView) miVista.findViewById(R.id.idImageCamara);
+        //imageCamara = (ImageView) miVista.findViewById(R.id.idImageCamara);
 
         categoriaServices = new CategoriaServicesImpl(this.getActivity());
         productoServices = new ProductoServicesImpl(this.getActivity());
@@ -140,8 +140,8 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
         btnCompra.setOnClickListener(this);
         btnPago.setOnClickListener(this);
-        btnCamara.setOnClickListener(this);
-        btnSave.setOnClickListener(this);
+        //btnCamara.setOnClickListener(this);
+        //btnSave.setOnClickListener(this);
 
         return miVista;
     }
@@ -225,7 +225,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
 
                 break;
-            case R.id.idCamera:
+            /*case R.id.idCamera:
 
                 // Hacer foto llamando al metodo abrir camara:
                 abrirCamara();
@@ -242,7 +242,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                 // Guardar las imagenes en un fichero:
                 guardarFoto();
 
-                break;
+                break;*/
         }
 
     }
