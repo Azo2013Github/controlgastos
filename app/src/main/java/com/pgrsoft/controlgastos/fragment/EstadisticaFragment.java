@@ -112,8 +112,6 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
 
                 List<Movimiento> movimientos = movimientoServices.getDateBetween(fechaInicio, fechaFin);
 
-
-
                 Log.d("***", "MOVIMIENTOS ARRAY: " + movimientos.toString());
                 break;
             case R.id.idFechaFinal:

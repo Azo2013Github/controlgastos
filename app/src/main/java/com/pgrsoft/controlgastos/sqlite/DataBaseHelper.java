@@ -232,25 +232,41 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
 
-        //String strDateInicial = "05/09/2019 19:00";
-        String strDateInicial = "";
-        String strDateFinal = "";
+        String strFechaInicial = "05/09/2019 10:10";
+        String strFechaFinal = "06/09/2019 07:50";
 
-        /*String consulta = "SELECT * from " + MOVIMIENTOS_TABLE + " where "  + COL_4_MOVIMIENTOS +
-                            " > '05/09/2019 19:00' AND "
-                + COL_4_MOVIMIENTOS + " < '05/09/2019 19:14' ORDER BY " +
-                    COL_1_MOVIMIENTOS + " DESC ";*/
+        /*SELECT
+         fecha
+        FROM
+         Mytable
+        WHERE
+         DATE(substr(fecha ,1,4) ||substr(fecha ,6,2)||substr(fecha ,9,2))
+        BETWEEN
+         DATE(20140105)
+        AND
+         DATE(20140105);*/
 
+        //TODO Fase 1 --> Cambiar las fechas hardcoded por los strings y comprobar que funciona
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        
+        strFechaFinal = sdf.format(dateFinal);
+        strFechaInicial = sdf.format(dateInicial);
 
-        strDateFinal = sdf.format(dateFinal);
-        strDateInicial = sdf.format(dateInicial);
-        String consulta = "SELECT * FROM " + MOVIMIENTOS_TABLE + " WHERE " + COL_4_MOVIMIENTOS +
-                " > '" + strDateInicial + "' AND " + COL_4_MOVIMIENTOS + " < '" + strDateFinal + "' ORDER BY " +
-                COL_1_MOVIMIENTOS + " DESC ";
+        String consulta2 = "SELECT " + COL_1_MOVIMIENTOS + " , "
+                +COL_2_MOVIMIENTOS + " , " + COL_3_MOVIMIENTOS + " , " + COL_4_MOVIMIENTOS + " ,"  + COL_6_MOVIMIENTOS+
+                " from " + MOVIMIENTOS_TABLE + " where "
+                + COL_4_MOVIMIENTOS + " > '" + strFechaInicial + "' AND " + COL_4_MOVIMIENTOS + " < '" + strFechaFinal + "' ORDER BY " +
+                    COL_1_MOVIMIENTOS + " DESC ";
 
-        Cursor cursor = db.rawQuery(consulta, null);
+        Log.d("***zzz", consulta2);
+
+
+        /*String consulta = "SELECT * from " + MOVIMIENTOS_TABLE + " where "  + COL_4_MOVIMIENTOS + " > '05/09/2019 10:10' AND "
+                + COL_4_MOVIMIENTOS + " < '06/09/2019 07:50' ORDER BY " +
+                    COL_1_MOVIMIENTOS + " DESC ";*/
+
+        Cursor cursor = db.rawQuery(consulta2, null);
         Log.d("***", "ENTRADO QUERY: ");
         return cursor;
     }

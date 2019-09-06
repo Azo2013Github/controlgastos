@@ -129,7 +129,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
             Log.d("***", " Entra aqui: " +cursor.toString());
             while (cursor.moveToNext()) {
 
-                Log.d("***", "CURSOR MOVE TO NEXT:  ");
+                //Log.d("***", "CURSOR MOVE TO NEXT:  ");
                 Long codigo = cursor.getLong(0);
                 double importe = cursor.getDouble(1);
                 String descripcion = cursor.getString(2);
