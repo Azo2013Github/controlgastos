@@ -122,8 +122,11 @@ public class MovimientoServicesImpl implements MovimientoServices {
     public List<Movimiento> getDateBetween(Date dateInicial, Date dateFinal) {
 
         List<Movimiento> movimientos = new ArrayList<>();
-        // = new Date();
-        Cursor cursor = dataBaseHelper.getDateBetweenQuery(dateInicial, dateInicial);
+
+        Log.d("***", "getDateBetween: " +dateInicial + " "+dateFinal);
+        Cursor cursor = dataBaseHelper.getDateBetweenQuery(dateInicial, dateFinal);
+
+
 
         if (cursor != null && cursor.getCount() > 0) {
             Log.d("***", " Entra aqui: " +cursor.toString());

@@ -22,6 +22,7 @@ import com.pgrsoft.controlgastos.services.impl.MovimientoServicesImpl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -37,13 +38,6 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
     private Button btnEstatitic;
     private TextView textDateStart;
     private TextView textDateEnd;
-
-    static int mYearIni;
-    static int mMonthIni;
-    static int mDayIni;
-    private int sYearIni;
-    private int sMonthIni;
-    private int sDayIni;
 
     private Calendar calendar;
     private MovimientoServices movimientoServices;
@@ -67,11 +61,6 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
 
         btnEstatitic = (Button) myView.findViewById(R.id.idBtnEstatistic);
 
-        /*Cal = Calendar.getInstance();
-        sMonthIni = Cal.get(Calendar.MONTH);
-        sDayIni = Cal.get(Calendar.DAY_OF_MONTH);
-        sYearIni = Cal.get(Calendar.YEAR);*/
-
         movimientoServices = new MovimientoServicesImpl(this.getActivity());
         btnEstatitic.setOnClickListener(this);
 
@@ -84,7 +73,8 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
                 int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                        new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
                         editDateInicial.setText(mDay + "/" + (mMonth+1) + "/" + mYear);
@@ -105,75 +95,55 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
                 int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                        new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
-                        editDateFinal.setText(mDay + "/" + (mMonth-1) + "/" + mYear);
+                        editDateFinal.setText(mDay + "/" + (mMonth+1) + "/" + mYear);
                     }
                 }, year, month, day);
+
+                Log.d("***", "DatePicker: " + year +" "+ month +" " +day);
                 datePickerDialog.show();
+
             }
         });
 
         return myView;
     }
 
-    /*protected Dialog showDialog() {
-        DatePickerDialog mDataPicker =
-                new DatePickerDialog(this.getActivity(), new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dateOfMonth) {
-                mYearIni = year;
-                mMonthIni = monthOfYear;
-                mDayIni = dateOfMonth;
-            }
-
-        }, mYearIni, mMonthIni, mDayIni);
-        mDataPicker.updateDate(2019, 9, 06);
-        mDataPicker.show();
-
-        return null;
-    }*/
-
-
     @Override
     public void onClick(View view) {
 
         switch (view.getId()){
             case R.id.idBtnEstatistic:
-                //showDialog();
-                if (editDateInicial.getText().toString().equals("") ||
-                        editDateFinal.getText().toString().equals("")){
+
+                if (editDateInicial.getText().toString().equals("") || editDateFinal.getText().toString().equals("")){
                     Log.d("***", "Write date in the EditText ");
-
                 }else {
+                    Date dateIni = new Date();
+                    Date dateFin = new Date();
 
-
-                    Date fechaInicio = null;
-                    Date fechaFin = null;
-                    SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy HH:mm");
-                    String strFechaInicio = "";
-                    String strFechaFin = "";
-
+                    String strFechaInicio = editDateInicial.getText().toString();
+                    String strFechaFin = editDateFinal.getText().toString();
+                    Log.d("***", strFechaFin + " " +strFechaInicio);
                     try {
-                        fechaInicio = sdf.parse(strFechaInicio);
-                        fechaFin = sdf.parse(strFechaFin);
+                        SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy");
+                        dateIni = sdf.parse(strFechaInicio);
+                        dateFin = sdf.parse(strFechaFin);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-
-                    for (Movimiento movimiento: movimientos){
-                        movimientos = movimientoServices.getDateBetween(fechaInicio, fechaFin);
-                        textDateStart.setText(String.valueOf(fechaInicio));
-                        textDateEnd.setText(String.valueOf(fechaFin));
-                    }
-
+                    movimientos = movimientoServices.getDateBetween(dateIni, dateFin);
 
                     Log.d("***", "MOVIMIENTOS ARRAY: " + movimientos.toString());
+                    for (int i = 0; i < movimientos.size(); i++){
+                        Movimiento movimiento = movimientos.get(i);
+                        textDateStart.setText(String.valueOf(dateIni));
+                        textDateEnd.setText(String.valueOf(dateFin));
+                    }
+
                 }
-
-
 
                 break;
             /*case R.id.idFechaInicial:
@@ -187,26 +157,5 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
 
     }
 
-    /*dateTextView = (EditText) view.findViewById(R.id.idFechaNacimiento);
 
-        dateTextView.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View v) {
-
-                calendar = Calendar.getInstance();
-
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int month = calendar.get(Calendar.MONTH);
-                int year = calendar.get(Calendar.YEAR);
-
-                datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int mYear, int mMonth, int mDay) {
-                        dateTextView.setText(mDay + "/" + (mMonth+1) + "/" + mYear);
-                    }
-                }, year, month, day);
-                datePickerDialog.show();
-            }
-        });*/
 }

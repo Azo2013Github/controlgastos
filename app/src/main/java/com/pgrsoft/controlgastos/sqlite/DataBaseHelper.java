@@ -244,9 +244,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             Log.d("***", "OJO ALGUNA FECHA ES NULL!!!!");
         }
 
-        dateInicial = new Date();
-        dateFinal = new Date();
-
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
         String strFechaInicial = sdf.format(dateInicial);
@@ -257,13 +254,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 " from " + MOVIMIENTOS_TABLE + " where "
                 + COL_4_MOVIMIENTOS + " > '" + strFechaInicial + "' AND " + COL_4_MOVIMIENTOS + " < '" + strFechaFinal + "' ORDER BY " +
                     COL_1_MOVIMIENTOS + " DESC ";
-
-        /*String consulta = "SELECT * from " + MOVIMIENTOS_TABLE + " where "  + COL_4_MOVIMIENTOS + " > '05/09/2019 10:10' AND "
-                + COL_4_MOVIMIENTOS + " < '06/09/2019 07:50' ORDER BY " +
-                    COL_1_MOVIMIENTOS + " DESC ";*/
-
         Cursor cursor = db.rawQuery(consulta2, null);
-        Log.d("***c", consulta2);
+
         return cursor;
     }
 
