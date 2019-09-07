@@ -1,7 +1,6 @@
 package com.pgrsoft.controlgastos.fragment;
 
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 
 import android.app.Fragment;
@@ -13,11 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.pgrsoft.controlgastos.R;
-import com.pgrsoft.controlgastos.adaptador.MovimientosAdaptador;
 import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.services.MovimientoServices;
-import com.pgrsoft.controlgastos.services.impl.MovimientoServicesImpl;
-import com.pgrsoft.controlgastos.services.impl.ProductoServicesImpl;
 
 import java.util.List;
 
