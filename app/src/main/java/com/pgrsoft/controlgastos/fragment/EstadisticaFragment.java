@@ -20,6 +20,7 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.pgrsoft.controlgastos.R;
 import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.services.MovimientoServices;
@@ -41,8 +42,6 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
     private EditText editDateInicial;
     private EditText editDateFinal;
     private Button btnEstatitic;
-    private TextView textDateStart;
-    private TextView textDateEnd;
     private BarChart barChart;
 
     private Calendar calendar;
@@ -62,10 +61,8 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
         View myView = inflater.inflate(R.layout.fragment_estadistica, container, false);
         editDateInicial = (EditText) myView.findViewById(R.id.idEditDateStart);
         editDateFinal = (EditText) myView.findViewById(R.id.idEditDateEnd);
-        textDateStart = (TextView) myView.findViewById(R.id.idTextDateStart);
-        textDateEnd = (TextView) myView.findViewById(R.id.idTextDateEnd);
-        barChart = (BarChart) myView.findViewById(R.id.idBarChart);
 
+        barChart = (BarChart) myView.findViewById(R.id.idBarChart);
         btnEstatitic = (Button) myView.findViewById(R.id.idBtnEstatistic);
 
         movimientoServices = new MovimientoServicesImpl(this.getActivity());
@@ -74,8 +71,8 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
         editDateInicial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                calendar = Calendar.getInstance();
 
+                calendar = Calendar.getInstance();
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
                 int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
@@ -96,7 +93,6 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
             public void onClick(View view) {
 
                 calendar = Calendar.getInstance();
-
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
                 int month = calendar.get(Calendar.MONTH);
                 int year = calendar.get(Calendar.YEAR);
@@ -145,48 +141,22 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
                     }
                     movimientos = movimientoServices.getDateBetween(dateIni, dateFin);
 
+                    int i = 0;
                     Log.d("***", "MOVIMIENTOS ARRAY: " + movimientos.toString());
-                    for (int i = 0; i < movimientos.size(); i++){
-                        Movimiento movimiento = movimientos.get(i);
-                        textDateStart.setText(String.valueOf(dateIni));
-                        textDateEnd.setText(String.valueOf(dateFin));
+                    for (Movimiento movimiento: movimientos){
+                        barEntries.add(new BarEntry((float)(movimiento.getImporte()), i));
+                        i++;
+                        strEntries.add(movimiento.getProducto().getNombre());
+
                     }
-
-                    /* Variables to get diagram */
-                    barEntries.add(new BarEntry(8f, 0));
-                    barEntries.add(new BarEntry(2f, 1));
-                    barEntries.add(new BarEntry(5f, 2));
-                    barEntries.add(new BarEntry(20f, 3));
-                    barEntries.add(new BarEntry(15f, 4));
-                    barEntries.add(new BarEntry(19f, 5));
-                    barEntries.add(new BarEntry(8f, 6));
-                    barEntries.add(new BarEntry(2f, 7));
-                    barEntries.add(new BarEntry(5f, 8));
-                    barEntries.add(new BarEntry(20f, 9));
-                    barEntries.add(new BarEntry(15f, 10));
-                    barEntries.add(new BarEntry(19f, 11));
-
-                    strEntries.add("Dec");
-                    strEntries.add("Nov");
-                    strEntries.add("Oct");
-                    strEntries.add("Sep");
-                    strEntries.add("Aug");
-                    strEntries.add("Jul");
-                    strEntries.add("Jun");
-                    strEntries.add("May");
-                    strEntries.add("Apr");
-                    strEntries.add("Mar");
-                    strEntries.add("Feb");
-                    strEntries.add("Jan");
-
-                    BarDataSet barDataset = new BarDataSet(barEntries, "Cells");
+                    BarDataSet barDataset = new BarDataSet(barEntries, "Productos");
                     BarData barData = new BarData(strEntries, barDataset);
                     barChart.setData(barData);
                     barChart.setDescription("Importe de Gastos por semana: ");
-                    barDataset.setColor(R.color.blue);
+                    barDataset.setColors(ColorTemplate.JOYFUL_COLORS);
+                    barDataset.setValueTextColor(Color.BLACK);
+                    barDataset.setValueTextSize(18f);
                     barChart.animateY(5000);
-
-
                 }
 
                 break;
