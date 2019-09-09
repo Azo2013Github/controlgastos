@@ -126,7 +126,13 @@ public class MovimientoServicesImpl implements MovimientoServices {
         Log.d("***", "getDateBetween: " +dateInicial + " "+dateFinal);
         Cursor cursor = dataBaseHelper.getDateBetweenQuery(dateInicial, dateFinal);
 
+        // el cursor cuantos elementos tiene?
 
+        if (cursor != null){
+            Log.d("** cursor size: ", "" + cursor.getCount());
+        } else {
+            Log.d("** cursor: ", "curosr es null!!!");
+        }
 
         if (cursor != null && cursor.getCount() > 0) {
             Log.d("***", " Entra aqui: " +cursor.toString());
@@ -156,6 +162,9 @@ public class MovimientoServicesImpl implements MovimientoServices {
             }
 
         }
+
+        Log.d("*** movimientos: ", movimientos.toString());
+
         return movimientos;
     }
 

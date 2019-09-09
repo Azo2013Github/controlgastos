@@ -256,6 +256,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     COL_1_MOVIMIENTOS + " DESC ";
         Cursor cursor = db.rawQuery(consulta2, null);
 
+        Log.d("*** consulta2 ", consulta2);
         return cursor;
     }
 

@@ -1,6 +1,7 @@
 package com.pgrsoft.controlgastos.fragment;
 
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -53,7 +54,7 @@ import static android.app.Activity.RESULT_OK;
 public class FormularioFragment extends Fragment implements View.OnClickListener{
 
     private Button btnAdd;
-    private ImageButton btnPago;
+    private Button btnList;
     private ImageButton btnCamara;
     private ImageButton btnSave;
 
@@ -62,7 +63,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     private EditText editNombre;
     private EditText editPrecio;
     private EditText editDescripcion;
-    //private EditText editSaldo;
+
     private EditText editDesMovimiento;
     private EditText editCantidad;
     private ImageView imageView;
@@ -99,7 +100,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         View miVista = inflater.inflate(R.layout.fragment_formulario, container, false);
 
         btnAdd = (Button) miVista.findViewById(R.id.idBtnAdd);
-        btnPago = (ImageButton) miVista.findViewById(R.id.idPagar);
+        btnList = (Button) miVista.findViewById(R.id.idBtnList);
         //btnCamara = (ImageButton) miVista.findViewById(R.id.idCamera);
         //btnSave = (ImageButton) miVista.findViewById(R.id.idSave);
 
@@ -109,11 +110,11 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editNombre = (EditText) miVista.findViewById(R.id.idNombre);
         editPrecio = (EditText) miVista.findViewById(R.id.idPrecio);
         editDescripcion = (EditText) miVista.findViewById(R.id.idDescripcion);
-        // editSaldo = (EditText) miVista.findViewById(R.id.idSaldo);
+
         editCantidad = (EditText) miVista.findViewById(R.id.idCantidad);
         editDesMovimiento = (EditText) miVista.findViewById(R.id.idDesMovimiento);
         imageView = (ImageView) miVista.findViewById(R.id.idImage);
-        //imageCamara = (ImageView) miVista.findViewById(R.id.idImageCamara);
+
 
         categoriaServices = new CategoriaServicesImpl(this.getActivity());
         productoServices = new ProductoServicesImpl(this.getActivity());
@@ -124,9 +125,9 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         //Bundle bundle = getArguments();
         //double saldo = bundle.getDouble("SALDO");
 
-        categorias = new ArrayList<>();
+        /*categorias = new ArrayList<>();
         productos = new ArrayList<>();
-        movimientos = new ArrayList<>();
+        movimientos = new ArrayList<>();*/
 
         /*movimientos = movimientoServices.getAll();
         int indice = movimientos.size() -1 ;
@@ -140,7 +141,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         //hacerFoto();
 
         btnAdd.setOnClickListener(this);
-        btnPago.setOnClickListener(this);
+        btnList.setOnClickListener(this);
         //btnCamara.setOnClickListener(this);
         //btnSave.setOnClickListener(this);
 
@@ -181,47 +182,17 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
                 break;
 
-            case R.id.idPagar:
-               /*for (int i=0; i< categorias.size(); i++) {
+            case R.id.idBtnList:
 
-                }*/
-                // Necesitamos una fecha de inicio y una de fin.
-                // Esto es "hardcodeado" para pruebas....
-                String strFechaInicio = "10/12/1990";
-                String strFechaFin = "5/9/2019";
-                Date fechaInicio = null;
-                Date fechaFin = null;
-                SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy HH:mm");
+                Fragment fragment = new GastoListadoFragment();
 
-                try {
-                    fechaInicio = sdf.parse(strFechaInicio);
-                    fechaFin = sdf.parse(strFechaFin);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
-                movimientos = movimientoServices.getDateBetween(fechaInicio, fechaFin);
+                fragmentTransaction.replace(R.id.destino, fragment);
 
-                Log.d("***", "MOVIMIENTOS ARRAY: " + movimientos.toString());
+                fragmentTransaction.addToBackStack(null);
 
-                // movimientos contiene el listado de movimientos entre fechas (admás ordenado)
-
-                // Ahora simplemente vamos a constatar que los datos son correctos....
-                //i++;
-                //Movimiento movimiento = movimientos.get(i);
-
-                /*Bundle bundle = new Bundle();
-                //bundle.putSerializable("PRODUCTOS", producto);
-                //bundle.putSerializable("MOVIMIENTOS", movimiento);
-
-                Intent intent = new Intent (this.getActivity(), DiagramaActivity.class);
-                intent.putExtra("MOVIMIENTOS", movimiento);
-                startActivity(intent);*/
-
-
-
-                //Fragment fragment = new ListadoDetalleFragment();
-
+                fragmentTransaction.commit();
 
                 break;
             /*case R.id.idCamera:

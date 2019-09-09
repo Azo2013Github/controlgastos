@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -62,7 +61,7 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
         editDateInicial = (EditText) myView.findViewById(R.id.idEditDateStart);
         editDateFinal = (EditText) myView.findViewById(R.id.idEditDateEnd);
 
-        barChart = (BarChart) myView.findViewById(R.id.idBarChart);
+        barChart = (BarChart) myView.findViewById(R.id.idBarChart); //Esta parte no funciona:
         btnEstatitic = (Button) myView.findViewById(R.id.idBtnEstatistic);
 
         movimientoServices = new MovimientoServicesImpl(this.getActivity());
@@ -122,6 +121,7 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
 
                 List<BarEntry> barEntries = new ArrayList<>();
                 List<String> strEntries = new ArrayList<>();
+
                 if (editDateInicial.getText().toString().equals("") || editDateFinal.getText().toString().equals("")){
                     Log.d("***", "Write date in the EditText ");
                 }else {
@@ -131,7 +131,6 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
                     String strFechaInicio = editDateInicial.getText().toString();
                     String strFechaFin = editDateFinal.getText().toString();
 
-                    Log.d("***", strFechaFin + " " +strFechaInicio);
                     try {
                         SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy");
                         dateIni = sdf.parse(strFechaInicio);
@@ -147,11 +146,14 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
                         barEntries.add(new BarEntry((float)(movimiento.getImporte()), i));
                         i++;
                         strEntries.add(movimiento.getProducto().getNombre());
-
                     }
-                    BarDataSet barDataset = new BarDataSet(barEntries, "Productos");
+                    Log.d("***", "DATOS strEntries: "+strEntries.toString());
+
+                    BarDataSet barDataset = new BarDataSet(barEntries, "Gastos");
                     BarData barData = new BarData(strEntries, barDataset);
                     barChart.setData(barData);
+
+                    //Log.d("***", "strEntries + barData: "+barData.toString());
                     barChart.setDescription("Importe de Gastos por semana: ");
                     barDataset.setColors(ColorTemplate.JOYFUL_COLORS);
                     barDataset.setValueTextColor(Color.BLACK);
