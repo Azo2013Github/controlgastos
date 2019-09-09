@@ -89,14 +89,20 @@
         android:text="@string/fecha"
         android:textColor="@color/colorAccent" />
 
-    <Button
+   <Button
         android:id="@+id/idBtnEstadisticas"
-        android:layout_width="170dp"
-        android:layout_height="130dp"
-        android:layout_marginLeft="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
         android:layout_marginTop="256dp"
-        android:background="@color/black"
+        android:background="@color/beige"
         android:text="@string/estadisticas"
-        android:textColor="@color/beige" />
+        android:textColor="@color/colorAccent" />
+  <!-- <com.google.android.material.button.MaterialButton
+        android:id="@+id/idBtnEstadistics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="true"
+        android:text="@string/button_label_disabled"/>-->
 
 </FrameLayout>

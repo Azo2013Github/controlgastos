@@ -56,7 +56,7 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View myView = inflater.inflate(R.layout.fragment_estadistica, container, false);
         editDateInicial = (EditText) myView.findViewById(R.id.idEditDateStart);
         editDateFinal = (EditText) myView.findViewById(R.id.idEditDateEnd);
@@ -132,33 +132,29 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
                     String strFechaFin = editDateFinal.getText().toString();
 
                     try {
-                        SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy");
-                        dateIni = sdf.parse(strFechaInicio);
-                        dateFin = sdf.parse(strFechaFin);
+                        SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy HH:mm");
+                        dateIni = sdf.parse(strFechaInicio + " 00:00");
+                        dateFin = sdf.parse(strFechaFin + " 23:59");
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     movimientos = movimientoServices.getDateBetween(dateIni, dateFin);
-
                     int i = 0;
-                    Log.d("***", "MOVIMIENTOS ARRAY: " + movimientos.toString());
                     for (Movimiento movimiento: movimientos){
                         barEntries.add(new BarEntry((float)(movimiento.getImporte()), i));
                         i++;
                         strEntries.add(movimiento.getProducto().getNombre());
                     }
-                    Log.d("***", "DATOS strEntries: "+strEntries.toString());
 
                     BarDataSet barDataset = new BarDataSet(barEntries, "Gastos");
                     BarData barData = new BarData(strEntries, barDataset);
                     barChart.setData(barData);
 
-                    //Log.d("***", "strEntries + barData: "+barData.toString());
                     barChart.setDescription("Importe de Gastos por semana: ");
                     barDataset.setColors(ColorTemplate.JOYFUL_COLORS);
                     barDataset.setValueTextColor(Color.BLACK);
                     barDataset.setValueTextSize(18f);
-                    barChart.animateY(5000);
+                    barChart.animateY(3000);
                 }
 
                 break;

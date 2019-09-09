@@ -123,22 +123,11 @@ public class MovimientoServicesImpl implements MovimientoServices {
 
         List<Movimiento> movimientos = new ArrayList<>();
 
-        Log.d("***", "getDateBetween: " +dateInicial + " "+dateFinal);
         Cursor cursor = dataBaseHelper.getDateBetweenQuery(dateInicial, dateFinal);
 
-        // el cursor cuantos elementos tiene?
-
-        if (cursor != null){
-            Log.d("** cursor size: ", "" + cursor.getCount());
-        } else {
-            Log.d("** cursor: ", "curosr es null!!!");
-        }
-
         if (cursor != null && cursor.getCount() > 0) {
-            Log.d("***", " Entra aqui: " +cursor.toString());
             while (cursor.moveToNext()) {
 
-                //Log.d("***", "CURSOR MOVE TO NEXT:  ");
                 Long codigo = cursor.getLong(0);
                 double importe = cursor.getDouble(1);
                 String descripcion = cursor.getString(2);
@@ -163,8 +152,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
 
         }
 
-        Log.d("*** movimientos: ", movimientos.toString());
-
+        dataBaseHelper.close();
         return movimientos;
     }
 

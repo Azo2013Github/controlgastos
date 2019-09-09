@@ -232,14 +232,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
 
-        //TODO Dase 2 --> Una vez comprobado que la Fase1 funciona hemos de convertir los Date
-        // exacatamente en el formato que necesitamos.
-
-        //String strFechaInicial = "05/09/2019 10:10";
-        //String strFechaFinal = "06/09/2019 07:50";
-
-        //TODO Fase 1 --> Cambiar las fechas hardcoded por los strings y comprobar que funciona
-
         if (dateInicial == null || dateFinal == null){
             Log.d("***", "OJO ALGUNA FECHA ES NULL!!!!");
         }
@@ -252,14 +244,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String consulta2 = "SELECT " + COL_1_MOVIMIENTOS + " , "
                 +COL_2_MOVIMIENTOS + " , " + COL_3_MOVIMIENTOS + " , " + COL_4_MOVIMIENTOS + " ,"  + COL_6_MOVIMIENTOS+
                 " from " + MOVIMIENTOS_TABLE + " where "
-                + COL_4_MOVIMIENTOS + " >= '" + strFechaInicial + "' AND " + COL_4_MOVIMIENTOS + " <= '" + strFechaFinal + "' ORDER BY " +
+                + COL_4_MOVIMIENTOS + " > '" + strFechaInicial + "' AND " + COL_4_MOVIMIENTOS + " < '" + strFechaFinal + "' ORDER BY " +
                     COL_1_MOVIMIENTOS + " DESC ";
         Cursor cursor = db.rawQuery(consulta2, null);
 
-        Log.d("*** consulta2 ", consulta2);
         return cursor;
     }
-
 
     public boolean deletingCategoria(Long codigo) {
 

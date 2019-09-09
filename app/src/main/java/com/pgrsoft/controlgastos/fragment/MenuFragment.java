@@ -83,7 +83,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
             case R.id.idBtnDiagrama:
 
-                fragment = new MovimientoListadoFragment();
+                /*fragment = new MovimientoListadoFragment();
 
                 fragmentTransaction = getFragmentManager().beginTransaction();
 
@@ -91,7 +91,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
                 fragmentTransaction.addToBackStack(null);
 
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
 
                 break;
 
