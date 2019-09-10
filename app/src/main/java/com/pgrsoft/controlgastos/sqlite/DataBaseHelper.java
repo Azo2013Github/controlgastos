@@ -240,14 +240,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         /*String strFechaInicial = sdf.format(dateInicial);
         String strFechaFinal = sdf.format(dateFinal);*/
-        String consulta2 = "SELECT " + COL_1_MOVIMIENTOS + " , "
+        String consulta = "SELECT " + COL_1_MOVIMIENTOS + " , "
                 +COL_2_MOVIMIENTOS + " , " + COL_3_MOVIMIENTOS + " , " + COL_4_MOVIMIENTOS + " ,"  + COL_6_MOVIMIENTOS+
                 " from " + MOVIMIENTOS_TABLE + " where "
-                + COL_4_MOVIMIENTOS + " > " + getMillisecondsFromDate(dateInicial) + " AND " + COL_4_MOVIMIENTOS + " < " + getMillisecondsFromDate(dateFinal) + " ORDER BY " +
+                + COL_4_MOVIMIENTOS + " > " + getMillisecondsFromDate(dateInicial) + " AND " + COL_4_MOVIMIENTOS + " <= " + getMillisecondsFromDate(dateFinal) + " ORDER BY " +
                     COL_1_MOVIMIENTOS + " DESC ";
 
-        Log.d("*** c2",consulta2);
-        Cursor cursor = db.rawQuery(consulta2, null);
+        Log.d("*** consulta",consulta);
+        Cursor cursor = db.rawQuery(consulta, null);
         return cursor;
     }
 
