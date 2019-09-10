@@ -126,23 +126,17 @@ public class MovimientoServicesImpl implements MovimientoServices {
 
         Cursor cursor = dataBaseHelper.getDateBetweenQuery(dateInicial, dateFinal);
 
+        if (cursor == null){
+            Log.d("***c", "CURSOR es Nulo: " +cursor.getCount());
+        }
         if (cursor != null && cursor.getCount() > 0) {
+            Log.d("*** c", "CURSOR: " +cursor.getCount());
             while (cursor.moveToNext()) {
-
                 Long codigo = cursor.getLong(0);
                 double importe = cursor.getDouble(1);
                 String descripcion = cursor.getString(2);
-                //String strFecha = cursor.getString(3);
                 Date fecha = getDateFromMilliseconds(cursor.getString(3));
                 Long codigoProducto = cursor.getLong(4);
-
-                /*SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
-                try {
-                    dateInicial = sdf.parse(strFecha);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }*/
 
                 ProductoServices productoServices = new ProductoServicesImpl(this.context);
                 Producto producto = productoServices.read(codigoProducto);
@@ -158,13 +152,22 @@ public class MovimientoServicesImpl implements MovimientoServices {
         return movimientos;
     }
 
-    /* private String getMillisecondsFromDate(Date date){
-        return String.valueOf(date.getTime());
-    }*/
-
     private Date getDateFromMilliseconds(String strMilliseconds){
         return new Date(Long.parseLong(strMilliseconds));
     }
 
 
 }
+
+
+
+
+                /* //String strFecha = cursor.getString(3);
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+                try {
+                    dateInicial = sdf.parse(strFecha);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }*/
+

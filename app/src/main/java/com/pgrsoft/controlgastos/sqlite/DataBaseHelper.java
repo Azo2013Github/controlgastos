@@ -238,14 +238,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
 
         //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
         /*String strFechaInicial = sdf.format(dateInicial);
         String strFechaFinal = sdf.format(dateFinal);*/
-
-        //Date date = getMillisecondsFromDate(movimiento.getFecha());
-
-
-
         String consulta2 = "SELECT " + COL_1_MOVIMIENTOS + " , "
                 +COL_2_MOVIMIENTOS + " , " + COL_3_MOVIMIENTOS + " , " + COL_4_MOVIMIENTOS + " ,"  + COL_6_MOVIMIENTOS+
                 " from " + MOVIMIENTOS_TABLE + " where "
@@ -253,9 +247,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                     COL_1_MOVIMIENTOS + " DESC ";
 
         Log.d("*** c2",consulta2);
-
         Cursor cursor = db.rawQuery(consulta2, null);
-
         return cursor;
     }
 

@@ -53,7 +53,6 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -117,15 +116,6 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
         switch (view.getId()){
             case R.id.idBtnEstatistic:
 
-                /*  Date date = new Date();
-                java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext()); mTimeText.setText("Time: " + dateFormat.format(date));
-                 *
-                *
-                *
-                *
-                *Date date = new Date(); String stringDate = DateFormat.getDateTimeInstance().format(date);
-                * */
-                //DateFormat dateFormat = (DateFormat) editDateInicial.getText().toString();
                 List<BarEntry> barEntries = new ArrayList<>();
                 List<String> strEntries = new ArrayList<>();
 
@@ -134,24 +124,20 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
                 }else {
                     Date dateIni = new Date();
                     Date dateFin = new Date();
-                    //SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy HH:mm");
+                    SimpleDateFormat sdf = new SimpleDateFormat ("yyMMddHHmmssZ");
+                    //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
                     String strFechaInicio = editDateInicial.getText().toString();
                     String strFechaFin = editDateFinal.getText().toString();
 
-
+                    Log.d("***Edit", editDateInicial.getText().toString());
                     try {
-                        dateIni = DateFormat.getInstance().parse(strFechaInicio);
-                        dateFin = DateFormat.getInstance().parse(strFechaFin);
-                    }catch (ParseException e){
-                        e.printStackTrace();
-                    }
-                   /* try {
 
-                        dateIni = editDateInicial.getText().toString();
-                        dateFin = sdf.parse(editDateInicial.getText().toString());
+                        dateIni = sdf.parse(strFechaInicio);
+                        dateFin = sdf.parse(strFechaFin);
                     } catch (ParseException e) {
                         e.printStackTrace();
-                    }*/
+                    }
 
                     movimientos = movimientoServices.getDateBetween(dateIni, dateFin);
                     int i = 0;

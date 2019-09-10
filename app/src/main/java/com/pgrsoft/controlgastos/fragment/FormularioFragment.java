@@ -346,6 +346,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         Categoria categoria7 = new Categoria("ALQUILER");
         Categoria categoria8 = new Categoria("EXTRAS");
         Categoria categoria9 = new Categoria("FARMACIA");
+        Categoria categoria10 = new Categoria("ZAPATOS");
 
         categorias.add(categoria1);
         categorias.add(categoria2);
@@ -356,8 +357,9 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         categorias.add(categoria7);
         categorias.add(categoria8);
         categorias.add(categoria9);
+        categorias.add(categoria10);
         int i = 0;
-        String [] strNombres = new String [9];
+        String [] strNombres = new String [10];
 
         for (Categoria categoria: categorias) {
             strNombres [i] = categoria.getNombre(); //cogemos los nombres de los agentes en cada posicion
@@ -400,6 +402,10 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
             case "FARMACIA":
                 imageView.setImageResource(R.drawable.farmacia);
                 break;
+            case "ZAPATOS":
+                imageView.setImageResource(R.drawable.shoes);
+                break;
+
 
         }
         Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
@@ -408,7 +414,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     }
 
     private void vaciarEditText(){
-        //editSaldo.setText("");
+
         editDescripcion.setText("");
         editCantidad.setText("");
         editPrecio.setText("");
