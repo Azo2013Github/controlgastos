@@ -125,8 +125,6 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
                     Date dateIni = new Date();
                     Date dateFin = new Date();
                     SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy");
-                    //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
                     String strFechaInicio = editDateInicial.getText().toString();
                     String strFechaFin = editDateFinal.getText().toString();
 

@@ -8,6 +8,9 @@ import android.app.FragmentTransaction;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.pgrsoft.controlgastos.R;
 import com.pgrsoft.controlgastos.fragment.FormularioFragment;
@@ -29,22 +32,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    private CategoriaServices categoriaServices;
-    private ProductoServices productoServices;
-    private  MovimientoServices movimientoServices;
-
-    private List<Categoria> categorias;
-    private List<Producto> productos;
-    private List<Movimiento> movimientos;
-
-    private Categoria categoria;
-    private Movimiento movimiento;
-    private Producto producto;
-
     private Fragment fragment;
-    private Fragment fragmentMenu;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,82 +45,48 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentTransaction.replace(R.id.destino, fragment);
 
-        //fragmentTransaction.replace(R.id.destino, fragmentMenu);
-
         fragmentTransaction.addToBackStack(null);
 
         fragmentTransaction.commit();
 
-
-
-
-
-        //DataBaseHelper dataBaseHelper = new DataBaseHelper(this);
-
-        // Es necesario solicitar una instancia de SQLiteDatabase para entrar en onCreate o onUpgrade
-        //SQLiteDatabase sql = dataBaseHelper.getWritableDatabase();
-        //Log.d("***", "SE HA CREADO" +sql.toString());
-        //sql.close();
-
-        /*categoriaServices = new CategoriaServicesImpl(this);
-
-        int numeroAleatorio = (int) (Math.random() * 10000);
-
-        categoria = categoriaServices.create(new Categoria(null, "cat_" + numeroAleatorio));
-        //Log.d("**", "MainActivity Categoria crear: " + categoria.toString());
-
-        categorias = categoriaServices.getAll();
-        //Log.d("**", "MainActivity Categoria ALL: " + categorias.toString());
-
-        categoria = categoriaServices.read(4L);
-        //Log.d("**", "MainActivity Categoria codigo: "+categoria.getCodigo().toString());
-
-        // la parte de productos:
-       productoServices = new ProductoServicesImpl(this);
-        producto = productoServices.create(new Producto
-           (null, ("prod_" + numeroAleatorio), "buen_producto_" + numeroAleatorio, 4.3, categoria));
-
-        Log.d("**", "MainActivity Producto Crear: " +producto.toString());
-
-        productos = productoServices.getAll();
-        //Log.d("**", "MainActivity Productos All: " + productos.toString());
-
-        producto = productoServices.read(3L);
-
-        //Log.d("**", "MainActivity Producto Codigo: " + producto.getCodigo());
-
-        movimientoServices = new MovimientoServicesImpl(this);
-
-        movimiento = movimientoServices.create(new Movimiento(null, 0.60, "descrip_" + numeroAleatorio,
-                new Date(), 5.12, producto));
-
-        //Log.d("**", "MainActivity Movimiento Crear: " + movimiento.toString());
-
-        movimientos = movimientoServices.getAll();
-
-        //Log.d("***" , "MainActivity Movimiento getAll(): " + movimientos.toString());
-
-        movimiento = movimientoServices.read(2L);
-
-        //Log.d("***" , "MainActivity Movimiento Codigo: " + movimientos.toString());
-
-        //boolean eleminadoMovimiento = movimientoServices.delete(2L);
-
-        //Log.d("***", movimientos.toString() + eleminadoMovimiento);
-
-        //boolean eliminadoProducto = productoServices.delete(2L);
-
-        //Log.d("**", productos.toString() + "eliminado Codigo producto: " +eliminadoProducto);
-
-        //boolean eliminadoCategoria = categoriaServices.delete(categoria.getCodigo());
-
-        //Log.d("**", categorias.toString() + "eliminado Codigo producto: " +eliminadoCategoria);
-
-        */
-
      }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        switch (id){
+            case R.id.action_settings:
 
 
+                break;
+            case R.id.action_add:
+                fragment = new FormularioFragment();
 
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+                fragmentTransaction.replace(R.id.destino, fragment);
+
+                fragmentTransaction.addToBackStack(null);
+
+                fragmentTransaction.commit();
+                break;
+            case R.id.action_help:
+                Toast.makeText(this, "APP CONTROL GASTOS \n: https://github.com/Azo2013Github/controlgastos", Toast.LENGTH_LONG).show();
+                break;
+
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -51,16 +51,6 @@ public class MovimientoServicesImpl implements MovimientoServices {
                 Date fecha = getDateFromMilliseconds(cursor.getString(3));
                 Long codigoProducto = cursor.getLong(4);
 
-                // Convertir el String en Date pour la fecha:
-                /*Date fecha = new Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
-                try {
-                    fecha = sdf.parse(strFecha);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }*/
-
                 ProductoServices productoServices = new ProductoServicesImpl(this.context);
                 Producto producto = productoServices.read(codigoProducto);
                 Movimiento movimiento = new Movimiento(importe, descripcion, fecha, producto);
