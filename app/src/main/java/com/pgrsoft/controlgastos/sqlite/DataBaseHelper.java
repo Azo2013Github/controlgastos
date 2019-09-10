@@ -192,13 +192,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
         // Convertir la fecka en Strng para poder introducir registros en la bb de datos...
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        String strFecha = sdf.format(movimiento.getFecha());
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        //String strFecha = sdf.format(movimiento.getFecha());
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2_MOVIMIENTOS, movimiento.getImporte());
         contentValues.put(COL_3_MOVIMIENTOS, movimiento.getDescripcion());
-        contentValues.put(COL_4_MOVIMIENTOS, strFecha);
+        //contentValues.put(COL_4_MOVIMIENTOS, strFecha);
+        contentValues.put(COL_4_MOVIMIENTOS, getMillisecondsFromDate(movimiento.getFecha()));
         contentValues.put(COL_6_MOVIMIENTOS, movimiento.getProducto().getCodigo());
 
         long resultado = db.insert(MOVIMIENTOS_TABLE, null, contentValues);
@@ -236,20 +237,58 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             Log.d("***", "OJO ALGUNA FECHA ES NULL!!!!");
         }
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-        String strFechaInicial = sdf.format(dateInicial);
-        String strFechaFinal = sdf.format(dateFinal);
+        /*String strFechaInicial = sdf.format(dateInicial);
+        String strFechaFinal = sdf.format(dateFinal);*/
+
+        //Date date = getMillisecondsFromDate(movimiento.getFecha());
+
+
 
         String consulta2 = "SELECT " + COL_1_MOVIMIENTOS + " , "
                 +COL_2_MOVIMIENTOS + " , " + COL_3_MOVIMIENTOS + " , " + COL_4_MOVIMIENTOS + " ,"  + COL_6_MOVIMIENTOS+
                 " from " + MOVIMIENTOS_TABLE + " where "
-                + COL_4_MOVIMIENTOS + " > '" + strFechaInicial + "' AND " + COL_4_MOVIMIENTOS + " < '" + strFechaFinal + "' ORDER BY " +
+                + COL_4_MOVIMIENTOS + " > " + getMillisecondsFromDate(dateInicial) + " AND " + COL_4_MOVIMIENTOS + " < " + getMillisecondsFromDate(dateFinal) + " ORDER BY " +
                     COL_1_MOVIMIENTOS + " DESC ";
+
+        Log.d("*** c2",consulta2);
+
         Cursor cursor = db.rawQuery(consulta2, null);
 
         return cursor;
     }
+
+    private String getMillisecondsFromDate(Date date){
+        return String.valueOf(date.getTime());
+    }
+
+    private Date getDateFromMilliseconds(String strMilliseconds){
+        return new Date(Long.parseLong(strMilliseconds));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public boolean deletingCategoria(Long codigo) {
 
@@ -351,6 +390,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.close();
         return true;
     }
+
+
 
 
 }

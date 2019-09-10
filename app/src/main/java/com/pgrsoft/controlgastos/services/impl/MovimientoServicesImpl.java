@@ -83,18 +83,19 @@ public class MovimientoServicesImpl implements MovimientoServices {
             Long code = cursor.getLong(0);
             double importe = cursor.getDouble(1);
             String descripcion = cursor.getString(2);
-            String strFecha = cursor.getString(3);
+            //String strFecha = cursor.getString(3);
+            Date fecha = getDateFromMilliseconds(cursor.getString(3));
             Long codigoProducto = cursor.getLong(4);
 
             // Transformar la fecha en Date()
-            Date fecha = new Date();
+            /* Date fecha = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             // Habrá un try catch....
             try {
                 fecha = sdf.parse(strFecha);
             } catch (ParseException e) {
                 e.printStackTrace();
-            }
+            }*/
 
             ProductoServices productoServices = new ProductoServicesImpl(this.context);
             Producto producto = productoServices.read(codigoProducto);
@@ -131,20 +132,21 @@ public class MovimientoServicesImpl implements MovimientoServices {
                 Long codigo = cursor.getLong(0);
                 double importe = cursor.getDouble(1);
                 String descripcion = cursor.getString(2);
-                String strFecha = cursor.getString(3);
+                //String strFecha = cursor.getString(3);
+                Date fecha = getDateFromMilliseconds(cursor.getString(3));
                 Long codigoProducto = cursor.getLong(4);
 
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                /*SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
                 try {
                     dateInicial = sdf.parse(strFecha);
                 } catch (ParseException e) {
                     e.printStackTrace();
-                }
+                }*/
 
                 ProductoServices productoServices = new ProductoServicesImpl(this.context);
                 Producto producto = productoServices.read(codigoProducto);
-                Movimiento movimiento = new Movimiento(importe, descripcion, dateInicial, producto);
+                Movimiento movimiento = new Movimiento(importe, descripcion, fecha, producto);
 
                 movimiento.setCodigo(codigo);
                 movimientos.add(movimiento);
@@ -154,6 +156,14 @@ public class MovimientoServicesImpl implements MovimientoServices {
 
         dataBaseHelper.close();
         return movimientos;
+    }
+
+    /* private String getMillisecondsFromDate(Date date){
+        return String.valueOf(date.getTime());
+    }*/
+
+    private Date getDateFromMilliseconds(String strMilliseconds){
+        return new Date(Long.parseLong(strMilliseconds));
     }
 
 

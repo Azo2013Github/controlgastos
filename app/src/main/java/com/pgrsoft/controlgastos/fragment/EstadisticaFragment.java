@@ -25,6 +25,7 @@ import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.services.MovimientoServices;
 import com.pgrsoft.controlgastos.services.impl.MovimientoServicesImpl;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -103,10 +104,7 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
                         editDateFinal.setText(mDay + "/" + (mMonth+1) + "/" + mYear);
                     }
                 }, year, month, day);
-
-                Log.d("***", "DatePicker: " + year +" "+ month +" " +day);
                 datePickerDialog.show();
-
             }
         });
 
@@ -119,6 +117,15 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
         switch (view.getId()){
             case R.id.idBtnEstatistic:
 
+                /*  Date date = new Date();
+                java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext()); mTimeText.setText("Time: " + dateFormat.format(date));
+                 *
+                *
+                *
+                *
+                *Date date = new Date(); String stringDate = DateFormat.getDateTimeInstance().format(date);
+                * */
+                //DateFormat dateFormat = (DateFormat) editDateInicial.getText().toString();
                 List<BarEntry> barEntries = new ArrayList<>();
                 List<String> strEntries = new ArrayList<>();
 
@@ -127,17 +134,25 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
                 }else {
                     Date dateIni = new Date();
                     Date dateFin = new Date();
-
+                    //SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy HH:mm");
                     String strFechaInicio = editDateInicial.getText().toString();
                     String strFechaFin = editDateFinal.getText().toString();
 
+
                     try {
-                        SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy HH:mm");
-                        dateIni = sdf.parse(strFechaInicio + " 00:00");
-                        dateFin = sdf.parse(strFechaFin + " 23:59");
-                    } catch (ParseException e) {
+                        dateIni = DateFormat.getInstance().parse(strFechaInicio);
+                        dateFin = DateFormat.getInstance().parse(strFechaFin);
+                    }catch (ParseException e){
                         e.printStackTrace();
                     }
+                   /* try {
+
+                        dateIni = editDateInicial.getText().toString();
+                        dateFin = sdf.parse(editDateInicial.getText().toString());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }*/
+
                     movimientos = movimientoServices.getDateBetween(dateIni, dateFin);
                     int i = 0;
                     for (Movimiento movimiento: movimientos){
@@ -160,6 +175,14 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
                 break;
         }
 
+    }
+
+    private String getMillisecondsFromDate(Date date){
+        return String.valueOf(date.getTime());
+    }
+
+    private Date getDateFromMilliseconds(String strMilliseconds){
+        return new Date(Long.parseLong(strMilliseconds));
     }
 
 
