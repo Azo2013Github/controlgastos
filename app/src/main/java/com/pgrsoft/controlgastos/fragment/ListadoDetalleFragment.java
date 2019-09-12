@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +21,14 @@ import android.widget.TextView;
 import com.pgrsoft.controlgastos.R;
 import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.model.Producto;
+import com.pgrsoft.controlgastos.services.MovimientoServices;
+import com.pgrsoft.controlgastos.services.impl.MovimientoServicesImpl;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -38,6 +42,8 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
     private Button btnSave;
     private Bitmap imageActual = null;
     private ImageView imageView;
+    private MovimientoServices movimientoServices;
+    private List<Movimiento> movimientos;
 
     public ListadoDetalleFragment() {
         // Required empty public constructor
@@ -50,6 +56,8 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
         int i = 0;
         View miVista = inflater.inflate(R.layout.fragment_listado_detalle, container, false);
 
+        movimientoServices = new MovimientoServicesImpl(this.getActivity());
+
         TextView textNombre = (TextView) miVista.findViewById(R.id.idDetalleNombre);
         TextView textDescripcion = (TextView) miVista.findViewById(R.id.idDetalleDescripcion);
         TextView textImporte = (TextView) miVista.findViewById(R.id.idImporte);
@@ -60,16 +68,24 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
         btnSave = (Button) miVista.findViewById(R.id.idBtnSavePhoto);
 
         Bundle bundle = getArguments();
-        Producto producto = (Producto) bundle.getSerializable("PRODUCTOS");
-        Movimiento movimiento = (Movimiento) bundle.getSerializable("MOVIMIENTOS");
 
-        textNombre.setText(producto.getNombre());
-        textDescripcion.setText(movimiento.getDescripcion());
-        textImporte.setText(String.valueOf(movimiento.getImporte()));
-        textFecha.setText(String.valueOf(movimiento.getFecha()));
-        byte[] images = movimiento.getProducto().getImagen();
+        if (bundle != null) {
 
-        imageView.setImageResource(images[i]);
+            Producto producto = (Producto) bundle.getSerializable("PRODUCTOS");
+            Movimiento movimiento = (Movimiento) bundle.getSerializable("MOVIMIENTOS");
+
+            textNombre.setText(producto.getNombre());
+            textDescripcion.setText(movimiento.getDescripcion());
+            textImporte.setText(String.valueOf(movimiento.getImporte()));
+            textFecha.setText(String.valueOf(movimiento.getFecha()));
+            byte[] images = movimiento.getProducto().getImagen();
+
+            Log.d("**","Tamaño imagen: " + images.length);
+            Bitmap bm = BitmapFactory.decodeByteArray(images, 0, images.length);
+
+            imageView.setImageBitmap(bm);
+
+        }
 
         btnPhoto.setOnClickListener(this);
         btnSave.setOnClickListener(this);
