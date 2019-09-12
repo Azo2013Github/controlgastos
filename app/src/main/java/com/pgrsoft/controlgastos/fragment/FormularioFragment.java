@@ -101,8 +101,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
         btnAdd = (Button) miVista.findViewById(R.id.idBtnAdd);
         btnList = (Button) miVista.findViewById(R.id.idBtnList);
-        //btnCamara = (ImageButton) miVista.findViewById(R.id.idCamera);
-        //btnSave = (ImageButton) miVista.findViewById(R.id.idSave);
+
 
         spinner = (Spinner) miVista.findViewById(R.id.idSpinnerCategory);
         cargarSpinner();

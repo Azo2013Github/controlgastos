@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.pgrsoft.controlgastos.R;
@@ -21,10 +22,12 @@ import com.pgrsoft.controlgastos.services.MovimientoServices;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListadoDetalleFragment extends Fragment {
+public class ListadoDetalleFragment extends Fragment implements View.OnClickListener{
 
-    private Button btnEstadisticas;
-    private MovimientoServices movimientoServices;
+
+    private Button btnPhoto;
+    private Button btnSave;
+
 
       public ListadoDetalleFragment() {
         // Required empty public constructor
@@ -42,6 +45,9 @@ public class ListadoDetalleFragment extends Fragment {
         TextView textImporte = (TextView) miVista.findViewById(R.id.idImporte);
         TextView textFecha = (TextView) miVista.findViewById(R.id.idFecha);
 
+        btnPhoto = (Button) miVista.findViewById(R.id.idBtnPhoto);
+        btnSave = (Button) miVista.findViewById(R.id.idBtnSavePhoto);
+
         Bundle bundle = getArguments();
         Producto producto = (Producto) bundle.getSerializable("PRODUCTOS");
         Movimiento movimiento = (Movimiento) bundle.getSerializable("MOVIMIENTOS");
@@ -51,40 +57,46 @@ public class ListadoDetalleFragment extends Fragment {
         textImporte.setText(String.valueOf(movimiento.getImporte()));
         textFecha.setText(String.valueOf(movimiento.getFecha()));
 
-        btnEstadisticas = (Button) miVista.findViewById(R.id.idBtnEstadisticas);
+        btnPhoto.setOnClickListener(this);
+        btnSave.setOnClickListener(this);
 
-        btnEstadisticas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*Intent intent = new Intent(view.getContext().getApplicationContext(), DiagramaActivity.class);
-
-                view.getContext().startActivity(intent);*/
-                Fragment fragment = new EstadisticaFragment();
-
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-
-                fragmentTransaction.replace(R.id.destino, fragment);
-
-                fragmentTransaction.addToBackStack(null);
-
-                fragmentTransaction.commit();
-
-            }
-        });
 
 
         return miVista;
     }
 
 
-    /*@Override
+    @Override
     public void onClick(View view) {
 
-        Intent intent = new Intent(getActivity(), DiagramaActivity.class);
+          switch (view.getId()){
 
-        getActivity().startActivity(intent);
+              case R.id.idBtnPhoto:
+                  break;
+              case R.id.idBtnSavePhoto:
+                  break;
 
-    }*/
+                  /*Intent intent = new Intent(view.getContext().getApplicationContext(), DiagramaActivity.class);
+
+                view.getContext().startActivity(intent);*/
+              Fragment fragment = new EstadisticaFragment();
+
+              FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+              fragmentTransaction.replace(R.id.destino, fragment);
+
+              fragmentTransaction.addToBackStack(null);
+
+              fragmentTransaction.commit();
+
+          }
+    });
+
+          }
+
+
+
+    }
 
 
 }
