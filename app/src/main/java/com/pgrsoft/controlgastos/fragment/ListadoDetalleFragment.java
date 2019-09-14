@@ -1,6 +1,7 @@
 package com.pgrsoft.controlgastos.fragment;
 
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -40,8 +41,10 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
 
     private Button btnPhoto;
     private Button btnSave;
+    private Button btnEstatistic;
     private Bitmap imageActual = null;
     private ImageView imageView;
+
     private MovimientoServices movimientoServices;
     private List<Movimiento> movimientos;
 
@@ -56,7 +59,7 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
         int i = 0;
         View miVista = inflater.inflate(R.layout.fragment_listado_detalle, container, false);
 
-        movimientoServices = new MovimientoServicesImpl(this.getActivity());
+        //movimientoServices = new MovimientoServicesImpl(this.getActivity());
 
         TextView textNombre = (TextView) miVista.findViewById(R.id.idDetalleNombre);
         TextView textDescripcion = (TextView) miVista.findViewById(R.id.idDetalleDescripcion);
@@ -66,6 +69,7 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
 
         btnPhoto = (Button) miVista.findViewById(R.id.idBtnPhoto);
         btnSave = (Button) miVista.findViewById(R.id.idBtnSavePhoto);
+        btnEstatistic = (Button) miVista.findViewById(R.id.idBtnEstatistic);
 
         Bundle bundle = getArguments();
 
@@ -89,6 +93,7 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
 
         btnPhoto.setOnClickListener(this);
         btnSave.setOnClickListener(this);
+        btnEstatistic.setOnClickListener(this);
 
         return miVista;
     }
@@ -105,6 +110,18 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
 
               case R.id.idBtnSavePhoto:
                   savePhoto();
+                  break;
+              case R.id.idBtnEstatistic:
+                  Fragment fragment = new EstadisticaFragment();
+
+                  FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+                  fragmentTransaction.replace(R.id.destino, fragment);
+
+                  fragmentTransaction.addToBackStack(null);
+
+                  fragmentTransaction.commit();
+
                   break;
           }
     }

@@ -66,6 +66,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
 
     @Override
     public Movimiento read(Long codigo) {
+
         Movimiento movimiento = null;
         Cursor cursor = this.dataBaseHelper.getMovimiento(codigo);
         if (cursor != null && cursor.getCount() > 0) {
@@ -73,19 +74,9 @@ public class MovimientoServicesImpl implements MovimientoServices {
             Long code = cursor.getLong(0);
             double importe = cursor.getDouble(1);
             String descripcion = cursor.getString(2);
-            //String strFecha = cursor.getString(3);
+
             Date fecha = getDateFromMilliseconds(cursor.getString(3));
             Long codigoProducto = cursor.getLong(4);
-
-            // Transformar la fecha en Date()
-            /* Date fecha = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            // Habrá un try catch....
-            try {
-                fecha = sdf.parse(strFecha);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }*/
 
             ProductoServices productoServices = new ProductoServicesImpl(this.context);
             Producto producto = productoServices.read(codigoProducto);
@@ -115,6 +106,8 @@ public class MovimientoServicesImpl implements MovimientoServices {
         List<Movimiento> movimientos = new ArrayList<>();
 
         Cursor cursor = dataBaseHelper.getDateBetweenQuery(dateInicial, dateFinal);
+
+        Log.d("***", "FECHAS: " +dateInicial + " " +dateFinal);
 
         if (cursor == null){
             Log.d("***c", "CURSOR es Nulo: " +cursor.getCount());

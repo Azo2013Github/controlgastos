@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.text.format.DateUtils;
 import android.util.Log;
 
 
@@ -237,13 +238,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             Log.d("***", "OJO ALGUNA FECHA ES NULL!!!!");
         }
 
-        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        /*String strFechaInicial = sdf.format(dateInicial);
-        String strFechaFinal = sdf.format(dateFinal);*/
         String consulta = "SELECT " + COL_1_MOVIMIENTOS + " , "
                 +COL_2_MOVIMIENTOS + " , " + COL_3_MOVIMIENTOS + " , " + COL_4_MOVIMIENTOS + " ,"  + COL_6_MOVIMIENTOS+
                 " from " + MOVIMIENTOS_TABLE + " where "
-                + COL_4_MOVIMIENTOS + " > " + getMillisecondsFromDate(dateInicial) + " AND " + COL_4_MOVIMIENTOS + " <= " + getMillisecondsFromDate(dateFinal) + " ORDER BY " +
+                + COL_4_MOVIMIENTOS + " >= " + getMillisecondsFromDate(dateInicial) + " AND " + COL_4_MOVIMIENTOS + " <= " + getMillisecondsFromDate(dateFinal) + " ORDER BY " +
                     COL_1_MOVIMIENTOS + " DESC ";
 
         Log.d("*** consulta",consulta);
@@ -252,34 +250,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     private String getMillisecondsFromDate(Date date){
+
         return String.valueOf(date.getTime());
     }
-
-    private Date getDateFromMilliseconds(String strMilliseconds){
-        return new Date(Long.parseLong(strMilliseconds));
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public boolean deletingCategoria(Long codigo) {

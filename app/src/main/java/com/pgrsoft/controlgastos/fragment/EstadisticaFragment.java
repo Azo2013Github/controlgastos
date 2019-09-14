@@ -124,7 +124,7 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
                 }else {
                     Date dateIni = new Date();
                     Date dateFin = new Date();
-                    SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy");
+                    SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy HH:mm");
                     String strFechaInicio = editDateInicial.getText().toString();
                     String strFechaFin = editDateFinal.getText().toString();
 
@@ -161,13 +161,6 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
 
     }
 
-    private String getMillisecondsFromDate(Date date){
-        return String.valueOf(date.getTime());
-    }
-
-    private Date getDateFromMilliseconds(String strMilliseconds){
-        return new Date(Long.parseLong(strMilliseconds));
-    }
 
 
 }
