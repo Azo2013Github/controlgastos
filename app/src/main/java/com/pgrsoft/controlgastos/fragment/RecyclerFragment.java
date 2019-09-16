@@ -37,7 +37,7 @@ public class RecyclerFragment extends Fragment {
         recyclerView = (RecyclerView) myView.findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
 
-        layoutManager = new LinearLayoutManager(this.getActivity());
+        layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
         return myView;
