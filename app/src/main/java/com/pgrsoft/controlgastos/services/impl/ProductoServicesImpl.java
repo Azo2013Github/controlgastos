@@ -41,23 +41,22 @@ public class ProductoServicesImpl implements ProductoServices {
         List<Producto> productos = new ArrayList<>();
 
         if (cursor != null && cursor.getCount() > 0) {
-
             while (cursor.moveToNext()) {
 
-                Long codigo = cursor.getLong(0);
-                String nombre = cursor.getString(1);
-                String descripcion = cursor.getString(2);
-                double precio = cursor.getDouble(3);
-                byte[] image = cursor.getBlob(4);
-                Long codigoCategoria = cursor.getLong(5);
+                    Long codigo = cursor.getLong(0);
+                    String nombre = cursor.getString(1);
+                    String descripcion = cursor.getString(2);
+                    double precio = cursor.getDouble(3);
+                    int image = cursor.getInt(4);
+                    Long codigoCategoria = cursor.getLong(5);
 
-                categoria = categoriaServices.read(codigoCategoria);
+                    categoria = categoriaServices.read(codigoCategoria);
 
-                Producto producto = new Producto(nombre, descripcion, precio, image, categoria);
-                producto.setCodigo(codigo);
-                productos.add(producto);
+                    Producto producto = new Producto(nombre, descripcion, precio, image, categoria);
+                    producto.setCodigo(codigo);
+                    productos.add(producto);
+                }
 
-            }
         }
 
         dataBaseHelper.close();
@@ -79,7 +78,7 @@ public class ProductoServicesImpl implements ProductoServices {
             String nombre = cursor.getString(1);
             String descripcion = cursor.getString(2);
             double precio = cursor.getDouble(3);
-            byte[] image = cursor.getBlob(4);
+            int image = cursor.getInt(4);
             Long codigoCategoria = cursor.getLong(5);
 
             Categoria categoria = categoriaServices.read(codigoCategoria);

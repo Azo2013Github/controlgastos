@@ -82,12 +82,8 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
             textDescripcion.setText(movimiento.getDescripcion());
             textImporte.setText(String.valueOf(movimiento.getImporte()));
             textFecha.setText(String.valueOf(movimiento.getFecha()));
-            byte[] images = movimiento.getProducto().getImagen();
 
-            Log.d("**","Tamaño imagen: " + images.length);
-            Bitmap bm = BitmapFactory.decodeByteArray(images, 0, images.length);
-
-            imageView.setImageBitmap(bm);
+            getDrawableImage(movimiento.getProducto().getImagen(), imageView) ;
 
         }
 
@@ -124,6 +120,50 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
 
                   break;
           }
+    }
+
+
+    /* La funcion para cambiar las imagenes: */
+    private void getDrawableImage(int valueImage, ImageView imageView){
+
+        switch (valueImage){
+            case 1:
+                imageView.setImageResource(R.drawable.carne);
+                break;
+            case 2:
+                imageView.setImageResource(R.drawable.verduras);
+                break;
+            case 3:
+                imageView.setImageResource(R.drawable.grifo);
+                break;
+            case 4:
+                imageView.setImageResource(R.drawable.legumbres);
+
+                break;
+            case 5:
+                imageView.setImageResource(R.drawable.bebidas);
+                break;
+            case 6:
+                imageView.setImageResource(R.drawable.ropa);
+                break;
+
+            case 7:
+                imageView.setImageResource(R.drawable.casa);
+
+                break;
+            case 8:
+                imageView.setImageResource(R.drawable.extras);
+
+                break;
+            case 9:
+                imageView.setImageResource(R.drawable.farmacia);
+
+                break;
+            case 10:
+                imageView.setImageResource(R.drawable.shoes);
+                break;
+        }
+
     }
 
     @Override

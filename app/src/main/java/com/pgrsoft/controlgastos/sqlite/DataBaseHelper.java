@@ -66,7 +66,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 .append(COL_2_PRODUCTOS).append(" TEXT NOT NULL, ")
                 .append(COL_3_PRODUCTOS).append(" TEXT NOT NULL, ")
                 .append(COL_4_PRODUCTOS).append(" REAL NOT NULL, ")
-                .append(COL_5_PRODUCTOS).append(" BLOB, ")
+                .append(COL_5_PRODUCTOS).append(" INTEGER NOT NULL, ")
                 .append(COL_6_PRODUCTOS).append(" INTEGER NOT NULL, ")
                 .append(" FOREIGN KEY " + "( " + COL_6_PRODUCTOS + " ) REFERENCES " + CATEGORIAS_TABLE + " (" + COL1_CODIDO_CAT + "  ))");
         strDDL = builder.toString();
@@ -174,7 +174,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         return db.rawQuery("SELECT * FROM " + PRODUCTOS_TABLE +
-                " ORDER BY " + COL_1_PRODUCTOS + " DESC", null);
+                " ORDER BY " + COL_1_PRODUCTOS + " DESC ", null);
 
     }
 
@@ -213,7 +213,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public Cursor getAllMovimientosCursor(){
 
         SQLiteDatabase db = getWritableDatabase();
-
         return db.rawQuery("SELECT * FROM " + MOVIMIENTOS_TABLE +
                 " ORDER BY " + COL_1_MOVIMIENTOS + " DESC", null);
 
@@ -233,11 +232,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public Cursor getDateBetweenQuery(Date dateInicial, Date dateFinal){
 
         SQLiteDatabase db = getWritableDatabase();
-
         if (dateInicial == null || dateFinal == null){
             Log.d("***", "OJO ALGUNA FECHA ES NULL!!!!");
         }
-
         String consulta = "SELECT " + COL_1_MOVIMIENTOS + " , "
                 +COL_2_MOVIMIENTOS + " , " + COL_3_MOVIMIENTOS + " , " + COL_4_MOVIMIENTOS + " ,"  + COL_6_MOVIMIENTOS+
                 " from " + MOVIMIENTOS_TABLE + " where "
@@ -250,7 +247,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     private String getMillisecondsFromDate(Date date){
-
         return String.valueOf(date.getTime());
     }
 

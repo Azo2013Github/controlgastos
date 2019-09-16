@@ -9,12 +9,9 @@ public class Producto implements Serializable {
     private String nombre; // nombre del producto...
     private double precio;
     private String descripcion;
-    private byte[] imagen;
+    private int imagen;
 
-    public Producto() {
-    }
-
-    public Producto(String nombre, String descripcion, double precio, byte [] imagen, Categoria categoria) {
+    public Producto(String nombre, String descripcion, double precio, int imagen, Categoria categoria) {
 
         this.imagen = imagen;
         this.categoria = categoria;
@@ -23,12 +20,12 @@ public class Producto implements Serializable {
         this.precio = precio;
     }
 
-    public byte[] getImagen() {
-        return imagen;
+    public void setImagen(int imagen) {
+        this.imagen = imagen;
     }
 
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
+    public int getImagen() {
+        return imagen;
     }
 
     public Long getCodigo() {

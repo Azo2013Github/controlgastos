@@ -63,12 +63,14 @@ public class GastosAdaptador extends BaseAdapter {
         textPrecio.setText(String.valueOf(movimiento.getProducto().getPrecio()));
         textDescripcion.setText(String.valueOf(movimiento.getProducto().getDescripcion()));
 
-        byte [] imagen = movimiento.getProducto().getImagen();
-        Bitmap bitmap = getImage(imagen);
+        //byte [] imagen = movimiento.getProducto().getImagen();
+        /*Bitmap bitmap = getImage(imagen);
 
         //Convert bitmap to drawable
-        Drawable drawable = new BitmapDrawable(miVista.getResources(), bitmap);
-        imageView.setImageDrawable(drawable);
+        Drawable drawable = new BitmapDrawable(miVista.getResources(), bitmap);*/
+        //imageView.setImageDrawable(drawable);
+
+        getDrawableImage(movimiento.getProducto().getImagen(), imageView) ;
         imageView.setTag(position);
 
         return miVista;
@@ -93,8 +95,50 @@ public class GastosAdaptador extends BaseAdapter {
     }
 
     // convert from byte array to bitmap
-    public static Bitmap getImage(byte[] image) {
+    /*public static Bitmap getImage(byte[] image) {
         return BitmapFactory.decodeByteArray(image, 0, image.length);
+    }*/
+
+    private void getDrawableImage(int valueImage, ImageView imageView){
+
+        switch (valueImage){
+            case 1:
+                imageView.setImageResource(R.drawable.carne);
+                break;
+            case 2:
+                imageView.setImageResource(R.drawable.verduras);
+                break;
+            case 3:
+                imageView.setImageResource(R.drawable.grifo);
+                break;
+            case 4:
+                imageView.setImageResource(R.drawable.legumbres);
+
+                break;
+            case 5:
+                imageView.setImageResource(R.drawable.bebidas);
+                break;
+            case 6:
+                imageView.setImageResource(R.drawable.ropa);
+                break;
+
+            case 7:
+                imageView.setImageResource(R.drawable.casa);
+
+                break;
+            case 8:
+                imageView.setImageResource(R.drawable.extras);
+
+                break;
+            case 9:
+                imageView.setImageResource(R.drawable.farmacia);
+
+                break;
+            case 10:
+                imageView.setImageResource(R.drawable.shoes);
+                break;
+        }
+
     }
 
 

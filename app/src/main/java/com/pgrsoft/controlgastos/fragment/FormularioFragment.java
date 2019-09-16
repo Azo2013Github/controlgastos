@@ -127,10 +127,9 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
                     String descripcion = editDescripcion.getText().toString();
                     String desMovimiento = editDesMovimiento.getText().toString();
-                    //double saldo = Double.parseDouble(editSaldo.getText().toString()) - importe;
 
                     categoria = new Categoria(strCategoria);
-                    byte[] image = changeImageListView(categoria.getNombre()); //Guardar las categorias  // en funcion de las Imagenes para añadir en la BBDD.
+                    int image = changeImageListView(categoria.getNombre()); //Guardar las categorias  // en funcion de las Imagenes para añadir en la BBDD.
 
                     producto = new Producto(nombre, descripcion, precio, image, categoria);
                     movimiento = new Movimiento(importe, desMovimiento, new Date(), producto);
@@ -206,45 +205,56 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     }
 
     /* Esta funcion sirve qua que las imagenes vayan cambiando segun categoria */
-    private byte[] changeImageListView(String nombre){
+    private int changeImageListView(String nombre){
+
+        int valorImage = 0;
 
         switch (nombre){
 
             case "CARNE":
                 imageView.setImageResource(R.drawable.carne);
+                valorImage = 1;
                 break;
             case "VERDURA":
                 imageView.setImageResource(R.drawable.verduras);
+                valorImage = 2;
                 break;
             case"SUMINISTROS":
                 imageView.setImageResource(R.drawable.grifo);
+                valorImage = 3;
                 break;
             case"LEGUMBRE":
                 imageView.setImageResource(R.drawable.legumbres);
+                valorImage = 4;
                 break;
             case"BEBIDAS":
                 imageView.setImageResource(R.drawable.bebidas);
+                valorImage = 5;
                 break;
             case"ROPA":
                 imageView.setImageResource(R.drawable.ropa);
+                valorImage = 6;
                 break;
+
             case"ALQUILER":
                 imageView.setImageResource(R.drawable.casa);
+                valorImage = 7;
                 break;
             case"EXTRAS":
                 imageView.setImageResource(R.drawable.extras);
+                valorImage = 8;
                 break;
             case "FARMACIA":
                 imageView.setImageResource(R.drawable.farmacia);
+                valorImage = 9;
                 break;
             case "ZAPATOS":
                 imageView.setImageResource(R.drawable.shoes);
+                valorImage = 10;
                 break;
         }
 
-        Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
-        byte [] imagen = getBytes(bitmap);
-        return imagen;
+        return valorImage;
     }
 
     private void vaciarEditText(){

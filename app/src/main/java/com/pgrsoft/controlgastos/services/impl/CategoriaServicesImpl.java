@@ -45,7 +45,7 @@ public class CategoriaServicesImpl implements CategoriaServices {
 
         }
 
-        dataBaseHelper.close();
+        //dataBaseHelper.close();
         return categoria;
     }
 

@@ -138,19 +138,6 @@ public class MovimientoServicesImpl implements MovimientoServices {
     private Date getDateFromMilliseconds(String strMilliseconds){
         return new Date(Long.parseLong(strMilliseconds));
     }
-
-
 }
 
-
-
-
-                /* //String strFecha = cursor.getString(3);
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
-                try {
-                    dateInicial = sdf.parse(strFecha);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }*/
 
