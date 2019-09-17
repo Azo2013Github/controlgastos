@@ -227,7 +227,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 " WHERE " + COL_1_MOVIMIENTOS + " = ?", args);
     }
 
-
     /* ESTE PARTE ES PARA HACER UNA QUERY SOBRE LA FECHA: */
     public Cursor getDateBetweenQuery(Date dateInicial, Date dateFinal){
 
@@ -241,8 +240,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + COL_4_MOVIMIENTOS + " >= " + getMillisecondsFromDate(dateInicial) + " AND " + COL_4_MOVIMIENTOS + " <= " + getMillisecondsFromDate(dateFinal) + " ORDER BY " +
                     COL_1_MOVIMIENTOS + " DESC ";
 
-        Log.d("*** consulta",consulta);
         Cursor cursor = db.rawQuery(consulta, null);
+
         return cursor;
     }
 

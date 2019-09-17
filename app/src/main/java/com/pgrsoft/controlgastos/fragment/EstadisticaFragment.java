@@ -124,15 +124,14 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
                 }else {
                     Date dateIni = new Date();
                     Date dateFin = new Date();
-                    SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy");
-                    String strFechaInicio = editDateInicial.getText().toString();
+                    SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy HH:mm");
+                    String strFechaInicio  = editDateInicial.getText().toString() ;
                     String strFechaFin = editDateFinal.getText().toString();
 
-                    Log.d("***Edit", editDateInicial.getText().toString());
                     try {
 
-                        dateIni = sdf.parse(strFechaInicio);
-                        dateFin = sdf.parse(strFechaFin);
+                        dateIni = sdf.parse(strFechaInicio + " 00:00");
+                        dateFin = sdf.parse(strFechaFin + " 23:59");
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }

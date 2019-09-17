@@ -1,21 +1,30 @@
 package com.pgrsoft.controlgastos.adaptador;
 
 
+import android.content.Context;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pgrsoft.controlgastos.model.Movimiento;
+import com.pgrsoft.controlgastos.services.MovimientoServices;
+import com.pgrsoft.controlgastos.services.impl.MovimientoServicesImpl;
 
 import java.util.List;
 
 public class ListadoAdaptadores extends RecyclerView.Adapter {
 
-    List<Movimiento> movimientos;
-    public ListadoAdaptadores(List<Movimiento> movimientos){
+    private List<Movimiento> movimientos;
+    private MovimientoServices movimientoServices;
+    private Context context;
 
-        this.movimientos = movimientos;
+
+    public ListadoAdaptadores(Context context){
+
+        movimientoServices = new MovimientoServicesImpl(this.context);
+        this.movimientos = movimientoServices.getAll();
+
 
     }
 
@@ -32,6 +41,6 @@ public class ListadoAdaptadores extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return movimientos.size();
     }
 }

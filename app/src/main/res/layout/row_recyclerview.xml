@@ -32,21 +32,34 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/idNombre"
+                    android:id="@+id/idTextViewCategory"
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nombre"
+                    android:text="@string/categoria"
                     android:textSize="25sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/idInfo"
+                    android:id="@+id/idTextViewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Descripcion "
+                    android:text="@string/nombre"
                     android:layout_marginBottom="15dp"
                     android:layout_marginRight="10dp"/>
+
+                <TextView
+                    android:id="@+id/idTextViewDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/descripcion" />
+
+                <TextView
+                    android:id="@+id/idTextViewDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fecha" />
+
 
             </LinearLayout>
         </LinearLayout>

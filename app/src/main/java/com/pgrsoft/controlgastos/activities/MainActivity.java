@@ -45,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentTransaction.replace(R.id.destino, fragment);
 
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack(null); // que hace?
 
         fragmentTransaction.commit();
 
-     }
+    }
 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
