@@ -129,7 +129,6 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
                     String strFechaFin = editDateFinal.getText().toString();
 
                     try {
-
                         dateIni = sdf.parse(strFechaInicio + " 00:00");
                         dateFin = sdf.parse(strFechaFin + " 23:59");
                     } catch (ParseException e) {
