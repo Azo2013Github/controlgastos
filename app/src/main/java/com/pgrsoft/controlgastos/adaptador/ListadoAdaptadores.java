@@ -1,6 +1,8 @@
 package com.pgrsoft.controlgastos.adaptador;
 
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pgrsoft.controlgastos.R;
+import com.pgrsoft.controlgastos.fragment.EstadisticaFragment;
+import com.pgrsoft.controlgastos.fragment.ListadoDetalleFragment;
 import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.services.MovimientoServices;
 
@@ -48,8 +52,8 @@ public class ListadoAdaptadores extends RecyclerView.Adapter<ListadoAdaptadores.
         holder.textViewDescription.setText(movimientos.get(position).getDescripcion());
         holder.textViewDate.setText(movimientos.get(position).getFecha().toString());
         holder.imageView.setImageResource(R.drawable.farmacia);
-        ListViewHolder vh = new ListViewHolder(new View());
-        vh.itemView
+        //ListViewHolder vh = new ListViewHolder(new View());
+        //vh.itemView
 
     }
 
@@ -74,6 +78,17 @@ public class ListadoAdaptadores extends RecyclerView.Adapter<ListadoAdaptadores.
             textViewDescription = (TextView) itemView.findViewById(R.id.idTextViewDescription);
             textViewName = (TextView) itemView.findViewById(R.id.idTextViewName);
             imageView = (ImageView) itemView.findViewById(R.id.idImageView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View view) {
+
+                    int position = getAdapterPosition();
+                }
+            });
+
+
 
         }
     }
