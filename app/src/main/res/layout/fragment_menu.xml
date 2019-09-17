@@ -30,7 +30,7 @@
         android:id="@+id/idBtnForm"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
+        android:layout_gravity="center"
         android:layout_marginTop="28dp"
         android:text="@string/formMovimiento"
         android:textColor="@color/beige"
@@ -40,7 +40,7 @@
         android:id="@+id/idBtnListar"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
+        android:layout_gravity="center"
         android:layout_marginTop="28dp"
         android:background="@color/colorAccent"
         android:text="@string/listarGastos"
@@ -51,11 +51,12 @@
         android:id="@+id/idBtnDiagrama"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
+        android:layout_gravity="center"
         android:layout_marginTop="28dp"
         android:background="@color/colorAccent"
         android:text="@string/diagrama"
         android:textColor="@color/beige"
         android:textSize="18sp" />
+
 
 </LinearLayout>
