@@ -1,20 +1,21 @@
 package com.pgrsoft.controlgastos.fragment;
 
 
-import android.app.FragmentTransaction;
+import androidx.fragment.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListAdapter;
 
 import com.pgrsoft.controlgastos.R;
-import com.pgrsoft.controlgastos.adaptador.ListadoAdaptadores;
+import com.pgrsoft.controlgastos.adaptador.ListAdapters;
 import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.model.Producto;
 import com.pgrsoft.controlgastos.services.MovimientoServices;
@@ -27,7 +28,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RecyclerFragment extends Fragment  {
+public class RecyclerFragment extends Fragment implements ListAdapters.MyListListener{
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -50,12 +51,44 @@ public class RecyclerFragment extends Fragment  {
         MovimientoServices movimientoServices = new MovimientoServicesImpl(this.getActivity());
         List<Movimiento> movimientos = movimientoServices.getAll();
 
-        ListadoAdaptadores listadoAdaptadores = new ListadoAdaptadores(movimientos);
+        ListAdapters listAdapters = new ListAdapters(movimientos, this);
 
-        recyclerView.setAdapter(listadoAdaptadores);
+        recyclerView.setAdapter(listAdapters);
 
         return myView;
     }
 
+
+    @Override
+    public void myClickList(int position) {
+
+        //productoServices = new ProductoServicesImpl(this.getActivity());
+        MovimientoServices movimientoServices = new MovimientoServicesImpl(this.getActivity());
+
+        //productos = productoServices.getAll();
+        List<Movimiento> movimientos = movimientoServices.getAll();
+
+        //Producto producto = productos.get(i);
+
+        Movimiento movimiento = movimientos.get(position);
+
+        Bundle bundle = new Bundle();
+
+        //bundle.putSerializable("PRODUCTOS", producto);
+        bundle.putSerializable("MOVIMIENTOS", movimiento);
+
+        ListadoDetalleFragment fragment = new ListadoDetalleFragment();
+
+        fragment.setArguments(bundle);
+
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+        fragmentTransaction.replace(R.id.destino, fragment);
+
+        fragmentTransaction.addToBackStack(null);
+
+        fragmentTransaction.commit();
+
+    }
 
 }

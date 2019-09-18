@@ -1,29 +1,31 @@
 package com.pgrsoft.controlgastos.fragment;
 
 
-import android.app.FragmentTransaction;
+import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pgrsoft.controlgastos.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MenuFragment extends Fragment implements View.OnClickListener{
+public class MenuFragment extends Fragment /*implements View.OnClickListener*/{
 
     private Button btnCrear;
     private Button btnListarProducto;
     private Button btnListarMovimiento;
-
-    private Fragment fragment;
+    private FloatingActionButton floatingActionButton;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -36,30 +38,52 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
         View miVista = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        btnCrear = (Button) miVista.findViewById(R.id.idBtnForm);
+        floatingActionButton = (FloatingActionButton) miVista.findViewById(R.id.idBtnAdd);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                FormularioFragment formularioFragment = new FormularioFragment();
+
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+                fragmentTransaction.replace(R.id.destino, formularioFragment);
+
+                fragmentTransaction.setTransition(fragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
+                fragmentTransaction.addToBackStack(null);
+
+                fragmentTransaction.commit();
+
+            }
+        });
+
+        /*btnCrear = (Button) miVista.findViewById(R.id.idBtnForm);
         btnListarProducto = (Button) miVista.findViewById(R.id.idBtnListar);
-        btnListarMovimiento = (Button) miVista.findViewById(R.id.idBtnDiagrama);
+        btnListarMovimiento = (Button) miVista.findViewById(R.id.idBtnDiagrama);*/
 
 
-        btnCrear.setOnClickListener(this);
-        btnListarProducto.setOnClickListener(this);
-        btnListarMovimiento.setOnClickListener(this);
+        //btnCrear.setOnClickListener(this);
+        //btnListarProducto.setOnClickListener(this);
+        //btnListarMovimiento.setOnClickListener(this);
 
         return miVista;
     }
 
-    @Override
+   /* @Override
     public void onClick(View view) {
 
         switch (view.getId()){
 
             case R.id.idBtnForm:
 
-                fragment = new FormularioFragment();
+                FormularioFragment formularioFragment = new FormularioFragment();
 
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
-                fragmentTransaction.replace(R.id.destino, fragment);
+                fragmentTransaction.replace(R.id.destino, formularioFragment);
 
                 fragmentTransaction.addToBackStack(null);
 
@@ -69,11 +93,11 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
             case R.id.idBtnListar:
 
-                fragment = new GastoListadoFragment();
+                GastoListadoFragment gastoListadoFragment = new GastoListadoFragment();
 
                 fragmentTransaction = getFragmentManager().beginTransaction();
 
-                fragmentTransaction.replace(R.id.destino, fragment);
+                fragmentTransaction.replace(R.id.destino, gastoListadoFragment);
 
                 fragmentTransaction.addToBackStack(null);
 
@@ -83,11 +107,11 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
             case R.id.idBtnDiagrama:
 
-                fragment = new RecyclerFragment();
+                RecyclerFragment recyclerFragment = new RecyclerFragment();
 
                 fragmentTransaction = getFragmentManager().beginTransaction();
 
-                fragmentTransaction.replace(R.id.destino, fragment);
+                fragmentTransaction.replace(R.id.destino, recyclerFragment);
 
                 fragmentTransaction.addToBackStack(null);
 
@@ -98,5 +122,5 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
         }
 
 
-    }
+    }*/
 }

@@ -1,13 +1,14 @@
 package com.pgrsoft.controlgastos.fragment;
 
 
-import android.app.FragmentTransaction;
-import android.content.Intent;
+//import android.app.FragmentTransaction;
+import androidx.fragment.app.FragmentTransaction;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
-import android.app.Fragment;
+//import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
 import android.util.Log;
@@ -114,7 +115,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
         switch (view.getId()){
 
-            case R.id.idBtnAdd:
+            /*case R.id.idBtnAdd:
                 if (spinner.toString().equals("") || editCantidad.getText().toString().equals("") || editPrecio.getText().toString().equals("") ||
                     editDesMovimiento.getText().toString().equals("") || editNombre.getText().toString().equals("")
                     || editDescripcion.getText().toString().equals("")){
@@ -144,7 +145,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
             case R.id.idBtnList:
 
-                Fragment fragment = new GastoListadoFragment();
+                /*GastoListadoFragment fragment = new GastoListadoFragment();
 
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
@@ -154,7 +155,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
                 fragmentTransaction.commit();
 
-                break;
+                break;*/
 
         }
 

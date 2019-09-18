@@ -1,10 +1,11 @@
 package com.pgrsoft.controlgastos.fragment;
 
 
-import android.app.FragmentTransaction;
+//import android.app.FragmentTransaction;
+import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,7 +64,7 @@ public class GastoListadoFragment extends Fragment implements ListView.OnItemCli
         productoServices = new ProductoServicesImpl(this.getActivity());
         MovimientoServices movimientoServices = new MovimientoServicesImpl(this.getActivity());
 
-        productos = productoServices.getAll();
+        /*productos = productoServices.getAll();
         List<Movimiento> movimientos = movimientoServices.getAll();
 
         Producto producto = productos.get(i);
@@ -75,7 +76,7 @@ public class GastoListadoFragment extends Fragment implements ListView.OnItemCli
         bundle.putSerializable("PRODUCTOS", producto);
         bundle.putSerializable("MOVIMIENTOS", movimiento);
 
-        Fragment fragment = new ListadoDetalleFragment();
+        ListadoDetalleFragment fragment = new ListadoDetalleFragment();
 
         fragment.setArguments(bundle);
 
@@ -85,7 +86,7 @@ public class GastoListadoFragment extends Fragment implements ListView.OnItemCli
 
         fragmentTransaction.addToBackStack(null);
 
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
 
     }
 }

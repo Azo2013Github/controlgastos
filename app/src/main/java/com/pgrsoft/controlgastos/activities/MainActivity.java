@@ -2,52 +2,78 @@ package com.pgrsoft.controlgastos.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
-import android.database.sqlite.SQLiteDatabase;
+
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
 import com.pgrsoft.controlgastos.R;
+import com.pgrsoft.controlgastos.adaptador.ViewPagerAdapters;
 import com.pgrsoft.controlgastos.fragment.FormularioFragment;
-import com.pgrsoft.controlgastos.fragment.MenuFragment;
-import com.pgrsoft.controlgastos.model.Categoria;
-import com.pgrsoft.controlgastos.model.Movimiento;
-import com.pgrsoft.controlgastos.model.Producto;
-import com.pgrsoft.controlgastos.services.CategoriaServices;
-import com.pgrsoft.controlgastos.services.MovimientoServices;
-import com.pgrsoft.controlgastos.services.ProductoServices;
-import com.pgrsoft.controlgastos.services.impl.CategoriaServicesImpl;
-import com.pgrsoft.controlgastos.services.impl.MovimientoServicesImpl;
-import com.pgrsoft.controlgastos.services.impl.ProductoServicesImpl;
-import com.pgrsoft.controlgastos.sqlite.DataBaseHelper;
-
-import java.util.Date;
-import java.util.List;
-
 
 public class MainActivity extends AppCompatActivity {
 
-    private Fragment fragment;
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fragment = new MenuFragment();
+        tabLayout = (TabLayout) findViewById(R.id.idtabLayout);
+        toolbar = (Toolbar) findViewById(R.id.idToolbar);
+        viewPager = (ViewPager) findViewById(R.id.idViewPager);
 
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        setSupportActionBar(toolbar); // PAra el action bar
 
-        fragmentTransaction.replace(R.id.destino, fragment);
+        tabLayout.addTab(tabLayout.newTab().setText("MENU"));
+        tabLayout.addTab(tabLayout.newTab().setText("LIST"));
+        tabLayout.addTab(tabLayout.newTab().setText("ESTATISTIC"));
+
+        tabLayout.setTabGravity(tabLayout.GRAVITY_FILL);
+
+        ViewPagerAdapters viewPagerAdapters = new ViewPagerAdapters(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(viewPagerAdapters);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+        /*MenuFragment menuFragment = new MenuFragment();
+
+        //FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+        fragmentTransaction.replace(R.id.destino, menuFragment);
 
         fragmentTransaction.addToBackStack(null); // que hace?
 
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
 
     }
 
@@ -70,11 +96,13 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.action_add:
-                fragment = new FormularioFragment();
+                FormularioFragment formularioFragment = new FormularioFragment();
 
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                //FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
-                fragmentTransaction.replace(R.id.destino, fragment);
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+                fragmentTransaction.replace(R.id.idViewPager, formularioFragment);
 
                 fragmentTransaction.addToBackStack(null);
 

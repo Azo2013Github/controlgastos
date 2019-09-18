@@ -1,13 +1,13 @@
 package com.pgrsoft.controlgastos.fragment;
 
 
-import android.app.FragmentTransaction;
+import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
@@ -75,10 +75,10 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
 
         if (bundle != null) {
 
-            Producto producto = (Producto) bundle.getSerializable("PRODUCTOS");
+            //Producto producto = (Producto) bundle.getSerializable("PRODUCTOS");
             Movimiento movimiento = (Movimiento) bundle.getSerializable("MOVIMIENTOS");
 
-            textNombre.setText(producto.getNombre());
+            textNombre.setText(movimiento.getProducto().getNombre());
             textDescripcion.setText(movimiento.getDescripcion());
             textImporte.setText(String.valueOf(movimiento.getImporte()));
             textFecha.setText(String.valueOf(movimiento.getFecha()));
@@ -108,15 +108,15 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
                   savePhoto();
                   break;
               case R.id.idBtnEstatistic:
-                  Fragment fragment = new EstadisticaFragment();
+                  EstadisticaFragment fragment = new EstadisticaFragment();
 
                   FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
-                  fragmentTransaction.replace(R.id.destino, fragment);
+                  /*fragmentTransaction.replace(R.id.destino, fragment);
 
                   fragmentTransaction.addToBackStack(null);
 
-                  fragmentTransaction.commit();
+                  fragmentTransaction.commit();*/
 
                   break;
           }
