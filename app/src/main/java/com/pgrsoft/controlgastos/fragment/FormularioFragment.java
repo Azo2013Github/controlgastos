@@ -88,7 +88,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         View miVista = inflater.inflate(R.layout.fragment_formulario, container, false);
 
         btnAdd = (Button) miVista.findViewById(R.id.idBtnAdd);
-        btnList = (Button) miVista.findViewById(R.id.idBtnList);
+        //btnList = (Button) miVista.findViewById(R.id.idBtnList);
 
         spinner = (Spinner) miVista.findViewById(R.id.idSpinnerCategory);
         cargarSpinner();
@@ -105,7 +105,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         movimientoServices = new MovimientoServicesImpl(this.getActivity());
 
         btnAdd.setOnClickListener(this);
-        btnList.setOnClickListener(this);
+        //btnList.setOnClickListener(this);
 
         return miVista;
     }
@@ -115,7 +115,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
         switch (view.getId()){
 
-            /*case R.id.idBtnAdd:
+            case R.id.idBtnAdd:
                 if (spinner.toString().equals("") || editCantidad.getText().toString().equals("") || editPrecio.getText().toString().equals("") ||
                     editDesMovimiento.getText().toString().equals("") || editNombre.getText().toString().equals("")
                     || editDescripcion.getText().toString().equals("")){
@@ -143,7 +143,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
                 break;
 
-            case R.id.idBtnList:
+            /*case R.id.idBtnList:
 
                 /*GastoListadoFragment fragment = new GastoListadoFragment();
 
@@ -162,11 +162,11 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     }
 
     // convert from bitmap to byte array para guardar las imagen en la bbdd
-    public static byte[] getBytes(Bitmap bitmap) {
+    /*public static byte[] getBytes(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
         return stream.toByteArray();
-    }
+    }*/
 
     private void cargarSpinner(){
 

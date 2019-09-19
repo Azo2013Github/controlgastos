@@ -41,6 +41,7 @@ public class ListAdapters extends RecyclerView.Adapter<ListAdapters.ListViewHold
         return new ListViewHolder(view, this.myListListener);
     }
 
+    // Actualizar los views
     @Override
     public void onBindViewHolder(@NonNull ListViewHolder holder, int position) {
 
@@ -49,17 +50,19 @@ public class ListAdapters extends RecyclerView.Adapter<ListAdapters.ListViewHold
         holder.textViewDescription.setText(movimientos.get(position).getDescripcion());
         holder.textViewDate.setText(movimientos.get(position).getFecha().toString());
         holder.imageView.setImageResource(R.drawable.farmacia);
-        //ListViewHolder vh = new ListViewHolder(new View());
-        //vh.itemView
+        getDrawableImage(movimientos.get(position).getProducto().getImagen(), holder.imageView) ;
 
     }
 
+    // Los numeros de Filas que hay dentro del ArrayList
     @Override
     public int getItemCount() {
         return movimientos.size();
     }
 
+
     // El metodo es para llamar al objeto y que sea uno:
+    // creacion de los Views y inicializacion:
     public class ListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView textViewCategory;
@@ -80,23 +83,64 @@ public class ListAdapters extends RecyclerView.Adapter<ListAdapters.ListViewHold
             // Creacion del Listener personalize
             myListListener = myListListener;
             itemView.setOnClickListener(this);
-
         }
 
         @Override
         public void onClick(View view) {
             myListListener.myClickList(getAdapterPosition());
-
         }
 
     }
 
     // creacion de una interface para poder acceder a myClickList
     public interface MyListListener{
-
         public void myClickList(int position);
 
     }
+
+    // Poner las imagenes
+    private void getDrawableImage(int valueImage, ImageView imageView){
+
+        switch (valueImage){
+            case 1:
+                imageView.setImageResource(R.drawable.carne);
+                break;
+            case 2:
+                imageView.setImageResource(R.drawable.verduras);
+                break;
+            case 3:
+                imageView.setImageResource(R.drawable.grifo);
+                break;
+            case 4:
+                imageView.setImageResource(R.drawable.legumbres);
+
+                break;
+            case 5:
+                imageView.setImageResource(R.drawable.bebidas);
+                break;
+            case 6:
+                imageView.setImageResource(R.drawable.ropa);
+                break;
+
+            case 7:
+                imageView.setImageResource(R.drawable.casa);
+
+                break;
+            case 8:
+                imageView.setImageResource(R.drawable.extras);
+
+                break;
+            case 9:
+                imageView.setImageResource(R.drawable.farmacia);
+
+                break;
+            case 10:
+                imageView.setImageResource(R.drawable.shoes);
+                break;
+        }
+
+    }
+
 
 
 }

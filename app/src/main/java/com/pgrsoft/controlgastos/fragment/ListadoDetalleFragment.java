@@ -37,7 +37,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListadoDetalleFragment extends Fragment implements View.OnClickListener{
+public class ListadoDetalleFragment extends Fragment /*implements View.OnClickListener*/{
 
     private Button btnPhoto;
     private Button btnSave;
@@ -67,9 +67,9 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
         TextView textFecha = (TextView) miVista.findViewById(R.id.idFecha);
         imageView = (ImageView) miVista.findViewById(R.id.idImageView);
 
-        btnPhoto = (Button) miVista.findViewById(R.id.idBtnPhoto);
-        btnSave = (Button) miVista.findViewById(R.id.idBtnSavePhoto);
-        btnEstatistic = (Button) miVista.findViewById(R.id.idBtnEstatistic);
+        //btnPhoto = (Button) miVista.findViewById(R.id.idBtnPhoto);
+        //btnSave = (Button) miVista.findViewById(R.id.idBtnSavePhoto);
+        //btnEstatistic = (Button) miVista.findViewById(R.id.idBtnEstatistic);
 
         Bundle bundle = getArguments();
 
@@ -87,15 +87,15 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
 
         }
 
-        btnPhoto.setOnClickListener(this);
-        btnSave.setOnClickListener(this);
-        btnEstatistic.setOnClickListener(this);
+       // btnPhoto.setOnClickListener(this);
+       // btnSave.setOnClickListener(this);
+       // btnEstatistic.setOnClickListener(this);
 
         return miVista;
     }
 
 
-    @Override
+    /*@Override
     public void onClick(View view) {
 
           switch (view.getId()){
@@ -116,11 +116,11 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
 
                   fragmentTransaction.addToBackStack(null);
 
-                  fragmentTransaction.commit();*/
+                  fragmentTransaction.commit();
 
                   break;
           }
-    }
+    }*/
 
 
     /* La funcion para cambiar las imagenes: */
