@@ -26,14 +26,12 @@ import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.services.MovimientoServices;
 import com.pgrsoft.controlgastos.services.impl.MovimientoServicesImpl;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 
 /**
  * A simple {@link Fragment} subclass.

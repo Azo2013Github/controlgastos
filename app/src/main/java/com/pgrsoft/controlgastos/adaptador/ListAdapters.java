@@ -37,7 +37,6 @@ public class ListAdapters extends RecyclerView.Adapter<ListAdapters.ListViewHold
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_recyclerview, null, false);
-        Log.d("***", "***: ListViewHolder onCreateViewHolder\n: ");
         return new ListViewHolder(view, this.myListListener);
     }
 

@@ -1,6 +1,8 @@
 package com.pgrsoft.controlgastos.model;
 
-public class Categoria {
+import java.io.Serializable;
+
+public class Categoria implements Serializable {
 
     private Long codigo;
     private String nombre;

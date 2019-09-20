@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.text.format.DateUtils;
 import android.util.Log;
 
 
@@ -13,9 +12,7 @@ import com.pgrsoft.controlgastos.model.Categoria;
 import com.pgrsoft.controlgastos.model.Movimiento;
 import com.pgrsoft.controlgastos.model.Producto;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class DataBaseHelper extends SQLiteOpenHelper {

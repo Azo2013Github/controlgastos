@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.pgrsoft.settingshelloworld.MainActivity">
 
-    <item
+    <!--<item
         android:id="@+id/action_add"
         android:orderInCategory="50"
         android:title="@string/action_add"
-        app:showAsAction="never" />
+        app:showAsAction="never" />-->
 
     <item
         android:id="@+id/action_settings"

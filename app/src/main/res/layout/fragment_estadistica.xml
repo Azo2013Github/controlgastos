@@ -7,15 +7,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/control"
-    android:textColor="@color/colorPrimaryDark"
     tools:context=".fragment.EstadisticaFragment">
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="72dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
         android:text="@string/diagramaGastos" />
 
     <LinearLayout
@@ -28,8 +27,8 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/startToDate" />
 
         <TextView
@@ -37,6 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/startToDate" />
     </LinearLayout>
 
@@ -76,27 +76,14 @@
             android:id="@+id/idBtnEstatistic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="130dp"
+            android:layout_gravity="center"
             android:text="@string/estadisticas" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/idTextDateStart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/idTextDateEnd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
+        android:orientation="horizontal"/>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -7,13 +7,13 @@
     android:orientation="vertical"
     tools:context=".fragment.MenuFragment">
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:src="@drawable/icono" />
+        android:src="@drawable/icono" />-->
 
     <TextView
         android:id="@+id/textView"
@@ -93,13 +93,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/idBtnAdd"
             android:layout_gravity="bottom|end"
-            android:src="@drawable/icon_24px"
-             />
-
+            android:src="@drawable/icon_24px"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-
 
 </LinearLayout>

@@ -93,23 +93,20 @@ public class MainActivity extends AppCompatActivity {
         switch (id){
             case R.id.action_settings:
 
-
                 break;
-            case R.id.action_add:
+            /*case R.id.action_add:
                 FormularioFragment formularioFragment = new FormularioFragment();
-
                 //FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-
                 fragmentTransaction.replace(R.id.idViewPager, formularioFragment);
-
                 fragmentTransaction.addToBackStack(null);
-
                 fragmentTransaction.commit();
-                break;
+                break;*/
+
             case R.id.action_help:
-                Toast.makeText(this, "APP CONTROL GASTOS \n: https://github.com/Azo2013Github/controlgastos", Toast.LENGTH_LONG).show();
+                Toast.makeText(this,
+                        "APP CONTROL GASTOS \n: https://github.com/Azo2013Github/controlgastos",
+                        Toast.LENGTH_LONG).show();
                 break;
 
         }
