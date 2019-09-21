@@ -2,14 +2,25 @@ package com.pgrsoft.controlgastos.fragment;
 
 
 //import android.app.FragmentTransaction;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 
 //import android.app.Fragment;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +32,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 //import com.frosquivel.magicalcamera.MagicalCamera;
 //import com.frosquivel.magicalcamera.MagicalPermissions;
@@ -77,6 +89,13 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     private Producto producto;
     private Movimiento movimiento;
 
+    // La parte de la foto:
+    private int camera = 1,gellary = 2;
+    public static final int PERMISSION_CODE = 111;
+
+    private Button btnPhoto;
+    private Button btnSave;
+
     public FormularioFragment() {
         // Required empty public constructor
     }
@@ -100,12 +119,16 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editDesMovimiento = (EditText) miVista.findViewById(R.id.idDesMovimiento);
         imageView = (ImageView) miVista.findViewById(R.id.idImage);
 
+        btnPhoto = (Button) miVista.findViewById(R.id.idBtnCamera);
+        btnSave = (Button) miVista.findViewById(R.id.idBtnSave);
+
         categoriaServices = new CategoriaServicesImpl(this.getActivity());
         productoServices = new ProductoServicesImpl(this.getActivity());
         movimientoServices = new MovimientoServicesImpl(this.getActivity());
 
         btnAdd.setOnClickListener(this);
-        //btnList.setOnClickListener(this);
+        btnPhoto.setOnClickListener(this);
+        //btnSave.setOnClickListener(this);
 
         return miVista;
     }
@@ -143,19 +166,14 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
                 break;
 
-            /*case R.id.idBtnList:
+            case R.id.idBtnCamera:
+                OpenImages();
+                break;
 
-                /*GastoListadoFragment fragment = new GastoListadoFragment();
+            case R.id.idBtnSave:
 
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-
-                fragmentTransaction.replace(R.id.destino, fragment);
-
-                fragmentTransaction.addToBackStack(null);
-
-                fragmentTransaction.commit();
-
-                break;*/
+                //savePhoto();
+                break;
 
         }
 
@@ -266,5 +284,174 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editNombre.setText("");
         editDesMovimiento.setText("");
     }
+
+    public boolean checkPermission(){
+
+        int result = ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE);
+        int result1 = ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int result2 = ContextCompat.checkSelfPermission(this.getActivity(), Manifest.permission.CAMERA);
+
+        return result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED && result2
+                == PackageManager.PERMISSION_GRANTED;
+
+    }
+
+    public void requestPermission(){
+
+        ActivityCompat.requestPermissions(this.getActivity(),new String[]
+                        {Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA},
+                PERMISSION_CODE);
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        switch (requestCode){
+
+            case PERMISSION_CODE :
+
+                if (grantResults.length > 0){
+
+                    boolean storage  = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean cameras = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+
+                    if (storage && cameras){
+
+                        Toast.makeText(this.getActivity(), "Permission Granted", Toast.LENGTH_SHORT).show();
+
+                    }else{
+
+                        Toast.makeText(this.getActivity(), "Permission Denied", Toast.LENGTH_SHORT).show();
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+
+                            if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+
+                                showMsg("You need to allow access to the permissions", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA},PERMISSION_CODE);
+                                        }
+                                    }
+                                });
+                                return;
+                            }
+                        }
+                    }
+                }
+        }
+
+    }
+
+    private void showMsg(String s, DialogInterface.OnClickListener listener) {
+
+        new AlertDialog.Builder(this.getActivity())
+                .setMessage(s)
+                .setPositiveButton("OK", listener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
+
+    private void OpenImages() {
+
+        final CharSequence[] option = {"Camera","Gellary"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this.getActivity());
+        builder.setTitle("Select Action");
+        builder.setItems(option, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if (option[which].equals("Camera")){
+                    CameraIntent();
+                }
+                if (option[which].equals("Gellary")){
+                    GellaryIntent();
+
+                }
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+    private void GellaryIntent() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,"Select File"),gellary);
+    }
+
+    private void CameraIntent() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent,camera);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK){
+            if (requestCode == camera){
+                OpenCameraResult(data);
+            }else if (requestCode == gellary){
+                OpenGellaryResult(data);
+            }
+        }
+    }
+
+    private void OpenGellaryResult(Intent data) {
+
+        Bitmap bitmap = null;
+
+        if (data != null){
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContext().getContentResolver(),data.getData());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        imageView.setImageBitmap(bitmap);
+
+    }
+
+    // Primera funcion:
+    private void OpenCameraResult(Intent data) {
+
+        Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+
+        File paths = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
+        Toast.makeText(this.getActivity(), "Path -> " + paths.getAbsolutePath(), Toast.LENGTH_SHORT).show();
+        Log.d("tag", "File Path -> " + paths.getName());
+
+        try {
+            FileOutputStream fos = new FileOutputStream(paths);
+            paths.createNewFile();
+
+            if (!paths.exists()) {
+                paths.mkdir();
+            }
+
+            fos.write(bytes.toByteArray());
+            fos.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        imageView.setImageBitmap(bitmap);
+
+    }
+
 
 }

@@ -105,8 +105,8 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
 
         }
 
-        btnPhoto.setOnClickListener(this);
-        btnSave.setOnClickListener(this);
+        //btnPhoto.setOnClickListener(this);
+        //btnSave.setOnClickListener(this);
         // btnEstatistic.setOnClickListener(this);
 
         return miVista;

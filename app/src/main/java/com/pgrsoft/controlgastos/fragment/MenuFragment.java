@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pgrsoft.controlgastos.R;
+import com.pgrsoft.controlgastos.adaptador.ViewPagerAdapters;
 
 
 /**
@@ -45,7 +47,7 @@ public class MenuFragment extends Fragment /*implements View.OnClickListener*/{
             @Override
             public void onClick(View view) {
 
-                FormularioFragment formularioFragment = new FormularioFragment();
+                /*FormularioFragment formularioFragment = new FormularioFragment();
 
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
@@ -55,7 +57,12 @@ public class MenuFragment extends Fragment /*implements View.OnClickListener*/{
 
                 fragmentTransaction.addToBackStack(null);
 
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
+
+                ViewPager myViewPager = (ViewPager) getActivity().findViewById(R.id.idViewPager);
+                myViewPager.setCurrentItem(3);
+
+
 
             }
         });

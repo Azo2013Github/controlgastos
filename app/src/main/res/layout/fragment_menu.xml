@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".fragment.MenuFragment">
 
@@ -89,11 +89,11 @@
         android:fitsSystemWindows="true">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/idBtnAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/idBtnAdd"
             android:layout_gravity="bottom|end"
-            android:src="@drawable/icon_24px"/>
+            android:src="@drawable/icon_24px" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

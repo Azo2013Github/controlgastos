@@ -6,19 +6,28 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.pgrsoft.controlgastos.fragment.EstadisticaFragment;
+import com.pgrsoft.controlgastos.fragment.FormularioFragment;
 import com.pgrsoft.controlgastos.fragment.ListadoDetalleFragment;
 import com.pgrsoft.controlgastos.fragment.MenuFragment;
 import com.pgrsoft.controlgastos.fragment.RecyclerFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ViewPagerAdapters extends FragmentStatePagerAdapter {
 
-
     private int numOfTap;
+    private List<Fragment> fragments;
 
-    public ViewPagerAdapters(FragmentManager fragmentManager, int numOfTap){
+    public ViewPagerAdapters(FragmentManager fragmentManager){
 
         super(fragmentManager);
-        this.numOfTap = numOfTap;
+        fragments = new ArrayList<>();
+        fragments.add(new MenuFragment());
+        fragments.add(new RecyclerFragment());
+        fragments.add(new EstadisticaFragment());
+        fragments.add(new FormularioFragment());
+        //this.numOfTap = numOfTap;
 
     }
 
@@ -26,7 +35,7 @@ public class ViewPagerAdapters extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        switch (position){
+        /*switch (position){
 
             case 0:
                 MenuFragment menuFragment = new MenuFragment();
@@ -39,12 +48,14 @@ public class ViewPagerAdapters extends FragmentStatePagerAdapter {
                 return estadisticaFragment;
                 default:
                     return null;
-        }
+        }*/
+        return fragments.get(position);
 
     }
 
     @Override
     public int getCount() {
-        return numOfTap;
+        //return numOfTap;
+        return fragments.size();
     }
 }

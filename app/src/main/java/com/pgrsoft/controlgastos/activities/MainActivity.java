@@ -36,11 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.addTab(tabLayout.newTab().setText("MENU"));
         tabLayout.addTab(tabLayout.newTab().setText("LIST"));
-        tabLayout.addTab(tabLayout.newTab().setText("ESTATISTIC"));
+        tabLayout.addTab(tabLayout.newTab().setText("ESTATIS"));
 
         tabLayout.setTabGravity(tabLayout.GRAVITY_FILL);
 
-        ViewPagerAdapters viewPagerAdapters = new ViewPagerAdapters(getSupportFragmentManager(), tabLayout.getTabCount());
+        ViewPagerAdapters viewPagerAdapters = new ViewPagerAdapters(getSupportFragmentManager()/*,
+        tabLayout.getTabCount()*/);
         viewPager.setAdapter(viewPagerAdapters);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -92,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
 
         switch (id){
             case R.id.action_settings:
-
+                ViewPager myViewPager = (ViewPager) this.findViewById(R.id.idViewPager);
+                myViewPager.setCurrentItem(3);
                 break;
             /*case R.id.action_add:
                 FormularioFragment formularioFragment = new FormularioFragment();
