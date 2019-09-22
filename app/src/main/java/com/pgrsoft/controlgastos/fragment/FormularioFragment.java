@@ -5,7 +5,6 @@ package com.pgrsoft.controlgastos.fragment;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -13,7 +12,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -29,7 +27,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -51,9 +48,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -119,8 +113,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editDesMovimiento = (EditText) miVista.findViewById(R.id.idDesMovimiento);
         imageView = (ImageView) miVista.findViewById(R.id.idImage);
 
-        btnPhoto = (Button) miVista.findViewById(R.id.idBtnCamera);
-        btnSave = (Button) miVista.findViewById(R.id.idBtnSave);
+        btnPhoto = (Button) miVista.findViewById(R.id.idBtnDelete);
 
         categoriaServices = new CategoriaServicesImpl(this.getActivity());
         productoServices = new ProductoServicesImpl(this.getActivity());
@@ -166,13 +159,8 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
                 break;
 
-            case R.id.idBtnCamera:
+            case R.id.idBtnDelete:
                 OpenImages();
-                break;
-
-            case R.id.idBtnSave:
-
-                //savePhoto();
                 break;
 
         }

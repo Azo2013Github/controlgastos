@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragment.MenuFragment">
 
-    <!--<ImageView
+    <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:src="@drawable/icono" />-->
+        android:src="@drawable/icono" />
 
     <TextView
         android:id="@+id/textView"
@@ -83,18 +83,20 @@
         android:text="@string/diagrama"
         android:textColor="@color/beige"
         android:textSize="18sp" />-->
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+   <!-- <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        >-->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/idBtnAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
+            app:tint="@null"
             android:src="@drawable/icon_24px" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-</LinearLayout>
+<!--</androidx.coordinatorlayout.widget.CoordinatorLayout>-->

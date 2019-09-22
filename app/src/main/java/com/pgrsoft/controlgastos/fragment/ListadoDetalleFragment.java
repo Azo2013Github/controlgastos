@@ -4,7 +4,6 @@ package com.pgrsoft.controlgastos.fragment;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -12,7 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -20,7 +18,6 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,16 +29,11 @@ import android.widget.Toast;
 
 import com.pgrsoft.controlgastos.R;
 import com.pgrsoft.controlgastos.model.Movimiento;
-import com.pgrsoft.controlgastos.model.Producto;
-import com.pgrsoft.controlgastos.services.MovimientoServices;
-import com.pgrsoft.controlgastos.services.impl.MovimientoServicesImpl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -55,7 +47,7 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
     private int camera = 1,gellary = 2;
     public static final int PERMISSION_CODE = 111;
 
-    private Button btnPhoto;
+    private Button btnDelete;
     private Button btnSave;
     //private Button btnEstatistic;
     private Bitmap imageActual = null;
@@ -80,8 +72,8 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
         TextView textFecha = (TextView) miVista.findViewById(R.id.idFecha);
         imageView = (ImageView) miVista.findViewById(R.id.idImageView);
 
-        btnPhoto = (Button) miVista.findViewById(R.id.idBtnCamera);
-        btnSave = (Button) miVista.findViewById(R.id.idBtnSave);
+        btnDelete = (Button) miVista.findViewById(R.id.idBtnDelete);
+        //btnSave = (Button) miVista.findViewById(R.id.idBtnSave);
 
         /*if (!checkPermission()){
             requestPermission();
@@ -105,7 +97,13 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
 
         }
 
-        //btnPhoto.setOnClickListener(this);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Log.d("***", "ESTO EJEMPLO: ");
+            }
+        });
         //btnSave.setOnClickListener(this);
         // btnEstatistic.setOnClickListener(this);
 
@@ -117,17 +115,17 @@ public class ListadoDetalleFragment extends Fragment implements View.OnClickList
 
         switch (view.getId()) {
 
-            case R.id.idBtnCamera:
+            case R.id.idBtnDelete:
                 //getCamera();
 
-                OpenImages(); //se llama a este metodo para abrir la camara:
+                //OpenImages(); //se llama a este metodo para abrir la camara:
                 break;
 
-            case R.id.idBtnSave:
+            /*case R.id.idBtnSave:
 
                 //savePhoto();
 
-                break;
+                break;*/
 
         }
     }
