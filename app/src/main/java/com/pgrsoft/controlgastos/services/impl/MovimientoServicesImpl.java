@@ -96,7 +96,7 @@ public class MovimientoServicesImpl implements MovimientoServices {
 
     @Override
     public boolean delete(Long codigo) {
-
+        Log.d("***", "ENtra DELETING");
         return dataBaseHelper.deletingMovimientoCodigo(codigo);
     }
 

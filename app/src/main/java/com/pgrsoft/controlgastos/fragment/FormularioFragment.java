@@ -113,7 +113,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         editDesMovimiento = (EditText) miVista.findViewById(R.id.idDesMovimiento);
         imageView = (ImageView) miVista.findViewById(R.id.idImage);
 
-        btnPhoto = (Button) miVista.findViewById(R.id.idBtnDelete);
+        btnPhoto = (Button) miVista.findViewById(R.id.idBtnCamera);
 
         categoriaServices = new CategoriaServicesImpl(this.getActivity());
         productoServices = new ProductoServicesImpl(this.getActivity());
@@ -159,7 +159,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
                 break;
 
-            case R.id.idBtnDelete:
+            case R.id.idBtnCamera:
                 OpenImages();
                 break;
 
@@ -188,6 +188,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         Categoria categoria8 = new Categoria("EXTRAS");
         Categoria categoria9 = new Categoria("FARMACIA");
         Categoria categoria10 = new Categoria("ZAPATOS");
+        Categoria categoria11 = new Categoria("TRANSPORTES");
 
         categorias.add(categoria1);
         categorias.add(categoria2);
@@ -199,13 +200,20 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         categorias.add(categoria8);
         categorias.add(categoria9);
         categorias.add(categoria10);
-        int i = 0;
-        String [] strNombres = new String [10];
+        categorias.add(categoria11);
 
-        for (Categoria categoria: categorias) {
+        //int i = 0;
+        String [] strNombres = new String [11];
+
+        /*for (Categoria categoria: categorias) {
             strNombres [i] = categoria.getNombre(); //cogemos los nombres de los agentes en cada posicion
             i++; //Incrementamos el i para que salga todos los nombres de los agentes
+        }*/
+        for (int i = 0; i < categorias.size(); i++) {
+            Categoria categoria = categorias.get(i);
+            strNombres [i] = categoria.getNombre();
         }
+
         stringArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, strNombres);
         spinner.setAdapter(stringArrayAdapter);
 
@@ -258,6 +266,10 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
             case "ZAPATOS":
                 imageView.setImageResource(R.drawable.shoes);
                 valorImage = 10;
+                break;
+            case "TRANSPORTES":
+                imageView.setImageResource(R.drawable.ic_tmb);
+                valorImage = 11;
                 break;
         }
 

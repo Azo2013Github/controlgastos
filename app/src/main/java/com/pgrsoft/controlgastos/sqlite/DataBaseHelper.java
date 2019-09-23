@@ -255,6 +255,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         try{
             db.delete(CATEGORIAS_TABLE, COL1_CODIDO_CAT + " = ? ", args);
+
             eliminado = true;
 
         }catch (Exception e){
@@ -334,16 +335,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String[] args = new String[]{String.valueOf(codigo)};
         boolean eliminado = false;
 
-        try{
+        db.delete(MOVIMIENTOS_TABLE, COL_1_MOVIMIENTOS + " = ? ", args);
 
-            db.delete(MOVIMIENTOS_TABLE, COL_1_MOVIMIENTOS + " = ? ", args);
-            eliminado = true;
 
-        }catch (Exception e){
-            if (eliminado == false){
-                e.printStackTrace();
-            }
-        }
         db.close();
         return true;
     }
