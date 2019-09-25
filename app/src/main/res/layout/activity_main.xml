@@ -39,16 +39,6 @@
 
     </androidx.viewpager.widget.ViewPager>
 
-
-    <!-- <fragment
-         android:id="@+id/menu"
-         android:name="com.pgrsoft.controlgastos.fragment.MenuFragment"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         tools:layout="@layout/fragment_menu">
-
-     </fragment>-->
-
     <RelativeLayout
         android:id="@+id/destino"
         android:layout_width="match_parent"
@@ -56,4 +46,3 @@
 
 </RelativeLayout>
 
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

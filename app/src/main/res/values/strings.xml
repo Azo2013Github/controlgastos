@@ -1,34 +1,32 @@
 <resources>
     <string name="app_name">controlgastos</string>
-    <string name="titulo">CONTROL DE GASTOS</string>
+    <string name="titulo">EXPENSE CONTROL</string>
     <string name="create">CREATE</string>
-    <string name="listarGastos">LISTADO GASTOS</string>
-    <string name="diagrama">DIAGRAMA</string>
-    <string name="categoria">CATEGORIA:</string>
-    <string name="precio">PRECIO:</string>
-    <string name="descripcion">DESCRIPCION:</string>
+    <string name="listarGastos">LIST EXPENSE</string>
+    <string name="diagrama">DIAGRAM</string>
+    <string name="categoria">CATEGORY:</string>
+    <string name="precio">PRICE:</string>
+    <string name="descripcion">DESCRIPTION:</string>
     <string name="nombre">NOMBRE:</string>
-    <string name="fecha">FECHA:</string>
-    <string name="importe">IMPORTE:</string>
+    <string name="fecha">DATE:</string>
+    <string name="importe">AMOUNT:</string>
     <string name="descrpcionMovimiento">MOVIMIENTO</string>
-    <string name="saldo">SALDO:</string>
+    <string name="saldo">BALANCE:</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="placeholder">descripcion</string>
-    <string name="introducir">INTRODUCIR GASTOS</string>
-    <string name="salir">SALIR</string>
-    <string name="descripcionProducto">DESCRIPCION PRODUCTO:</string>
-    <string name="detalleProducto">DETALLE DE LAS COMPRAS</string>
-    <string name="guardar">GUARDAR IMAGEN</string>
-    <string name="descripcionMovimiento">DESP MOVIMIENTO</string>
+    <string name="introducir">INSERT GASTOS</string>
+    <string name="descripcionProducto">DESCRIPTION OF PRODUCT:</string>
+    <string name="detalleProducto">SHOPPING DETAIL</string>
+    <string name="descripcionMovimiento">DESP MOVEMENT</string>
     <string name="cantidad">CANTIDAD</string>
-    <string name="diagramaGastos">DIAGRAMA DE IMPORTE DE LOS GASTOS</string>
+    <string name="diagramaGastos">EXPENSE AMOUNT DIAGRAM</string>
     <string name="endDate">DateToEnd</string>
     <string name="startToDate">DateOfToday</string>
     <string name="estadisticas">ESTATISTICS</string>
     <string name="pick_date">DATE</string>
-    <string name="compra">COMPRA</string>
+    <string name="compra">BY</string>
     <string name="formMovimiento">MOVEMENTS FORM</string>
     <string name="list">LIST</string>
     <string name="action_settings">Settings</string>
@@ -38,5 +36,6 @@
     <string name="get_photo">GET PHOTO</string>
     <string name="save_photo">SAVE PHOTO</string>
     <string name="deleteGasto">DELETE GASTO</string>
+    <string name="edit">EDIT EXPENSIVE</string>
 
 </resources>

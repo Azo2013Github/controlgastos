@@ -120,7 +120,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     }
 
-
        // Las partes de la tabla Productos:
     public Producto createProducto(Producto producto) {
 
@@ -140,7 +139,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return resultado == -1 ? null : producto;
 
     }
-
 
     public Cursor getAllCategoriesCursor(){
 
@@ -189,14 +187,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public Movimiento createMovimiento(Movimiento movimiento){
 
         SQLiteDatabase db = getWritableDatabase();
-        // Convertir la fecka en Strng para poder introducir registros en la bb de datos...
-        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        //String strFecha = sdf.format(movimiento.getFecha());
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2_MOVIMIENTOS, movimiento.getImporte());
         contentValues.put(COL_3_MOVIMIENTOS, movimiento.getDescripcion());
-        //contentValues.put(COL_4_MOVIMIENTOS, strFecha);
         contentValues.put(COL_4_MOVIMIENTOS, getMillisecondsFromDate(movimiento.getFecha()));
         contentValues.put(COL_6_MOVIMIENTOS, movimiento.getProducto().getCodigo());
 
@@ -246,23 +240,11 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return String.valueOf(date.getTime());
     }
 
-
     public boolean deletingCategoria(Long codigo) {
 
-        boolean eliminado = false;
         SQLiteDatabase db = getWritableDatabase();
         String[] args = new String[]{String.valueOf(codigo)};
-
-        try{
-            db.delete(CATEGORIAS_TABLE, COL1_CODIDO_CAT + " = ? ", args);
-
-            eliminado = true;
-
-        }catch (Exception e){
-            eliminado = false;
-            e.printStackTrace();
-        }
-
+        db.delete(CATEGORIAS_TABLE, COL1_CODIDO_CAT + " = ? ", args);
         db.close();
         return true;
     }
@@ -282,6 +264,30 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         db.close();
         return producto;
+
+    }
+
+    public Movimiento updatingMovimiento(Movimiento movimiento){
+
+        SQLiteDatabase db = getWritableDatabase();
+        // Convertir la fecka en Strng para poder introducir registros en la bb de datos...
+        /*SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String strFecha = sdf.format(movimiento.getFecha());*/
+
+        String[] args = new String[]{String.valueOf(movimiento.getCodigo())};
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(COL_2_MOVIMIENTOS, movimiento.getImporte());
+        contentValues.put(COL_3_MOVIMIENTOS, movimiento.getDescripcion());
+        contentValues.put(COL_4_MOVIMIENTOS, getMillisecondsFromDate(movimiento.getFecha()));
+        contentValues.put(COL_6_MOVIMIENTOS, movimiento.getProducto().getCodigo());
+
+        int update = db.update(MOVIMIENTOS_TABLE, contentValues, COL_1_MOVIMIENTOS + " = " , args);
+        Log.d("***", "Updating values: " + update);
+
+        db.close();
+        return movimiento;
 
     }
 
@@ -306,38 +312,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public Movimiento updatingMovimiento(Movimiento movimiento){
-
-        SQLiteDatabase db = getWritableDatabase();
-
-        // Convertir la fecka en Strng para poder introducir registros en la bb de datos...
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        String strFecha = sdf.format(movimiento.getFecha());
-
-        String[] args = new String[]{String.valueOf(movimiento.getCodigo())};
-
-        ContentValues contentValues = new ContentValues();
-
-        contentValues.put(COL_2_MOVIMIENTOS, movimiento.getImporte());
-        contentValues.put(COL_3_MOVIMIENTOS, movimiento.getDescripcion());
-        contentValues.put(COL_4_MOVIMIENTOS, strFecha);
-        contentValues.put(COL_6_MOVIMIENTOS, movimiento.getProducto().getCodigo());
-
-        db.update(MOVIMIENTOS_TABLE, contentValues, COL_1_MOVIMIENTOS + " = " , args);
-        db.close();
-        return movimiento;
-
-    }
-
     public boolean deletingMovimientoCodigo(Long codigo){
 
         SQLiteDatabase db = getWritableDatabase();
         String[] args = new String[]{String.valueOf(codigo)};
-        boolean eliminado = false;
-
-        db.delete(MOVIMIENTOS_TABLE, COL_1_MOVIMIENTOS + " = ? ", args);
-
-
+        int consulta =  db.delete(MOVIMIENTOS_TABLE, COL_1_MOVIMIENTOS + " = ? ", args);
+        Log.d("***", "deleting codigo: " + consulta);
         db.close();
         return true;
     }

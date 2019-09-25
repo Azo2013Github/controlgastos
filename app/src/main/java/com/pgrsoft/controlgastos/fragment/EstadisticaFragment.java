@@ -49,7 +49,7 @@ public class EstadisticaFragment extends Fragment implements View.OnClickListene
 
 
     public EstadisticaFragment() {
-        // Required empty public constructor
+
     }
 
     @Override

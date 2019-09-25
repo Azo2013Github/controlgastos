@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +51,8 @@ public class ListadoDetalleFragment extends Fragment {
 
     private Button btnDelete;
     private ImageView imageView;
+    private boolean delete;
+    private EditText editTextCode;
 
     public ListadoDetalleFragment() {
         // Required empty public constructor
@@ -58,20 +61,20 @@ public class ListadoDetalleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        int i = 0;
-        View miVista = inflater.inflate(R.layout.fragment_listado_detalle, container, false);
 
-        //movimientoServices = new MovimientoServicesImpl(this.getActivity());
+        //int i = 0;
+        View mView = inflater.inflate(R.layout.fragment_listado_detalle, container, false);
 
-        TextView textNombre = (TextView) miVista.findViewById(R.id.idDetalleNombre);
-        TextView textDescripcion = (TextView) miVista.findViewById(R.id.idDetalleDescripcion);
-        TextView textImporte = (TextView) miVista.findViewById(R.id.idImporte);
-        TextView textFecha = (TextView) miVista.findViewById(R.id.idFecha);
-        imageView = (ImageView) miVista.findViewById(R.id.idImageView);
+        TextView textNombre = (TextView) mView.findViewById(R.id.idDetalleNombre);
+        TextView textDescripcion = (TextView) mView.findViewById(R.id.idDetalleDescripcion);
+        TextView textImporte = (TextView) mView.findViewById(R.id.idImporte);
+        TextView textFecha = (TextView) mView.findViewById(R.id.idFecha);
 
-        btnDelete = (Button) miVista.findViewById(R.id.idBtnDelete);
+        editTextCode = (EditText) mView.findViewById(R.id.idEditTextCode);
 
+        imageView = (ImageView) mView.findViewById(R.id.idImageView);
+
+        btnDelete = (Button) mView.findViewById(R.id.idBtnDelete);
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -90,19 +93,20 @@ public class ListadoDetalleFragment extends Fragment {
             public void onClick(View view) {
 
                 MovimientoServices movimientoServices = new MovimientoServicesImpl(getContext());
+                Long code = Long.parseLong(editTextCode.getText().toString());
+                delete = movimientoServices.delete(code);
 
-
-                boolean delete = movimientoServices.delete(1L);
-
-
-
+                emptyEditText();
             }
         });
 
-        return miVista;
+        return mView;
     }
 
 
+    private void emptyEditText(){
+        editTextCode.setText("");
+    }
 
     /* La funcion para cambiar las imagenes: */
     private void getDrawableImage(int valueImage, ImageView imageView){

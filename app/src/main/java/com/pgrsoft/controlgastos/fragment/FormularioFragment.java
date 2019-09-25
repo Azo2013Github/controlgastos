@@ -69,7 +69,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     private EditText editPrecio;
     private EditText editDescripcion;
     private EditText editDesMovimiento;
-    private EditText editCantidad;
+    //private EditText editCantidad;
     private ImageView imageView;
 
     private ArrayAdapter<String> stringArrayAdapter;
@@ -104,12 +104,12 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         //btnList = (Button) miVista.findViewById(R.id.idBtnList);
 
         spinner = (Spinner) miVista.findViewById(R.id.idSpinnerCategory);
-        cargarSpinner();
+        loadSpinner();
 
         editNombre = (EditText) miVista.findViewById(R.id.idNombre);
         editPrecio = (EditText) miVista.findViewById(R.id.idPrecio);
         editDescripcion = (EditText) miVista.findViewById(R.id.idDescripcion);
-        editCantidad = (EditText) miVista.findViewById(R.id.idCantidad);
+        //editCantidad = (EditText) miVista.findViewById(R.id.idCantidad);
         editDesMovimiento = (EditText) miVista.findViewById(R.id.idDesMovimiento);
         imageView = (ImageView) miVista.findViewById(R.id.idImage);
 
@@ -120,8 +120,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         movimientoServices = new MovimientoServicesImpl(this.getActivity());
 
         btnAdd.setOnClickListener(this);
-        btnPhoto.setOnClickListener(this);
-        //btnSave.setOnClickListener(this);
+        btnPhoto.setOnClickListener(this); //editCantidad.getText().toString().equals("") ||Double.parseDouble(editCantidad.getText().toString()) *
 
         return miVista;
     }
@@ -132,7 +131,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         switch (view.getId()){
 
             case R.id.idBtnAdd:
-                if (spinner.toString().equals("") || editCantidad.getText().toString().equals("") || editPrecio.getText().toString().equals("") ||
+                if (spinner.toString().equals("") || editPrecio.getText().toString().equals("") ||
                     editDesMovimiento.getText().toString().equals("") || editNombre.getText().toString().equals("")
                     || editDescripcion.getText().toString().equals("")){
                     Log.d("***", "The EditTexts are Empty ");
@@ -140,7 +139,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                     String strCategoria = spinner.getSelectedItem().toString();
                     String nombre = editNombre.getText().toString();
                     double precio = Double.parseDouble(editPrecio.getText().toString());
-                    double importe = Double.parseDouble(editCantidad.getText().toString()) * Double.parseDouble(editPrecio.getText().toString());
+                    double importe =  Double.parseDouble(editPrecio.getText().toString());
 
                     String descripcion = editDescripcion.getText().toString();
                     String desMovimiento = editDesMovimiento.getText().toString();
@@ -155,8 +154,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                     productoServices.create(producto);
                     movimientoServices.create(movimiento);
                 }
-                vaciarEditText();
-
+                emptyEditText();
                 break;
 
             case R.id.idBtnCamera:
@@ -167,14 +165,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
 
     }
 
-    // convert from bitmap to byte array para guardar las imagen en la bbdd
-    /*public static byte[] getBytes(Bitmap bitmap) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
-        return stream.toByteArray();
-    }*/
-
-    private void cargarSpinner(){
+    private void loadSpinner(){
 
         categorias = new ArrayList<>();
 
@@ -223,7 +214,6 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     private int changeImageListView(String nombre){
 
         int valorImage = 0;
-
         switch (nombre){
 
             case "CARNE":
@@ -276,10 +266,10 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         return valorImage;
     }
 
-    private void vaciarEditText(){
+    private void emptyEditText(){
 
         editDescripcion.setText("");
-        editCantidad.setText("");
+        //editCantidad.setText("");
         editPrecio.setText("");
         editNombre.setText("");
         editDesMovimiento.setText("");

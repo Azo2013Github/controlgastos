@@ -25,77 +25,31 @@
         android:textColor="@color/colorAccent"
         android:textSize="24sp" />
 
-    <!--<Button
-        android:id="@+id/button"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="28dp"
-        android:text="@string/formMovimiento"
-        android:textColor="@color/beige"
-        android:textSize="18sp" />-->
-
-    <!--<com.google.android.material.button.MaterialButton
-        android:id="@+id/idBtnForm"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:text="@string/formMovimiento"
-        android:textSize="18sp"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        />-->
-    <!--<com.google.android.material.button.MaterialButton
-        android:id="@+id/idBtnForm"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/formMovimiento"
-        android:textColor="@color/colorAccent"
-        app:backgroundTint="@color/design_default_color_secondary" />-->
-
-    <!--<com.google.android.material.button.MaterialButton
-        android:id="@+id/idBtnForm"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="@color/colorAccent"
-        android:text="@string/formMovimiento" />
-
-    <Button
-        android:id="@+id/idBtnListar"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="28dp"
-        android:background="@color/colorAccent"
-        android:text="@string/listarGastos"
-        android:textColor="@color/beige"
-        android:textSize="18sp" />
-
-    <Button
-        android:id="@+id/idBtnDiagrama"
-        android:layout_width="220dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="28dp"
-        android:background="@color/colorAccent"
-        android:text="@string/diagrama"
-        android:textColor="@color/beige"
-        android:textSize="18sp" />-->
-   <!-- <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        >-->
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/idBtnAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             app:tint="@null"
-            android:src="@drawable/icon_24px" />
+            android:src="@drawable/ic_icon_add" />
+
+    <Button
+        android:id="@+id/idBtnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="350dp"
+        android:text="@string/edit" />
+
+    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/idBtnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+
+        android:src="@drawable/ic_icon_add"
+        app:tint="@null" />-->
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

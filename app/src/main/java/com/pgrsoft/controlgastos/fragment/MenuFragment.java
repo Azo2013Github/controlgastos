@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,93 +42,44 @@ public class MenuFragment extends Fragment /*implements View.OnClickListener*/{
         View miVista = inflater.inflate(R.layout.fragment_menu, container, false);
 
         floatingActionButton = (FloatingActionButton) miVista.findViewById(R.id.idBtnAdd);
+        Button btnEdit = (Button) miVista.findViewById(R.id.idBtnEdit);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
-                /*FormularioFragment formularioFragment = new FormularioFragment();
-
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-
-                fragmentTransaction.replace(R.id.destino, formularioFragment);
-
-                fragmentTransaction.setTransition(fragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-
-                fragmentTransaction.addToBackStack(null);
-
-                fragmentTransaction.commit();*/
-
                 ViewPager myViewPager = (ViewPager) getActivity().findViewById(R.id.idViewPager);
                 myViewPager.setCurrentItem(3);
-
-
 
             }
         });
 
-        /*btnCrear = (Button) miVista.findViewById(R.id.idBtnForm);
-        btnListarProducto = (Button) miVista.findViewById(R.id.idBtnListar);
-        btnListarMovimiento = (Button) miVista.findViewById(R.id.idBtnDiagrama);*/
+        btnEdit.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View view) {
 
-        //btnCrear.setOnClickListener(this);
-        //btnListarProducto.setOnClickListener(this);
-        //btnListarMovimiento.setOnClickListener(this);
+                Log.d("***", "Se ha clicado el botton");
+
+                UpdateFragment fragment = new UpdateFragment();
+
+                Bundle bundle = new Bundle();
+
+                fragment.setArguments(bundle);
+
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+                fragmentTransaction.replace(R.id.destino, fragment);
+
+                fragmentTransaction.addToBackStack(null);
+
+                fragmentTransaction.commit();
+
+            }
+        });
 
         return miVista;
     }
 
-   /* @Override
-    public void onClick(View view) {
-
-        switch (view.getId()){
-
-            case R.id.idBtnForm:
-
-                FormularioFragment formularioFragment = new FormularioFragment();
-
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-
-                fragmentTransaction.replace(R.id.destino, formularioFragment);
-
-                fragmentTransaction.addToBackStack(null);
-
-                fragmentTransaction.commit();
-
-                break;
-
-            case R.id.idBtnListar:
-
-                GastoListadoFragment gastoListadoFragment = new GastoListadoFragment();
-
-                fragmentTransaction = getFragmentManager().beginTransaction();
-
-                fragmentTransaction.replace(R.id.destino, gastoListadoFragment);
-
-                fragmentTransaction.addToBackStack(null);
-
-                fragmentTransaction.commit();
-
-                break;
-
-            case R.id.idBtnDiagrama:
-
-                RecyclerFragment recyclerFragment = new RecyclerFragment();
-
-                fragmentTransaction = getFragmentManager().beginTransaction();
-
-                fragmentTransaction.replace(R.id.destino, recyclerFragment);
-
-                fragmentTransaction.addToBackStack(null);
-
-                fragmentTransaction.commit();
-
-                break;
-
-        }
-
-
-    }*/
 }

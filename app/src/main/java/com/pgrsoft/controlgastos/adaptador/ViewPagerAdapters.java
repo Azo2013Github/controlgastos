@@ -35,22 +35,7 @@ public class ViewPagerAdapters extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        /*switch (position){
-
-            case 0:
-                MenuFragment menuFragment = new MenuFragment();
-                return menuFragment;
-            case 1:
-                RecyclerFragment recyclerFragment =  new RecyclerFragment();
-                return recyclerFragment;
-            case 2:
-                EstadisticaFragment estadisticaFragment = new EstadisticaFragment();
-                return estadisticaFragment;
-                default:
-                    return null;
-        }*/
         return fragments.get(position);
-
     }
 
     @Override

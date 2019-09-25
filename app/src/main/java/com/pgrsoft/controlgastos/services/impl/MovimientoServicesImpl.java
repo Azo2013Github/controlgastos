@@ -89,14 +89,8 @@ public class MovimientoServicesImpl implements MovimientoServices {
     }
 
     @Override
-    public Movimiento update(Movimiento movimiento) {
-
-        return dataBaseHelper.updatingMovimiento(movimiento);
-    }
-
-    @Override
     public boolean delete(Long codigo) {
-        Log.d("***", "ENtra DELETING");
+
         return dataBaseHelper.deletingMovimientoCodigo(codigo);
     }
 
@@ -106,8 +100,6 @@ public class MovimientoServicesImpl implements MovimientoServices {
         List<Movimiento> movimientos = new ArrayList<>();
 
         Cursor cursor = dataBaseHelper.getDateBetweenQuery(dateInicial, dateFinal);
-
-        Log.d("***", "FECHAS: " +dateInicial + " " +dateFinal);
 
         if (cursor == null){
             Log.d("***c", "CURSOR es Nulo: " +cursor.getCount());
@@ -138,6 +130,13 @@ public class MovimientoServicesImpl implements MovimientoServices {
     private Date getDateFromMilliseconds(String strMilliseconds){
         return new Date(Long.parseLong(strMilliseconds));
     }
+
+    @Override
+    public Movimiento update(Movimiento movimiento) {
+
+        return dataBaseHelper.updatingMovimiento(movimiento);
+    }
+
 }
 
 
