@@ -1,6 +1,6 @@
 # CONTROL DE GASTOS
 
-[![Alt Text](app\doc\diagram_display.png)]
+[![Alt Text](app/doc/diagram_display.png)]
 
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
