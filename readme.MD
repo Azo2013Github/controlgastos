@@ -2,8 +2,6 @@
 
 
 
-[![Alt Text](C:/app/doc/create_expensive.png)]
-
 [![Alt Text](C:/app/create_expensive.png)]
 
 [![Alt Text](app/doc/recyclerView_display.png)]
