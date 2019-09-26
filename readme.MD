@@ -2,10 +2,10 @@
 
 
 [![Alt Text](app/src/main/res/drawable/icono.jpg)]
-C:\PROYECTO_GASTOS\controlgastos\app\src\main\res\drawable
 
-[![Alt Text](app/doc/recyclerView_display.png)]
-- [x] La primera screenshot es un formulario que nos permite añadir (insertar) un nuevo gasto para insertar en la BBDD
+
+
+- [x] La primera imagen corresponde a la icono de la aplicacion que sale en la pantalla menu
 - [ ] Update the website
 - [ ] Contact the media
 
@@ -73,14 +73,14 @@ La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidi
 		1. tiene 2 Edittext que permite introducir 2 fechas que son de inicio y fin:
 		2. Y despues se da al boton que saca el diagrama de barras de movimiento en funcion del importe y el nombre,
 				 
-		
 
 # las tablas estan creadas en sqlite
 
   - LA APLICACION ESTA BASADA EN CONTROLAR GASTOS DE UNA CASA.
-  - Drag and drop images (requires your Dropbox account be linked)
-  - 
-    - Drag and drop images (requires your Dropbox account be linked)
+  - A continuacion se demuestra el diagrama UML donde hay la relacion entre las 3 tablas:
+  
+  ![Alt Text](doc/diagram model project.ucls)
+
 
 
 You can also:
