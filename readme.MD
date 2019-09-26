@@ -1,8 +1,11 @@
 # CONTROL DE GASTOS
 
-[![Alt Text](app/doc/recyclerView_display.png)]
-- [x] En esta pantalla se lista los gastos insertados en la bbdd con recyclerview en vez de listView
 
+
+[![Alt Text](C:/app/doc/create_expensive.png)]
+
+[![Alt Text](app/doc/recyclerView_display.png)]
+- [x] En esta pantalla se añade un nuevo gasto para insertar en la BBDD
 - [ ] Update the website
 - [ ] Contact the media
 
