@@ -1,7 +1,8 @@
 # CONTROL DE GASTOS
 
 
-[![Alt Text](doc/create_expensive.png)]
+[![Alt Text](app/src/main/res/drawable/icono.jpg)]
+C:\PROYECTO_GASTOS\controlgastos\app\src\main\res\drawable
 
 [![Alt Text](app/doc/recyclerView_display.png)]
 - [x] La primera screenshot es un formulario que nos permite añadir (insertar) un nuevo gasto para insertar en la BBDD
@@ -33,7 +34,7 @@ La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidi
 
 ### Formulario de Gastos
 
-[Alt Text](doc/create_expensive.png)
+![Alt Text](doc/create_expensive.png)
 
   - En esta pantalla el usuario rellena los campos, pero primero si clica sobre el boton se le informara que tiene que rellanar los edittext.
 		1. el campo categoria se despliega un spinner con los diferentes nombres de los productos que son verduras, frutas, legumbres, carnes etc...
