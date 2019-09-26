@@ -20,7 +20,20 @@ La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidi
 
 ## Funcionamiento de la aplicacion!
 
-![Alt Text](doc/create_expensive.png)
+### Menu de gastos
+
+![Alt Text](doc/menu_fragment.png)
+
+   - En esta pantalla puedes navegar entre las diferentes pantalla, tiene tambien el actionBar arriba.
+		1. El boton floating add te lleva a la pantalla del formulario,
+		2. hay una image que no hace nada fija dentro de la pantalla,
+		3. Hay la parte de Viewpagers que tiene 3 contenedores y que cada uno te lleva a una pantalla diferente clicando sobre una cosa o otra cosa.
+		4. hay el menu de los action bar que tienen 2 elementos que son action_settings que te lleva al formulario. y el action_helping que te enseña el lin del github.
+		
+
+### Formulario de Gastos
+
+[Alt Text](doc/create_expensive.png)
 
   - En esta pantalla el usuario rellena los campos, pero primero si clica sobre el boton se le informara que tiene que rellanar los edittext.
 		1. el campo categoria se despliega un spinner con los diferentes nombres de los productos que son verduras, frutas, legumbres, carnes etc...
@@ -30,6 +43,35 @@ La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidi
 		5. es la descripcion del movimiento donde se ha echo la compra del producto.
 		6. despues hay un boton que hacer la insercion de datos que es el boton create.
 		7. el segundo boton es el boton GET IMAGE este boton te hace la foto por ejemplo de un ticket y te lo guarda en la galeria de imagenes.
+	
+### Lista de movimientos
+	
+![Alt Text](doc/recyclerView_display.png)
+
+  - Esta pantalla tiene un recyclerView que se ha utilizaso en vez de ListView.
+		1. tiene un apdapter que carga los elementos row_model_xml
+		2. Tiene un listener propio que permite ver el detalle del movimiento cuando se hace click sobre un item de la lista.
+		3. Cada lista corresponde a una imagen del movimiento.
+	
+### Detalle del movimiento
+	
+![Alt Text](doc/detalle_recyclerview.png)
+
+  - Esta pantalla tiene el detalle de la lista.
+		1. En cuando se clica sonre un item te saca la fecha en la que se ha echo el movimiento,
+		2. la descripcion,
+		3. la imagen.
+		4. tiene un boton, y un edittext para borrar un movimiento a traver su codigo introciendolo dentro del edittext.
+		5. el segundo boton aun no esta implementado.
+		
+### Estadisticas
+
+![Alt Text](doc/diagram_display.png)
+
+  - En esta pantalla se compra entre 2 fechas para hacer el diagrama de los movimientos:.
+		1. tiene 2 Edittext que permite introducir 2 fechas que son de inicio y fin:
+		2. Y despues se da al boton que saca el diagrama de barras de movimiento en funcion del importe y el nombre,
+				 
 		
 
 # las tablas estan creadas en sqlite
