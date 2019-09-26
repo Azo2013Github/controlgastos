@@ -79,7 +79,7 @@ La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidi
   - LA APLICACION ESTA BASADA EN CONTROLAR GASTOS DE UNA CASA.
   - A continuacion se demuestra el diagrama UML donde hay la relacion entre las 3 tablas:
   
-  ![Alt Text](doc/diagram model project.ucls)
+  ![Alt Text](doc/diagram_model_project.ucls)
 
 
 
