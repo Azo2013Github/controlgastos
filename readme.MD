@@ -10,13 +10,27 @@
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
+## Caracteristicas:
+
 La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidiana. Es decir saber los gastos que hemos tenido por alquiler, gastos agua, comida, farmacia etc....
 
-  - permite introducir los gastos, para su visualizacion en el emulador
-  - permite visualizar una lista de gastos
+  - permite introducir los gastos, para su visualizacion en el emulador a traver uso de sqlite 
+  - permite visualizar una lista de gastos a traver uso de sqlite 
   - permite la visualiazacion de las estadisticas de los gastos mas alto entre 2 fechas.
 
-# New Features!
+## Funcionamiento de la aplicacion!
+
+[![Alt Text](doc/create_expensive.png)]
+
+  - En esta pantalla el usuario rellena los campos, pero primero si clica sobre el boton se le informara que tiene que rellanar los edittext.
+		1. el campo categoria se despliega un spinner con los diferentes nombres de los productos que son verduras, frutas, legumbres, carnes etc...
+		2. el campo de nombre te dice de introducir el nombre exacto del producto como son generales.
+		3. el campo precio es precio de los productos.
+		4. es la descripcion 
+		5. es la descripcion del movimiento donde se ha echo la compra del producto.
+		6. despues hay un boton que hacer la insercion de datos que es el boton create.
+		7. el segundo boton es el boton GET IMAGE este boton te hace la foto por ejemplo de un ticket y te lo guarda en la galeria de imagenes.
+		
 
 # las tablas estan creadas en sqlite
 
