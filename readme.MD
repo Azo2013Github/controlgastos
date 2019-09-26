@@ -4,17 +4,17 @@
 [![Alt Text](doc/create_expensive.png)]
 
 [![Alt Text](app/doc/recyclerView_display.png)]
-- [x] En esta pantalla se añade un nuevo gasto para insertar en la BBDD
+- [x] La primera screenshot es un formulario que nos permite añadir (insertar) un nuevo gasto para insertar en la BBDD
 - [ ] Update the website
 - [ ] Contact the media
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
-Dillinger is a cloud-enabled, mobile-ready, offline-storage, AngularJS powered HTML5 Markdown editor.
+La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidiana. Es decir saber los gastos que hemos tenido por alquiler, gastos agua, comida, farmacia etc....
 
-  - Type some Markdown on the left
-  - See HTML in the right
-  - Magic
+  - permite introducir los gastos, para su visualizacion en el emulador
+  - permite visualizar una lista de gastos
+  - permite la visualiazacion de las estadisticas de los gastos mas alto entre 2 fechas.
 
 # New Features!
 
