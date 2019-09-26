@@ -2,6 +2,10 @@
 
 [![Alt Text](app/doc/create_expensive.png)]
 
+[![Alt Text](C:/app/doc/create_expensive.png)]
+- [x] En esta pantalla se añade un nuevo gasto para insertar en la BBDD
+- [ ] Update the website
+- [ ] Contact the media
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
@@ -13,7 +17,7 @@ Dillinger is a cloud-enabled, mobile-ready, offline-storage, AngularJS powered H
 
 # New Features!
 
-# CONTROL DE GASTOS
+# las tablas estan creadas en sqlite
 
   - LA APLICACION ESTA BASADA EN CONTROLAR GASTOS DE UNA CASA.
   - Drag and drop images (requires your Dropbox account be linked)
