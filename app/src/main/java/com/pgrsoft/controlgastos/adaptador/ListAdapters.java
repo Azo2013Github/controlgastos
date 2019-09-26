@@ -139,6 +139,9 @@ public class ListAdapters extends RecyclerView.Adapter<ListAdapters.ListViewHold
             case 11:
                 imageView.setImageResource(R.drawable.ic_tmb);
                 break;
+            case 12:
+                imageView.setImageResource(R.drawable.ic_fruta);
+                break;
         }
 
     }

@@ -180,6 +180,7 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         Categoria categoria9 = new Categoria("FARMACIA");
         Categoria categoria10 = new Categoria("ZAPATOS");
         Categoria categoria11 = new Categoria("TRANSPORTES");
+        Categoria categoria12 = new Categoria("FRUTAS");
 
         categorias.add(categoria1);
         categorias.add(categoria2);
@@ -192,9 +193,10 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
         categorias.add(categoria9);
         categorias.add(categoria10);
         categorias.add(categoria11);
+        categorias.add(categoria12);
 
         //int i = 0;
-        String [] strNombres = new String [11];
+        String [] strNombres = new String [12];
 
         /*for (Categoria categoria: categorias) {
             strNombres [i] = categoria.getNombre(); //cogemos los nombres de los agentes en cada posicion
@@ -260,6 +262,10 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
             case "TRANSPORTES":
                 imageView.setImageResource(R.drawable.ic_tmb);
                 valorImage = 11;
+                break;
+            case "FRUTAS":
+                imageView.setImageResource(R.drawable.ic_fruta);
+                valorImage = 12;
                 break;
         }
 

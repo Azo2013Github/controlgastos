@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -50,31 +51,31 @@ import static android.app.Activity.RESULT_OK;
 public class ListadoDetalleFragment extends Fragment {
 
     private Button btnDelete;
+    private Button btnEditExpense;
     private ImageView imageView;
     private boolean delete;
     private EditText editTextCode;
 
     public ListadoDetalleFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        //int i = 0;
         View mView = inflater.inflate(R.layout.fragment_listado_detalle, container, false);
 
         TextView textNombre = (TextView) mView.findViewById(R.id.idDetalleNombre);
         TextView textDescripcion = (TextView) mView.findViewById(R.id.idDetalleDescripcion);
         TextView textImporte = (TextView) mView.findViewById(R.id.idImporte);
         TextView textFecha = (TextView) mView.findViewById(R.id.idFecha);
-
         editTextCode = (EditText) mView.findViewById(R.id.idEditTextCode);
 
         imageView = (ImageView) mView.findViewById(R.id.idImageView);
 
-        btnDelete = (Button) mView.findViewById(R.id.idBtnDelete);
+        this.btnDelete = (Button) mView.findViewById(R.id.idBtnDelete);
+        this.btnEditExpense = (Button) mView.findViewById(R.id.idBtnEdit);
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -100,18 +101,42 @@ public class ListadoDetalleFragment extends Fragment {
             }
         });
 
+        this.btnEditExpense.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                //Log.d("***", "Se ha clicado el botton");
+
+                UpdateFragment fragment = new UpdateFragment();
+
+                //Bundle bundle = new Bundle();
+
+                //fragment.setArguments(bundle);
+
+                /*FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+                fragmentTransaction.replace(R.id.destino, fragment);
+
+                //fragmentTransaction.addToBackStack(null);
+
+                fragmentTransaction.commit();*/
+
+            }
+        });
+
         return mView;
     }
 
 
-    private void emptyEditText(){
+    private void emptyEditText() {
         editTextCode.setText("");
     }
 
     /* La funcion para cambiar las imagenes: */
-    private void getDrawableImage(int valueImage, ImageView imageView){
+    private void getDrawableImage(int valueImage, ImageView imageView) {
 
-        switch (valueImage){
+        switch (valueImage) {
             case 1:
                 imageView.setImageResource(R.drawable.carne);
                 break;
@@ -149,6 +174,9 @@ public class ListadoDetalleFragment extends Fragment {
                 break;
             case 11:
                 imageView.setImageResource(R.drawable.ic_tmb);
+                break;
+            case 12:
+                imageView.setImageResource(R.drawable.ic_fruta);
                 break;
         }
 

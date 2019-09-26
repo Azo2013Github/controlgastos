@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="238dp"
+        android:layout_height="206dp"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
         android:src="@drawable/icono" />
@@ -32,14 +32,6 @@
             android:layout_gravity="bottom|end"
             app:tint="@null"
             android:src="@drawable/ic_icon_add" />
-
-    <Button
-        android:id="@+id/idBtnEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="350dp"
-        android:text="@string/edit" />
 
     <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/idBtnEdit"

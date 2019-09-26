@@ -69,11 +69,9 @@ public class RecyclerFragment extends Fragment implements ListAdapters.MyListLis
     @Override
     public void myClickList(int position) {
 
-        ProductoServices productoServices = new ProductoServicesImpl(this.getActivity());
+        //ProductoServices productoServices = new ProductoServicesImpl(this.getActivity());
         MovimientoServices movimientoServices = new MovimientoServicesImpl(this.getActivity());
 
-
-        //List<Producto> productos = productoServices.getAll();
         List<Movimiento> movimientos = movimientoServices.getAll();
 
         //Producto producto = productos.get(position);
