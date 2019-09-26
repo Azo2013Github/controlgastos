@@ -4,6 +4,8 @@
 
 [![Alt Text](C:/app/doc/create_expensive.png)]
 
+[![Alt Text](C:/app/create_expensive.png)]
+
 [![Alt Text](app/doc/recyclerView_display.png)]
 - [x] En esta pantalla se añade un nuevo gasto para insertar en la BBDD
 - [ ] Update the website
