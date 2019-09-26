@@ -1,7 +1,7 @@
 # CONTROL DE GASTOS
 
 
-[![Alt Text](app/doc/create_expensive.png)]
+[![Alt Text](doc/create_expensive.png)]
 
 [![Alt Text](app/doc/recyclerView_display.png)]
 - [x] En esta pantalla se añade un nuevo gasto para insertar en la BBDD
