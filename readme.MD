@@ -20,7 +20,7 @@ La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidi
 
 ## Funcionamiento de la aplicacion!
 
-[![Alt Text](doc/create_expensive.png)]
+![Alt Text](doc/create_expensive.png)
 
   - En esta pantalla el usuario rellena los campos, pero primero si clica sobre el boton se le informara que tiene que rellanar los edittext.
 		1. el campo categoria se despliega un spinner con los diferentes nombres de los productos que son verduras, frutas, legumbres, carnes etc...
