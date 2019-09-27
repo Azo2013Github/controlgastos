@@ -95,16 +95,42 @@ La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidi
 # Descripcion y creacion de las tablas!
 
 ## Las tablas
-### tabla Categoria
+### tabla Categorias:
 ```
-| codigo | nombre |
-| ------ | ------ |
-|  001   | Verdura |
-|  002   | Frutas  |
-|  003   | Carne  |
-|  003   | Extras  |
+| codigo | nombre   |
+| ------ | -------- |
+|  001   | CARNE    |
+|  002   | LEGUMBRE |
+|  003   | ROPA     |
+|  003   | CARNE    |
+```
 
-etc--
+### tabla Productos:
+```
+| codigo |   nombre  | descripcion               | precio | imagen | categoria |
+| ------ | --------- |-------------------------- | ------ | ------ | --------- |
+|   1    |	Carnes   |  ternera pechuga de pollo |  40.0  |	 1     |	   1   |
+|   2	 |  Verduras |  compra de legumbres      |  5.0   |	 4	   |     2     |
+|   3    |	vaqueros |	compra de vaqueros       |  12.22 |	 6     |     3     |  
+|   4	 |  Conejo	 |  1 kg de Conejo	         |   7.5  |  1	   |     4     |
+|   5    |	TMB	     |  Compra de t-10	         |  10.2  |	 11    |	   5   |
+|   6	 |  Cafe     |	Cifo la violeta	         |   0.45 |	 8     |	   6   |
+
+```
+### Tabla Movimientos:
+```
+| codigo | importe | descripcion       |    fecha          | codigo_producto   |
+| ------ | ------  | -------------     | ------------      | ----------------- | 
+|   2    |	5.0    |	mercadona      |    1569406540041  |	   2           |
+|   4    | 	7.5    | en la carniceria  |    1569406836464  |	   4           |
+|   6	 |  0.45   |	Al cifo	       |    1569406922111  |	   6           |
+|   7	 |   6.3   |   farmacia        |	11569406958218 |	   7           |
+|   8	 |  32.2   |	Endesa	       |    1569407551975  |	   8           |
+|   9	 |  39.99  |	Zalando	       |    1569408073167  |	   9           |
+```
+- Entre las tablas Categorias Productos hay una relacion 1 a n
+- Y entre la tablas Productos y Movimeintos tambien
+Estan relacionadas con sus codigo 
 
 You can also:
   - Import and save files from GitHub, Dropbox, Google Drive and One Drive
