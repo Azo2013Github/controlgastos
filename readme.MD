@@ -72,15 +72,25 @@ La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidi
   - En esta pantalla se compra entre 2 fechas para hacer el diagrama de los movimientos:.
 		1. tiene 2 Edittext que permite introducir 2 fechas que son de inicio y fin:
 		2. Y despues se da al boton que saca el diagrama de barras de movimiento en funcion del importe y el nombre,
-				 
-
-# las tablas estan creadas en sqlite
-
-  - LA APLICACION ESTA BASADA EN CONTROLAR GASTOS DE UNA CASA.
-  - A continuacion se demuestra el diagrama UML donde hay la relacion entre las 3 tablas:
-  
-  ![Alt Text](doc/diagram_model_project.ucls)
-
+		 
+## En la parte de codigo:  
+  > Que son hay 3.
+  - el modelo Categoria que tiene 2 atributos el codigo de tipo Long y el nombre de la categoria de tipo String.
+  - el modelo de Producto a su vez tiene los atributos siguientes:
+    * su codigo de tipo Long
+    * su nombre de tipo String
+    * su precio de tipo double
+    * su descripcion de tipo String
+    * un campo de imagen de tipo int
+    * categoria de tipo Categoria
+  - el modelo de Movimiento tiene los atributos siguientes:
+    * su codigo de tipo Long
+    * su importe de tipo double
+    * producto de tipo Producto
+    * fecha de tipo Date
+    * descripcion de tipo String
+> A continuacion se demuestra el diagrama
+  ![Alt Text](doc/diagramamodelo.png)
 
 
 You can also:
