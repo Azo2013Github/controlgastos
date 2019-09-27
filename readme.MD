@@ -3,18 +3,9 @@
 
 [![Alt Text](doc/icono.jpg)]
 
-
-
-- [x] La primera imagen corresponde a la icono de la aplicacion que sale en la pantalla menu
-- [ ] Update the website
-- [ ] Contact the media
-
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-
+- [x] Descripcion de la aplicacion: 
+La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidiana.  
 ## Caracteristicas:
-
-La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidiana. Es decir saber los gastos que hemos tenido por alquiler, gastos agua, comida, farmacia etc....
-
   - permite introducir los gastos, para su visualizacion en el emulador a traver uso de sqlite 
   - permite visualizar una lista de gastos a traver uso de sqlite 
   - permite la visualiazacion de las estadisticas de los gastos mas alto entre 2 fechas.
