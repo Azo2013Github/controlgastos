@@ -92,6 +92,19 @@ La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidi
 > A continuacion se demuestra el diagrama
   ![Alt Text](doc/diagramamodelo.png)
 
+# Descripcion y creacion de las tablas!
+
+## Las tablas
+### tabla Categoria
+```
+| codigo | nombre |
+| ------ | ------ |
+|  001   | Verdura |
+|  002   | Frutas  |
+|  003   | Carne  |
+|  003   | Extras  |
+
+etc--
 
 You can also:
   - Import and save files from GitHub, Dropbox, Google Drive and One Drive
