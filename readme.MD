@@ -1,7 +1,7 @@
 # CONTROL DE GASTOS
 
 
-[![Alt Text](app/src/main/res/drawable/icono.jpg)]
+[![Alt Text](doc/icono.jpg)]
 
 
 
