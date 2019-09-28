@@ -283,7 +283,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_4_MOVIMIENTOS, getMillisecondsFromDate(movimiento.getFecha()));
         contentValues.put(COL_6_MOVIMIENTOS, movimiento.getProducto().getCodigo());
 
-        int update = db.update(MOVIMIENTOS_TABLE, contentValues, COL_1_MOVIMIENTOS + " = " , args);
+        int update = db.update(MOVIMIENTOS_TABLE, contentValues, COL_1_MOVIMIENTOS + " = ? " , args);
         Log.d("***", "Updating values: " + update);
 
         db.close();

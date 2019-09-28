@@ -101,33 +101,8 @@ public class ListadoDetalleFragment extends Fragment {
             }
         });
 
-        this.btnEditExpense.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-                //Log.d("***", "Se ha clicado el botton");
-
-                UpdateFragment fragment = new UpdateFragment();
-
-                //Bundle bundle = new Bundle();
-
-                //fragment.setArguments(bundle);
-
-                /*FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-
-                fragmentTransaction.replace(R.id.destino, fragment);
-
-                //fragmentTransaction.addToBackStack(null);
-
-                fragmentTransaction.commit();*/
-
-            }
-        });
-
         return mView;
     }
-
 
     private void emptyEditText() {
         editTextCode.setText("");

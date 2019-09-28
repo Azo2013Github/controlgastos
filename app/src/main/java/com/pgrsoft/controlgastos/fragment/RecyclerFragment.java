@@ -1,6 +1,7 @@
 package com.pgrsoft.controlgastos.fragment;
 
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Dialog;
@@ -8,6 +9,8 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,11 +18,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.pgrsoft.controlgastos.R;
 import com.pgrsoft.controlgastos.adaptador.ListAdapters;
 import com.pgrsoft.controlgastos.model.Movimiento;
@@ -49,18 +49,57 @@ public class RecyclerFragment extends Fragment implements ListAdapters.MyListLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View myView = inflater.inflate(R.layout.fragment_recycler_listado, container, false);
+        final View myView = inflater.inflate(R.layout.fragment_recycler_listado, container, false);
         recyclerView = (RecyclerView) myView.findViewById(R.id.my_recycler_view);
         recyclerView.setHasFixedSize(true);
 
-        layoutManager = new LinearLayoutManager(this.getActivity());
+        layoutManager = new GridLayoutManager(this.getActivity(), 1);
         recyclerView.setLayoutManager(layoutManager);
-        MovimientoServices movimientoServices = new MovimientoServicesImpl(this.getActivity());
-        List<Movimiento> movimientos = movimientoServices.getAll();
 
-        ListAdapters listAdapters = new ListAdapters(movimientos, this);
+        final MovimientoServices movimientoServices = new MovimientoServicesImpl(this.getActivity());
+        final List<Movimiento> movimientos = movimientoServices.getAll();
+
+        final ListAdapters listAdapters = new ListAdapters(movimientos, this);
 
         recyclerView.setAdapter(listAdapters);
+
+        // esta parte te ayuda
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback
+                (0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+                final int position = viewHolder.getAdapterPosition();
+                final Movimiento movimiento = movimientos.get(position);
+
+                movimientos.remove(position);
+                listAdapters.notifyDataSetChanged();
+                boolean deleting = movimientoServices.delete(movimiento.getCodigo());
+                Snackbar snackbar = Snackbar.make(recyclerView,"Item was removed from the list.",
+                        Snackbar.LENGTH_LONG);
+
+                snackbar.setAction("UNDO", new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+
+                        movimientos.add(position, movimiento);
+                        recyclerView.scrollToPosition(position);
+                        movimientoServices.create(movimiento);
+                    }
+                });
+                snackbar.setActionTextColor(getResources().getColor(R.color.colorAccent));
+                snackbar.show();
+            }
+        });
+
+        itemTouchHelper.attachToRecyclerView(recyclerView);
 
         return myView;
     }
@@ -78,10 +117,10 @@ public class RecyclerFragment extends Fragment implements ListAdapters.MyListLis
 
         Movimiento movimiento = movimientos.get(position);
 
-        //Dialog dialog = new Dialog(this.getActivity());
-        //dialog.setContentView(R.layout.fragment_listado_detalle);
+        /*Dialog dialog = new Dialog(this.getActivity());
+        dialog.setContentView(R.layout.fragment_listado_detalle);
 
-        /*TextView textNombre = (TextView) dialog.findViewById(R.id.idDetalleNombre);
+        TextView textNombre = (TextView) dialog.findViewById(R.id.idDetalleNombre);
         TextView textDescripcion = (TextView) dialog.findViewById(R.id.idDetalleDescripcion);
         TextView textImporte = (TextView) dialog.findViewById(R.id.idImporte);
         TextView textFecha = (TextView) dialog.findViewById(R.id.idFecha);

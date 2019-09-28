@@ -46,7 +46,7 @@ public class MenuFragment extends Fragment /*implements View.OnClickListener*/{
             public void onClick(View view) {
 
                 ViewPager myViewPager = (ViewPager) getActivity().findViewById(R.id.idViewPager);
-                myViewPager.setCurrentItem(4);
+                myViewPager.setCurrentItem(3);
 
             }
         });
