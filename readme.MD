@@ -1,10 +1,11 @@
 # CONTROL DE GASTOS
 
-
 [![Alt Text](doc/icono.jpg)]
 
 - [x] Descripcion de la aplicacion: 
-La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidiana.  
+La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidiana. Esta basada en SQLite con los query´s 
+necesarios para la implementacion de la aplicacion.
+
 ## Caracteristicas:
   - permite introducir los gastos, para su visualizacion en el emulador a traver uso de sqlite 
   - permite visualizar una lista de gastos a traver uso de sqlite 
@@ -87,6 +88,9 @@ La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidi
 
 ## Las tablas
 ### tabla Categorias:
+
+![Alt Text](doc/schema-dbdesigner.pdf.png)
+
 ```
 | codigo | nombre   |
 | ------ | -------- |
