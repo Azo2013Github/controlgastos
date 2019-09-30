@@ -89,7 +89,8 @@ necesarios para la implementacion de la aplicacion.
 ## Las tablas
 ### tabla Categorias:
 
-![Alt Text](doc/schema-dbdesigner.pdf.png)
+
+<img src="schema-dbdesigner.pdf" alt="some text"  width="75%" height="75%">
 
 ```
 | codigo | nombre   |
