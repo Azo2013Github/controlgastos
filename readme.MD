@@ -96,6 +96,8 @@ necesarios para la implementacion de la aplicacion.
 
 ### tabla Categorias:
 
+![Alt Text](doc/schema.jpg)
+
 ![schema.pdf](doc/schema.pdf)
 
 ```
