@@ -270,9 +270,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public Movimiento updatingMovimiento(Movimiento movimiento){
 
         SQLiteDatabase db = getWritableDatabase();
-        // Convertir la fecka en Strng para poder introducir registros en la bb de datos...
-        /*SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        String strFecha = sdf.format(movimiento.getFecha());*/
 
         String[] args = new String[]{String.valueOf(movimiento.getCodigo())};
 
@@ -295,19 +292,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = getWritableDatabase();
         String[] args = new String[]{String.valueOf(codigo)};
-        boolean eliminado = false;
 
-        try{
-            db.delete(PRODUCTOS_TABLE, COL_1_PRODUCTOS + " = ? ", args);
-            eliminado = true;
-
-        }catch (Exception e){
-            if (eliminado == false) {
-                e.printStackTrace();
-            }else {
-                eliminado = true;
-            }
-        }
+        db.delete(PRODUCTOS_TABLE, COL_1_PRODUCTOS + " = ? ", args);
         db.close();
         return true;
     }
