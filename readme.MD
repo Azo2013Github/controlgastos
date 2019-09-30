@@ -1,6 +1,6 @@
 # CONTROL DE GASTOS
 
-[![Alt Text](doc/icono.jpg)]
+![Alt Text](doc/icono.jpg)
 
 - [x] Descripcion de la aplicacion: 
 La aplicación nos permite conocer los gastos que tenemos en nuestra vida cotidiana. Esta basada en SQLite con los query´s 
