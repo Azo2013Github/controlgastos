@@ -89,9 +89,9 @@ necesarios para la implementacion de la aplicacion.
 ## Las tablas
 ### tabla Categorias:
 
-![Alt](doc/schema.pdf)
+![Alt](./schema.pdf)
 
-<img src="doc/schema.pdf" alt="some text"  width="75%" height="75%">
+![Image Title](./path/to/schema.pdf){width=33%}
 
 ```
 | codigo | nombre   |

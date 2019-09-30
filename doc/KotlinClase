@@ -1,0 +1,204 @@
+/**
+ * We declare a package-level function main which returns Unit and takes
+ * an Array of strings as a parameter. Note that semicolons are optional.
+ */
+
+fun main(args: Array<String>) {
+    println("Salut, Le Monde!")
+    
+    /* ---- VARIABLES ------
+     * variable: Solo de lecturas (constantes) */
+    
+    val name = "Pepin"
+    
+    // Variables de 
+    var edad = 42
+   
+    // Si nos hace ilusion indicar el tipo tambien podemos hacerlo
+    var numero: Int = 666
+    var numero2: Long = 2000
+    
+    numero2 = Long.MAX_VALUE
+    
+    println(Int.MAX_VALUE)
+    println(numero2)
+    
+    var importe: Double = Double.MAX_VALUE
+    println(importe)
+    
+    // Int, Long, Short, Byte, Double, Float, Char, Boolean
+    // 
+    // CONVERSION DE TIPOS
+    
+    println("5.14 To Int: " + (5.14.toInt()))
+    //println("A to Int: " + ("A"))
+    
+    println("65 to char: " + (65.toChar()))
+    
+    // LOS STRINGS: 
+    
+    var apellido1 = "Martín"
+    var apellido2 = "Salvador"
+    
+    var nombreCompleto = apellido1 + " " + apellido2
+    
+    // Interpolacion !!!
+    
+    var numeroHijos = 3
+    
+    println("tengo " + numeroHijos + " hijos")
+    println("Tengo ${numeroHijos} hijos")
+    
+    var direccion: String = "Calle del Pino, 14 "
+    
+    println(direccion)
+    
+    println("1 + 2 = ${1 + 2}")
+    
+    // Tamaño de un String: 
+    
+    println("Tamaño del String: ${direccion.length} ")
+    
+    // Comparar Strings!
+    
+    println("Pepin".equals("Pepín"))
+    println("A".compareTo("B"))
+    
+    // Los Substrings como obtenerlos: .....
+    
+    println("Piscina".subSequence(2,4))
+    
+    // Saber si un String contiene a otro...
+     
+    println("tentaculo".contains("en")) 
+    
+    // Conocer el caracter en una determinado posicion:
+    
+    println("ola".get(2))
+    
+    // Tema de los Arrays
+    // 
+    // No necesariamente son tipados ! es una opcion
+    
+    var mArray = arrayOf(1, 1, 24, "Pepín") // esto significa de es de tipo Strings
+    
+    // Como acceder a un elemento del array
+    
+    println("Posicion: " +mArray[2])
+    
+    // Cambiar valores:
+    
+    mArray[2] = 100
+    
+    // Conocer el tamaño del array: 
+    
+    println("Tamaño: " +(mArray.size))
+    
+    // saber si el array contiene un determinado elemento:
+    
+    println("Contiene : " +mArray.contains(1))
+    
+    // Obtener el primer elemento del array:
+    
+    println("First: " + mArray.first())
+    
+    println("last: " +mArray.last())
+    
+    // Los arrays se pueden tipar:
+    
+    var arr2: Array<Int> = arrayOf(1,666,50,-23,45,90)
+    
+    var arr3: Array<Any> = arrayOf(1,666,"50",-23,45,90)
+    
+    
+    arr3[2] = "Carlota"
+    
+    println("Valor array tipado: " +arr3)
+    
+      // when como funciona:
+    
+    val edad1 = 8
+    
+    when (edad1){
+        
+        // Mirar coincidencia con una lista de valores:
+        0,1,2,3,4 -> println("peque")
+        
+        5 -> println("cinco añitos...")
+        
+        // Mirar si coincide con el rango
+        
+        in 6.. 17 -> {
+            println("mayor")
+        }
+        else -> println("este es el default de java ...")        
+    }    
+
+
+fun dameDosCosas(num: Int):Pair<Int, Int>{    
+    // Vamos a instenciar un Pair     
+    return Pair(num+1, num-1)
+}
+
+fun dameDosCosas2(num: Int):Pair<Int, Pair<Int, Int>>{
+    // Vamos a instenciar un Pair     
+    return Pair(num + 1, Pair(num+1, num-10))
+}
+
+/*fun getSuma(vararg nums: Int): Int{
+    // Vamos a una variable con tipado Int
+    var sum = 0
+    nums.forEach{n -> sum += n}
+        
+    return sum
+}*/
+
+// Listas (Mutables e Inmutables)
+    
+    var list1: MutableList<Int> = mutableListOf(10,20,30,40)
+    
+    var list2: List<Int> = listOf(10,20,30)
+    
+    // añadir un elemento en la lista...
+    
+    list1.add(6)
+    
+    // Obtener primer y último elemento de la lista...package
+    
+    println("1st: ${list1.first()}")
+    println("last: ${list1.last()}")
+    
+    // Obtener un valor a partir del índice
+    
+    println(list1[2])
+    
+    // tamaño de la lista:
+     println("Tamño de la lista : ${list1.size}")
+     //Como limpiar una lista .... package
+     
+     list1.clear()
+     
+     println("Tamaño de la lista una vez aplicado el clear() es: ${list1.size}")
+     //
+     // CRear un Mapa
+     
+     var mapa = mutableMapOf<Int, Any?>()
+     mapa.put(1, "Pepin")
+     mapa.put(2, true)
+     mapa.put(3, 100)
+     
+     // Como declara y crear un mapa con valores inicializados:package
+     
+     var mapa2 = mutableMapOf(1 to "Gato", 2 to 100)
+     
+    println("El map2 tiene : ${mapa2.size} elementos")
+    
+    mapa.remove(2)
+    
+    // Como obtener un valor a partir de la clave
+    
+    println("El valor de la clave 1 es : ${mapa.get(1)}")
+    println("El valor de la clave es 1: $mapa2[1]")
+    
+    
+}
