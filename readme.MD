@@ -87,9 +87,14 @@ necesarios para la implementacion de la aplicacion.
 # Descripcion y creacion de las tablas!
 
 ## Las tablas
-### tabla Categorias:
 
-![Image Title](doc/schema.pdf){width=33%}
+- Entre las tablas Categorias Productos hay una relacion 1 a n
+- Y entre las tablas Productos y Movimeintos tambien
+- Estan relacionadas con sus codigo 
+ 
+> A continuacion se demuestra esta relacion entre ellas: 
+
+### tabla Categorias:
 
 
 ```
@@ -124,9 +129,7 @@ necesarios para la implementacion de la aplicacion.
 |   8	 |  32.2   |	Endesa	       |    1569407551975  |	   8           |
 |   9	 |  39.99  |	Zalando	       |    1569408073167  |	   9           |
 ```
-- Entre las tablas Categorias Productos hay una relacion 1 a n
-- Y entre la tablas Productos y Movimeintos tambien
-Estan relacionadas con sus codigo 
+
 
 You can also:
   - Import and save files from GitHub, Dropbox, Google Drive and One Drive
