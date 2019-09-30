@@ -135,9 +135,7 @@ necesarios para la implementacion de la aplicacion.
 	- UPDATE(Object object): devuelve Object , 
 	- DELETE(Long codigo): devuelve boolean.
 
-> Aqui dejo el link github de la aplicacion:
-
-[github.com](https://github.com/Azo2013Github/controlgastos)
+> Aqui dejo el link github de la aplicacion: [Control de GASTOS](https://github.com/Azo2013Github/controlgastos)
 
 
 
