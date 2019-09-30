@@ -96,6 +96,7 @@ necesarios para la implementacion de la aplicacion.
 
 ### tabla Categorias:
 
+![schema.pdf](doc/schema.pdf)
 
 ```
 | codigo | nombre   |
