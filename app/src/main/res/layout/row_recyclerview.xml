@@ -8,8 +8,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        app:cardBackgroundColor="@color/colorAccent"
+        android:layout_marginBottom="4dp"
+        app:cardBackgroundColor="@color/mtrl_dark_on_surface_emphasis_medium"
        >
 
         <LinearLayout
