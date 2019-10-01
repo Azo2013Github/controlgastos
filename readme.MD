@@ -93,23 +93,19 @@ necesarios para la implementacion de la aplicacion.
 	- Entre las tablas Categorias Productos hay una relacion 1 a n
 	- Y entre las tablas Productos y Movimeintos tambien
 	- Estan relacionadas con su campo codigo que son de tipo Primary keys, Foreign Keys.
- 
+  
 > A continuacion se demuestra esta relacion entre ellas: 
-
 
 ![Esquema de la Base de Datos](doc/schema.jpg)
 
-
 ![schema.pdf](doc/schema.pdf) 
-
 
 > Esta BBDD esta implementada en el fichero DataBaseHelper donde tenemos los siguientes metodos:
 
-	- Create (Object object): devuelve Object,
-    - Read(Long codigo) devuelve Object,
-    - Update(Object object) devuelve Object,
-    - Delete(Long codigo) devuelve boolean.
-	
+   - Create(Object object): devuelve Object,
+   - Read(Long codigo) devuelve Object, 
+   - Update(Object object) devuelve Object,
+   - Delete(Long codigo) devuelve boolean.
 	
 ### Service:
 
