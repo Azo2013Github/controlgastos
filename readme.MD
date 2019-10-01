@@ -105,35 +105,35 @@ necesarios para la implementacion de la aplicacion.
 
 > Esta BBDD esta implementada en el fichero DataBaseHelper donde tenemos los siguientes metodos:
 
-	- CREATE(Object object): devuelve Object,
-	- READ(Long codigo) devuelve Object,
-	- UPDATE(Object object) devuelve Object , 
-	- DELETE(Long codigo) devuelve boolean.
+	- Create (Object object): devuelve Object,
+    - Read(Long codigo) devuelve Object,
+    - Update(Object object) devuelve Object,
+    - Delete(Long codigo) devuelve boolean.
 	
 	
 ### Service:
 
 #### MovimientoServiceImpl con su interfaz.
 
-	- CREATE(Object object): devuelve Object,
-	- getAll(): devuelve ArrayList<Object>,
-	- UPDATE(Object object): devuelve Object , 
-	- DELETE(Long codigo): devuelve boolean.
-	- getDateBetweenDate(Date dateIni, Date datefin): ArrayList<Object>
+   - Create(Object object): devuelve Object,
+   - Read(Long codigo) devuelve Object, 
+   - Update(Object object) devuelve Object,
+   - Delete(Long codigo) devuelve boolean.
+   - getBetWeenDate(Date ini, Date fini): devuelve un ArrayList
 
 #### ProductoServiceImpl con su interfaz.
 
-	- CREATE(Object object): devuelve Object,
-	- getAll(): devuelve ArrayList<Object>,
-	- UPDATE(Object object): devuelve Object , 
-	- DELETE(Long codigo): devuelve boolean.
+   - Create(Object object): devuelve Object, 
+   - Read(Long codigo) devuelve Object, 
+   - Update(Object object) devuelve Object,
+   - Delete(Long codigo) devuelve boolean.
 
 #### CategoriaServiceImpl con su interfaz.
 
-	- CREATE(Object object): devuelve Object,
-	- getAll(): devuelve ArrayList<Object>,
-	- UPDATE(Object object): devuelve Object , 
-	- DELETE(Long codigo): devuelve boolean.
+   - Create(Object object): devuelve Object, 
+   - Read(Long codigo) devuelve Object, 
+   - Update(Object object) devuelve Object,
+   - Delete(Long codigo) devuelve boolean.
 
 > Aqui dejo el link github de la aplicacion: [Control de GASTOS](https://github.com/Azo2013Github/controlgastos)
 
