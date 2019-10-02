@@ -33,7 +33,6 @@ public class RecyclerFragment extends Fragment implements ListAdapters.MyListLis
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private EditText editTextCode;
 
     public RecyclerFragment() {
         // Required empty public constructor

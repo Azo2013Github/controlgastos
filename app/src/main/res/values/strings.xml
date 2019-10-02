@@ -37,5 +37,7 @@
     <string name="save_photo">SAVE PHOTO</string>
     <string name="deleteGasto">DELETE GASTO</string>
     <string name="edit">EDITING</string>
+    <string name="update_expensive">UPDATE EXPENSIVE</string>
+    <string name="save">SAVE</string>
 
 </resources>

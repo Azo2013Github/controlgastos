@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -50,11 +51,8 @@ import static android.app.Activity.RESULT_OK;
  */
 public class ListadoDetalleFragment extends Fragment {
 
-    private Button btnDelete;
     private Button btnEditExpense;
     private ImageView imageView;
-    private boolean delete;
-    private EditText editTextCode;
 
     public ListadoDetalleFragment() {
 
@@ -70,11 +68,7 @@ public class ListadoDetalleFragment extends Fragment {
         TextView textDescripcion = (TextView) mView.findViewById(R.id.idDetalleDescripcion);
         TextView textImporte = (TextView) mView.findViewById(R.id.idImporte);
         TextView textFecha = (TextView) mView.findViewById(R.id.idFecha);
-        editTextCode = (EditText) mView.findViewById(R.id.idEditTextCode);
-
         imageView = (ImageView) mView.findViewById(R.id.idImageView);
-
-        this.btnDelete = (Button) mView.findViewById(R.id.idBtnDelete);
         this.btnEditExpense = (Button) mView.findViewById(R.id.idBtnEdit);
 
         Bundle bundle = getArguments();
@@ -88,24 +82,30 @@ public class ListadoDetalleFragment extends Fragment {
             getDrawableImage(movimiento.getProducto().getImagen(), imageView);
         }
 
-        btnDelete.setOnClickListener(new View.OnClickListener() {
+        this.btnEditExpense.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
-                MovimientoServices movimientoServices = new MovimientoServicesImpl(getContext());
-                Long code = Long.parseLong(editTextCode.getText().toString());
-                delete = movimientoServices.delete(code);
+                Dialog dialog = new Dialog(getActivity());
+                dialog.setContentView(R.layout.updating_fragment);
+                EditText editTextCategory = (EditText) dialog.findViewById(R.id.idEditTextCategory);
+                EditText editTextName = (EditText) dialog.findViewById(R.id.idEditTextName);
+                EditText editTextPrice = (EditText) dialog.findViewById(R.id.idEditTextPrice);
+                EditText editTextAmount = (EditText) dialog.findViewById(R.id.idEditTextAmount);
+                EditText editTextDescription = (EditText) dialog.findViewById(R.id.idEditTextDescrip);
+                EditText editTextDescMov = (EditText) dialog.findViewById(R.id.idEditTextMovDesrip);
 
-                emptyEditText();
+
+                dialog.show();
             }
+
+
         });
 
-        return mView;
-    }
 
-    private void emptyEditText() {
-        editTextCode.setText("");
+
+        return mView;
     }
 
     /* La funcion para cambiar las imagenes: */
@@ -123,7 +123,6 @@ public class ListadoDetalleFragment extends Fragment {
                 break;
             case 4:
                 imageView.setImageResource(R.drawable.legumbres);
-
                 break;
             case 5:
                 imageView.setImageResource(R.drawable.bebidas);
@@ -131,18 +130,14 @@ public class ListadoDetalleFragment extends Fragment {
             case 6:
                 imageView.setImageResource(R.drawable.ropa);
                 break;
-
             case 7:
                 imageView.setImageResource(R.drawable.casa);
-
                 break;
             case 8:
                 imageView.setImageResource(R.drawable.extras);
-
                 break;
             case 9:
                 imageView.setImageResource(R.drawable.farmacia);
-
                 break;
             case 10:
                 imageView.setImageResource(R.drawable.shoes);
