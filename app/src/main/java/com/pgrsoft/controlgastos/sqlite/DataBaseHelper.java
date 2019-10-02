@@ -260,7 +260,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_4_PRODUCTOS, producto.getPrecio());
         contentValues.put(COL_5_PRODUCTOS, producto.getCategoria().getCodigo());
 
-        db.update(PRODUCTOS_TABLE, contentValues, COL_1_PRODUCTOS + " = " , args);
+        db.update(PRODUCTOS_TABLE, contentValues, COL_1_PRODUCTOS + " = ?" , args);
 
         db.close();
         return producto;

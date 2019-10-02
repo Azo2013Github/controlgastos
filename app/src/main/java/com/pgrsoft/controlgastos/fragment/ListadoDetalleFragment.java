@@ -33,15 +33,19 @@ import android.widget.Toast;
 import com.pgrsoft.controlgastos.R;
 import com.pgrsoft.controlgastos.model.Categoria;
 import com.pgrsoft.controlgastos.model.Movimiento;
+import com.pgrsoft.controlgastos.model.Producto;
 import com.pgrsoft.controlgastos.services.CategoriaServices;
 import com.pgrsoft.controlgastos.services.MovimientoServices;
+import com.pgrsoft.controlgastos.services.ProductoServices;
 import com.pgrsoft.controlgastos.services.impl.CategoriaServicesImpl;
 import com.pgrsoft.controlgastos.services.impl.MovimientoServicesImpl;
+import com.pgrsoft.controlgastos.services.impl.ProductoServicesImpl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -52,17 +56,19 @@ import static android.app.Activity.RESULT_OK;
 public class ListadoDetalleFragment extends Fragment {
 
     private Button btnEditExpense;
+
     private ImageView imageView;
+    private Movimiento movimiento;
 
     public ListadoDetalleFragment() {
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View mView = inflater.inflate(R.layout.fragment_listado_detalle, container, false);
+        final View mView = inflater.inflate(R.layout.fragment_listado_detalle, container, false);
 
         TextView textNombre = (TextView) mView.findViewById(R.id.idDetalleNombre);
         TextView textDescripcion = (TextView) mView.findViewById(R.id.idDetalleDescripcion);
@@ -74,7 +80,7 @@ public class ListadoDetalleFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
 
-            Movimiento movimiento = (Movimiento) bundle.getSerializable("MOVIMIENTOS");
+            movimiento = (Movimiento) bundle.getSerializable("MOVIMIENTOS");
             textNombre.setText(movimiento.getProducto().getNombre());
             textDescripcion.setText(movimiento.getDescripcion());
             textImporte.setText(String.valueOf(movimiento.getImporte()));
@@ -89,19 +95,63 @@ public class ListadoDetalleFragment extends Fragment {
 
                 Dialog dialog = new Dialog(getActivity());
                 dialog.setContentView(R.layout.updating_fragment);
-                EditText editTextCategory = (EditText) dialog.findViewById(R.id.idEditTextCategory);
-                EditText editTextName = (EditText) dialog.findViewById(R.id.idEditTextName);
-                EditText editTextPrice = (EditText) dialog.findViewById(R.id.idEditTextPrice);
-                EditText editTextAmount = (EditText) dialog.findViewById(R.id.idEditTextAmount);
-                EditText editTextDescription = (EditText) dialog.findViewById(R.id.idEditTextDescrip);
-                EditText editTextDescMov = (EditText) dialog.findViewById(R.id.idEditTextMovDesrip);
+                final EditText editTextCategory = (EditText) dialog.findViewById(R.id.idEditTextCategory);
+                final EditText editTextName = (EditText) dialog.findViewById(R.id.idEditTextName);
+                final EditText editTextPrice = (EditText) dialog.findViewById(R.id.idEditTextPrice);
+                final EditText editTextAmount = (EditText) dialog.findViewById(R.id.idEditTextAmount);
+                final EditText editTextDescription = (EditText) dialog.findViewById(R.id.idEditTextDescrip);
+                final EditText editTextDescMov = (EditText) dialog.findViewById(R.id.idEditTextMovDesrip);
 
+                editTextCategory.setText(movimiento.getProducto().getCategoria().getNombre());
+                editTextName.setText(movimiento.getProducto().getNombre());
+                editTextPrice.setText(String.valueOf(movimiento.getProducto().getPrecio()));
+                editTextAmount.setText(String.valueOf(movimiento.getImporte()));
+                editTextDescription.setText(movimiento.getProducto().getDescripcion());
+                editTextDescMov.setText(movimiento.getDescripcion());
+                getDrawableImage(movimiento.getProducto().getImagen(), imageView);
+
+                Button btnSave = (Button) dialog.findViewById(R.id.idBtnSaveList);
+                btnSave.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+
+                        CategoriaServices categoriaServices = new CategoriaServicesImpl(getActivity());
+                        ProductoServices productoServices = new ProductoServicesImpl(getActivity());
+                        MovimientoServices movimientoServices = new MovimientoServicesImpl(getActivity());
+                        double importe = Double.parseDouble(editTextAmount.getText().toString());
+                        double price = Double.parseDouble(editTextPrice.getText().toString());
+                        String category = editTextCategory.getText().toString();
+                        String descripcion = editTextDescription.getText().toString();
+                        String descripMov = editTextDescMov.getText().toString();
+                        String name = editTextName.getText().toString();
+
+                        movimiento.setImporte(importe);
+                        movimiento.setDescripcion(descripMov);
+                        movimiento.getProducto().setNombre(name);
+                        movimiento.getProducto().setDescripcion(descripcion);
+                        movimiento.getProducto().setPrecio(price);
+                        movimiento.getProducto().getCategoria().setNombre(category);
+                        getDrawableImage(movimiento.getProducto().getImagen(), imageView);
+
+                        Categoria categoria = movimiento.getProducto().getCategoria();
+                        Producto producto = movimiento.getProducto();
+                        Log.d("Valores de Movimeinto: " , movimiento.toString());
+
+                        categoria = categoriaServices.update(categoria);
+                        producto = productoServices.update(producto);
+                        movimiento = movimientoServices.update(movimiento);
+                    }
+                });
 
                 dialog.show();
+
             }
 
 
         });
+
+
 
 
 
