@@ -267,6 +267,8 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
                 imageView.setImageResource(R.drawable.ic_fruta);
                 valorImage = 12;
                 break;
+
+            default: imageView.setImageResource(R.drawable.brocoli);
         }
 
         return valorImage;

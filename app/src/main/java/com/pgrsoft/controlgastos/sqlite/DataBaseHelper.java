@@ -240,15 +240,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return String.valueOf(date.getTime());
     }
 
-    public boolean deletingCategoria(Long codigo) {
-
-        SQLiteDatabase db = getWritableDatabase();
-        String[] args = new String[]{String.valueOf(codigo)};
-        db.delete(CATEGORIAS_TABLE, COL1_CODIDO_CAT + " = ? ", args);
-        db.close();
-        return true;
-    }
-
     public Producto updatingProducto (Producto producto){
 
         SQLiteDatabase db = getWritableDatabase();
@@ -258,7 +249,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_2_PRODUCTOS, producto.getNombre());
         contentValues.put(COL_3_PRODUCTOS, producto.getDescripcion());
         contentValues.put(COL_4_PRODUCTOS, producto.getPrecio());
-        contentValues.put(COL_5_PRODUCTOS, producto.getCategoria().getCodigo());
+        contentValues.put(COL_5_PRODUCTOS, producto.getImagen());
+        contentValues.put(COL_6_PRODUCTOS, producto.getCategoria().getCodigo());
 
         db.update(PRODUCTOS_TABLE, contentValues, COL_1_PRODUCTOS + " = ?" , args);
 
@@ -304,6 +296,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         String[] args = new String[]{String.valueOf(codigo)};
         int consulta =  db.delete(MOVIMIENTOS_TABLE, COL_1_MOVIMIENTOS + " = ? ", args);
         Log.d("***", "deleting codigo: " + consulta);
+        db.close();
+        return true;
+    }
+
+    public boolean deletingCategoria(Long codigo) {
+
+        SQLiteDatabase db = getWritableDatabase();
+        String[] args = new String[]{String.valueOf(codigo)};
+        db.delete(CATEGORIAS_TABLE, COL1_CODIDO_CAT + " = ? ", args);
         db.close();
         return true;
     }

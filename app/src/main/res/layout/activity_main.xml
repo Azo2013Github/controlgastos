@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/idToolbar"
-        android:background="?attr/colorPrimary"
+        android:background="?attr/colorAccent"
         android:elevation="6dp"
         android:layout_marginTop="1dp"
         app:tabSelectedTextColor="@color/colorPrimaryDark"

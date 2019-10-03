@@ -2,11 +2,11 @@ package com.pgrsoft.controlgastos.adaptador;
 
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pgrsoft.controlgastos.R;
 import com.pgrsoft.controlgastos.model.Movimiento;
-import com.pgrsoft.controlgastos.services.MovimientoServices;
 
 import java.util.List;
 
@@ -49,7 +48,13 @@ public class ListAdapters extends RecyclerView.Adapter<ListAdapters.ListViewHold
         holder.textViewDescription.setText(movimientos.get(position).getDescripcion());
         holder.textViewDate.setText(movimientos.get(position).getFecha().toString());
         holder.imageView.setImageResource(R.drawable.farmacia);
-        getDrawableImage(movimientos.get(position).getProducto().getImagen(), holder.imageView) ;
+        drawableImage(movimientos.get(position).getProducto().getImagen(), holder.imageView) ;
+
+        if (position%2 == 0) {
+            holder.row_linearLayout.setBackgroundResource(R.color.blueLighter);
+        }else{
+            holder.row_linearLayout.setBackgroundResource(R.color.blueFonce);
+        }
 
     }
 
@@ -69,6 +74,7 @@ public class ListAdapters extends RecyclerView.Adapter<ListAdapters.ListViewHold
         TextView textViewDate;
         TextView textViewDescription;
         ImageView imageView;
+        LinearLayout row_linearLayout;
 
         public ListViewHolder(@NonNull View itemView, MyListListener myListListener) {
 
@@ -78,7 +84,7 @@ public class ListAdapters extends RecyclerView.Adapter<ListAdapters.ListViewHold
             textViewDescription = (TextView) itemView.findViewById(R.id.idTextViewDescription);
             textViewName = (TextView) itemView.findViewById(R.id.idTextViewName);
             imageView = (ImageView) itemView.findViewById(R.id.idImageView);
-
+            row_linearLayout = (LinearLayout) itemView.findViewById(R.id.idLinearLayout);
             // Creacion del Listener personalize
             myListListener = myListListener;
             itemView.setOnClickListener(this);
@@ -98,7 +104,7 @@ public class ListAdapters extends RecyclerView.Adapter<ListAdapters.ListViewHold
     }
 
     // Poner las imagenes
-    private void getDrawableImage(int valueImage, ImageView imageView){
+    private void drawableImage(int valueImage, ImageView imageView){
 
         switch (valueImage){
             case 1:
@@ -123,7 +129,6 @@ public class ListAdapters extends RecyclerView.Adapter<ListAdapters.ListViewHold
 
             case 7:
                 imageView.setImageResource(R.drawable.casa);
-
                 break;
             case 8:
                 imageView.setImageResource(R.drawable.extras);
@@ -142,6 +147,7 @@ public class ListAdapters extends RecyclerView.Adapter<ListAdapters.ListViewHold
             case 12:
                 imageView.setImageResource(R.drawable.ic_fruta);
                 break;
+            default: imageView.setImageResource(R.drawable.brocoli);
         }
 
     }
