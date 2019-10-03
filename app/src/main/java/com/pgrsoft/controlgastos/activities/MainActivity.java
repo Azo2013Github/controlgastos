@@ -40,8 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.setTabGravity(tabLayout.GRAVITY_FILL);
 
-        ViewPagerAdapters viewPagerAdapters = new ViewPagerAdapters(getSupportFragmentManager()/*,
-        tabLayout.getTabCount()*/);
+        ViewPagerAdapters viewPagerAdapters = new ViewPagerAdapters(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapters);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -65,16 +64,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        /*MenuFragment menuFragment = new MenuFragment();
-
-        //FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-
-        fragmentTransaction.replace(R.id.destino, menuFragment);
-
-        fragmentTransaction.addToBackStack(null); // que hace?
-
-        fragmentTransaction.commit();*/
 
     }
 
@@ -96,14 +85,6 @@ public class MainActivity extends AppCompatActivity {
                 ViewPager myViewPager = (ViewPager) this.findViewById(R.id.idViewPager);
                 myViewPager.setCurrentItem(3);
                 break;
-            /*case R.id.action_add:
-                FormularioFragment formularioFragment = new FormularioFragment();
-                //FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.idViewPager, formularioFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-                break;*/
 
             case R.id.action_help:
                 Toast.makeText(this,

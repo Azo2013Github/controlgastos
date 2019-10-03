@@ -277,7 +277,6 @@ public class FormularioFragment extends Fragment implements View.OnClickListener
     private void emptyEditText(){
 
         editDescripcion.setText("");
-        //editCantidad.setText("");
         editPrecio.setText("");
         editNombre.setText("");
         editDesMovimiento.setText("");

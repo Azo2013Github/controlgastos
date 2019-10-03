@@ -35,7 +35,7 @@ public class RecyclerFragment extends Fragment implements ListAdapters.MyListLis
     private RecyclerView.LayoutManager layoutManager;
 
     public RecyclerFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
