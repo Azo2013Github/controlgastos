@@ -56,6 +56,9 @@ public class RecyclerFragment extends Fragment implements ListAdapters.MyListLis
 
         recyclerView.setAdapter(listAdapters);
 
+        listAdapters.setMovimientos(movimientos);
+        listAdapters.notifyDataSetChanged();
+
         // esta parte te ayuda
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback
                 (0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -100,7 +103,6 @@ public class RecyclerFragment extends Fragment implements ListAdapters.MyListLis
 
     @Override
     public void myClickList(int position) {
-
 
         MovimientoServices movimientoServices = new MovimientoServicesImpl(this.getActivity());
 

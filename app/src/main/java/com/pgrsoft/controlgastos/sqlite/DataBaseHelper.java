@@ -229,7 +229,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 +COL_2_MOVIMIENTOS + " , " + COL_3_MOVIMIENTOS + " , " + COL_4_MOVIMIENTOS + " ,"  + COL_6_MOVIMIENTOS+
                 " from " + MOVIMIENTOS_TABLE + " where "
                 + COL_4_MOVIMIENTOS + " >= " + getMillisecondsFromDate(dateInicial) + " AND " + COL_4_MOVIMIENTOS + " <= " + getMillisecondsFromDate(dateFinal) + " ORDER BY " +
-                    COL_1_MOVIMIENTOS + " DESC ";
+                    COL_2_MOVIMIENTOS + " DESC ";
 
         Cursor cursor = db.rawQuery(consulta, null);
 

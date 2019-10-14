@@ -31,6 +31,10 @@ public class ListAdapters extends RecyclerView.Adapter<ListAdapters.ListViewHold
 
     }
 
+    public void setMovimientos(List<Movimiento> movimientos){
+        this.movimientos = movimientos;
+    }
+
     @NonNull
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){

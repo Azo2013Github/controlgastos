@@ -1,6 +1,5 @@
 package com.pgrsoft.controlgastos.fragment;
 
-
 import android.app.Dialog;
 import android.os.Bundle;
 
@@ -127,10 +126,6 @@ public class ListadoDetalleFragment extends Fragment {
 
 
         });
-
-
-
-
 
         return mView;
     }
